@@ -1,5 +1,5 @@
 # Welcome to my Latex Portfolio
-You will find here some examples of my work in Latex. The files refer to the studies "Does a productivity bonus pay off?" and "The geography of intergenerational mobility". For both studies, I created the main manuscript and online data appendix.
+You will find here some examples of my work in Latex. The files refer to the studies "Does a productivity bonus pay off?". For this study, I created the main manuscript, online data appendix, and slides for the presentation of the results.
 
-Please visit my private homepage to see the published version of the studies.
+Please visit my private homepage to see the final versions in PDF.
 
