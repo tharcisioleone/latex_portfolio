@@ -1,0 +1,1205 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,bookmarks=false, hypertexnames=true]{hyperref} 
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{scalefnt}
+\usepackage{pdflscape}
+%\usepackage{draftwatermark}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{natbib} [options]
+\usepackage{fixmath}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage{varwidth}
+\usepackage{breqn}
+\usepackage{mathtools}
+\usepackage{adjustbox}
+\usepackage{pdflscape,array,booktabs}
+\usepackage{caption}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{lscape}
+\usepackage[titletoc]{appendix}
+\usepackage[skip=1pt]{caption}
+\usepackage{booktabs}
+\usepackage{enumitem}
+\usepackage{tocloft}
+\usepackage{titlesec}
+\usepackage{endnotes}
+
+\captionsetup[table]{position=top,skip=7pt} 
+\DeclareMathOperator{\Tr}{Tr}         
+\captionsetup[figure]{
+    position=above,
+}
+
+
+\let\footnote=\endnote
+
+ 
+
+
+
+
+\newcommand{\Rho}{\mathrm{P}}
+\newcommand{\Chi}{\mathrm{X}}
+
+\let\ACMmaketitle=\maketitle
+\renewcommand{\maketitle}{\begingroup\let\footnote=\thanks \ACMmaketitle\endgroup}
+
+
+\title{The Geography of Intergenerational Mobility: \\ \normalsize Evidence of Educational Persistence and the ‘Great Gatsby Curve’ in Brazil}
+
+
+
+\author{Tharcisio Leone \\ \normalsize ORCID: 0000-0002-4131-8774 \\ \normalsize \href{www.tharcisio-leone.com}{www.tharcisio-leone.com} \\ \normalsize tharcisio.leone@giga-hamburg.de\\ \normalsize +49 (0)40 42825-796 \\ \\ \normalsize German Institute of Global and Area Studies \\ \normalsize Neuer Jungfernstieg 21 \\ \normalsize 20354, Hamburg (Germany)}
+
+
+
+
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+This paper explores the variation in intergenerational educational mobility across the Brazilian states based on Markov transition matrixes and univariate econometric techniques. The analysis of the national household survey (PNAD-2014) confirms a strong variation in mobility among the 27 federative units in Brazil and demonstrates a significant correlation between mobility and income inequality. In this sense, this work presents empirical evidence for the existence of the ‘Great Gatsby curve’ within a single country: states with greater income disparities present higher levels of persistence in educational levels across generations. Finally, I investigate one specific mechanism behind this correlation – namely, whether higher income inequality might lead to a lower investment in human capital among children from socially vulnerable households. The paper delivers robust and compelling results showing that children born into families where the parents have not completed primary education  have a statistically significant reduction in their chance of completing the educational system if they live in states with a higher level of income inequality.
+
+\end{abstract}
+
+\hfill \break 
+\thispagestyle{empty}
+Number of Words : 12,415 (total).
+%Keywords: Intergenerational Mobility, Great Gatsby Curve, Educational attainment, Human Capital, Inequality, Brazil. 
+
+%\hfill \break 
+%JEL Codes: J62, I24, I26
+
+
+
+\newpage
+
+\section{Introduction}
+
+Empirical evidence from cross-country comparisons has revealed a negative correlation between intergenerational mobility and income inequality: Countries with greater income disparity tend to have lower levels of economic mobility between generations \citep{corak2006poor, bjorklund2009intergenerational, blanden2013cross}. The so-called ‘Great Gatsby curve” (GGC) illustrates the transmission of income inequality across generations and underlines the fact that the higher the level of inequality in one generation, the more children’s chances of economic success depend on whether they have poor or rich parents \citep{corak2013income, boudreaux2014jumping, jerrim2015income}.
+ 
+The original GGC was based on research conducted at the international level, using cross-country comparisons. However, some authors have questioned the results, owing to the poor comparability of the data across countries \citep{chetty2014land, jerrim2015income, guell2018correlating}. The demonstration of equivalence (lack of bias) is an important criteria for any cross-regional comparison in order to provide empirical findings free from differences in the data construction across countries. For this purpose, studies that address the lack of suitable data represent an important and beneficial contribution to international research \citep{andrews2009more, boudreaux2014jumping}.
+
+This paper is intended primarily to expand the available literature by providing a GGC free of comparability bias, in which the correlation between income inequality and intergenerational mobility is analysed across different regions within a single country, using observations recorded and consolidated in a single database. Given the lack of intergenerational income data for Brazil, the investigation of the GGC in this study is based on education mobility, and applies the data of educational attainment from children and their parents that have been recently published in the Mobility Supplement from the nationally representative Brazilian household survey (PNAD-2014). The case of Brazil, with its continental dimensions and widespread regional and social inequalities, is a very promising area for research. The country has one of the highest levels of income inequality in the world and at the same time a significant variation in inequality across the 27 states\footnote{To be more precise, Brazil comprises 26 states plus a federal district (Distrito Federal), where the federal capital is located. See the figures in the Online Appendix for a clear picture of the variation in income inequality across the Brazilian states.}. The income inequality – as measured by the Gini coefficient – varied in the year 2014 from $0.416$ in Santa Catarina to $0.577$ in Distrito Federal.
+
+I focus on state-level variation because in Brazil the responsibility for the provision of primary and secondary education lies with the states. According to the Law of Directives and Bases of National Education, the current legislation that regulates the education system in Brazil, the tasks of the federal government in relation to primary and secondary public education are restricted to providing technical and financial support to the states and municipalities, thereby guaranteeing the equalisation of opportunities and a minimum level of quality.
+
+%%In addition to the construction of the “Great Gatsby Curve”, I investigate via statistical correlation analysis the main channel discussed in literature as jointly responsible for the association between inequality and mobility: Returns to human capital. For \citet{corak2013income} and \citet{Solon2004} the increase in the returns to education would change the incentive to the investiment in children's human capital across families and leads to a reduction of the mobility chances for offspring from low-income families. 
+
+Despite the increasing scientific interest in the GGC, far too little is known about the causal link between inequality and intergenerational mobility, because only limited research has been undertaken on the determinants of this correlation \citep{jerrim2015income}. In the final part of this paper, I seek to fill this research gap by focusing on a possible mechanism through which inequality might affect intergenerational mobility – namely, curtailed investment in education. \citet{kearney2014income} propose that a greater level of inequality could lead to an underestimation of the return on investment in human capital for children from socially vulnerable families, which would increase their school drop-out rates, thereby decreasing their chances of mobility.
+
+The empirical findings presented in this paper indicate that the case of Brazil provides two main evidence for the existing literature. Firstly, the relationship between income inequality and intergenerational mobility illustrated in the GGC remains persist within a single country; and secondly, a possible reason for this association is the	link between educational outcomes and inequality: in states with a higher gap between the bottom and the middle of the income distribution, have children from socially vulnerable families a higher chance to drop-out the education system.
+
+ 
+
+The remainder of this paper is structured as follows. The next section reviews the related literature and presents the econometric models used as the theoretical basis for the investigation. Section \ref{Data} presents the database. In the following, I describe the three different empirical approaches applied in the paper. Section \ref{Results} deals with the empirical findings. I first estimate the level of intergenerational educational mobility in the 27 Brazilian states, then I correlate the results from mobility with income inequality. Finally, I apply an econometric model to investigate whether (socially) vulnerable children living in states with a higher gap between the middle and the bottom of the income distribution have a greater probability of leaving school without a certificate. Section \ref{Conclusion} concludes with a summary of the key findings.\footnote{This paper is supplemented by a comprehensive Online Appendix with relevant information concerning the educational system in Brazil, the data harmonisation, the codification process for the variables, additional figures and the formal description of the underlying theoretical models.}
+
+
+
+
+\section{Theoretical Background and Literature Review} \label{Literature}
+
+%\begin{itemize}
+%\color{red}
+%\item Kearney and Kearney, 2014: Introdution to the Great Gatsby Curve 
+%\end{itemize}
+
+The term ‘intergenerational mobility” describes the ability of children to move beyond their social origins and achieve a socio-economic status that is not dictated by that of their parents \citep{ribeiro2007estrutura, foxintergenerational}. In the mobility literature, the focus of the economic investigations is the measurement of the correlation between parents’ and children’s economic outcomes, in terms of income, education or occupation \citep{blanden2014education, corak2014comparison, hills2015new}. The greater this association, the greater the economic advantages and disadvantages inherited from the family background \citep{schneebaum2016gender}.
+
+
+\long\def\comment#1{}
+\comment{
+
+The scientific community has been working for a long time on a framework for understanding the transmission of economic outcomes from parents to their offspring \citep{blanden2014intergenerational,black2010recent}. The studies of \citet{solon1992intergenerational} and \citet{zimmerman1992regression} were the precursors to the modern empirical estimations of intergenerational correlation of outcomes \citep{bjorklund2009intergenerational,blanden2014intergenerational, ichino2011political}. In the subsequent years, motivated mainly by the theoretical contribution of \citet{Solon2004} several researchers around the world have begun to investigate the persistence of income, wealth, consumption and education between parents and their children \citep[see for example][]{ayala2008structure, blanden2013cross, bratsberg2007nonlinearities, chen2009cross, corak2014comparison, dunn2007intergenerational, roemer2004equal, ueda2009intergenerational}. In a second stage of the literature, researchers have focused on the variation of intergenerational mobility over time \citep[see for example][] {aaronson2008intergenerational, bjorklund2009family, hertz2007inheritance, hout2013intergenerational, lee2009trends, mazumder2012intergenerational} and across countries \citep[see for example][] {aaberge2002income, ayala2008structure, blanden2013cross, blanden2014intergenerational, corak2006poor, Jantti&Etal2006}.
+
+
+// Finalising ignore
+}
+
+
+%An analysis of these works shows that two different research methodologies have primarily been used to measure intergenerational mobility in the economic literature: the first approach focuses on income and the second on educational attainment \citep{torche2015analyses}.
+
+In the economic literature, two main outcomes have primarily been used to measure intergenerational mobility: the first one based on income and the second on educational attainment \citep{torche2015analyses}.\footnote{A third approach, found especially in sociological studies, measures the degree of intergenerational mobility using the professional occupations of parents and their children.} However, given the limited availability of lifetime income data – specially in developing countries \citep{ferreira2006intergenerational, azam2015like} - an increasing number of authors have used the strong positive correlation between education and income to measure mobility across generations. This approach is justified by the solid set of studies and empirical evidence which indicate that educational inequality plays a determining role in the transmission of inequalities across generations, making it a robust indicator for future trends in income inequality \citep{blanden2014education, psacharopoulos2018returns}.
+
+
+
+
+Although, the empirical evidence for intergenerational educational mobility remain highly concentrated in the industrialized world, it is possible to detect in recent years an increasing academic interest in estimating mobility chances for developing countries \citep{torche2019educational}. Recent papers to this topic have been published by \citet{dacuycuy2019understanding} for Philippines, \citet{assaad2018does} for Jordan, \citet{leone2017gender} for Brazil, \citet{li2017impact, magnani2015social} and \citet{fan2015great} for China, \citet{emran2015gender} and \citet{azam2015like} for India, and 
+\citet{cheema2013historical} for Pakistan. In the same way, the literature already offers cross-national comparative studies conducted exclusively with developing countries, such as the cases of \citet{neidhofer2018educational} and \citet{daude2015intergenerational} for Latin America, and \citet{azomahou2016intergenerational} for sub-Sahara Africa.
+
+%\citet{leone2019intergenerational} with 148 countries or \citet{hertz2007inheritance} using 42 nations, indicated that intergenerational educational mobility tends to be lower in developing than in developed countries.
+
+Specially, from the 2000s onward, the economic literature has started also to deal with the mechanisms behind the intergenerational persistence in outcomes \citep{black2010recent, rothwell2015geographic}. \citet {corak2006poor} was the first to provide empirical evidence of a negative correlation between intergenerational mobility and income inequality \citep{kearney2014income}. Based on cross-country comparisons and the theoretical approach of \citet{Solon2004}, the author showed that countries with greater income disparity tend to exhibit lower levels of income mobility between generations.
+
+
+It didn't take long for the finding of \citet{corak2006poor} to enter the political debate. In his speech as chairman of President Barack Obama's Council of Economic Advisers, economics professor Alan Krueger \citeyearpar{krueger2012rise} introduced the GGC, and within a short space of time this curve gained a prominent position in the international economic community \citep{jerrim2015income}. It has been mentioned by Nobel Prize winners \citep[see for example][] {heckman2013economics} and has been extensively addressed by the mainstream press \citep[see for example][] {churchwell2012great, economist2013} and high-ranking policymakers \citep[see for example][] {obama2013full,whitehouse2013}. Furthermore, the GGC has also been addressed in a long list of recent publications in peer-reviewed journals \citep [see for example][] {corak2013income, chetty2014land, boudreaux2014jumping, lefgren2015beyond, jerrim2015income, brahim2016inequality, guell2018correlating, neidhofer2019intergenerational}.
+
+
+
+
+The negative relationship between inequality and intergenerational mobility illustrated by the GGC is also supported by the economic theory. \citet{Becker&Tomes1986}, \citet{Solon2004}, \citet{breen2005inequality}, \citet{duncan2011whither}, and \citet{corak2013income} are just some examples of authors who have argued that the disparities in the investment in children’s human capital across families increase with the growth of income inequality. \citet{Solon2004}, for example, adapted the classical model of \citet{Becker&Tomes1979, Becker&Tomes1986} in a detailed theoretical model presenting the intergenerational transmission of inequality and demonstrated on the basis of a mathematical approach that higher-income parents have a higher capacity to invest more in human capital of their children, and they are also more inclined to make this investment if the expected earnings return on human capital increases. However, the model of \citet{Solon2004} has been used in the economic literature only as a starting point for understanding the variation in the intergenerational persistence of outcomes across countries and over time. The GGC does not present a causality link between inequality and mobility, but rather a summary of all mechanisms reflecting the outcome of a host of ways that income inequality affects children’s development \citep{corak2013income,kearney2014income}. 
+
+
+Recent research has offered a vast amount of evidence that childhood development has direct effects on adult economic productivity \citep{cunha2006interpreting, knudsen2006economic}. Socially vulnerable families lack the socio-economic resources to provide effective early development for their children. Therefore, these children are exposed from a very young age to adverse environments, leading to skill and ability deficits that result in low productivity in the future \citep{shonkoff2000handbook, lawrence2005lifetime}. Also, during adult life, children continue to benefit from the resources of their family. Social connections, for example, play an important role in mobility chances. Children from wealthy families can use the extensive network of their parents to climb the economic ladder, which means they have an advantage relative to children from low-income households \citep{corak2013income}.
+
+
+Despite this complexity, the variation in the intergenerational persistence of economic outcomes presented by the GGC calls for us to reflect on the reasons for the different levels of mobility, and how these underlying drivers can influence the ultimate outcomes. To address these questions, it is important to bear in mind the three fundamental institutions that play a strong role in children’s chances of mobility: the family, the labour market and the state \citep{corak2013income, neidhofer2019intergenerational}.
+
+As described in the model of \citet{Solon2004}, the income inequality resulting from the labour market impacts the financial capacity and the incentives for investment in the human capital of children across families. The individual capabilities of children are also strongly influenced by non-monetary resources, such as the behavioural patterns, motivations and social connections which are transmitted in the family environment and play an important role in mobility potential. Finally, the importance of public policy for intergenerational mobility relates to all key aspects that affect the interaction between families and the labour market, such as taxation and regulatory structure \citep{bjorklund2009intergenerational, corak2013income}.
+
+\long\def\comment#1{}
+\comment{
+
+Based on theoretical considerations of \citet{corak2013income}, the most recent empirical studies concerning the GGC have investigated the association between intergenerational mobility and a increasing number of socioeconomic indicators referring to these three institutions. Using income data, \citet{chetty2014land}, for example, estimated the intergenerational mobility for 741 ‘Commuting Zones’ in the United States, providing empirical evidence for a strong variation in the mobility across these regions. In the second step, they explored the spatial variation in mobility correlating the results with observable socio-political variables. According to the authors, the level of (income) mobility across the ‘Commuting Zones’ are positively associated with: (1) less residential segregation, (2) less income inequality, (3) better primary schools, (4) greater social capital, and (5) greater family stability. In a more recent study, \citet{guell2018correlating} followed \citet{chetty2014land} to produce comparable measures of intergenerational (income) mobility for 103 Italian provinces and correlate the findings with a serie of indicators for economic and social development. The empirical evidence have suggested two mainly findings: Fist, there is a positive correlation of mobility with ‘good’ economic outcomes, such as value added per capita, wealth, income, employment rates and participation rates, and secondly, the correlation changed its direction when ‘bad’ economic outcomes are analyzed. Intergeneration mobility is negatively associated with income inequality, unemployment rates and share of low educated young individuals.
+
+// Finalising ignore
+}
+
+
+
+
+The association behind the GGC was already explored using education data for the measure of mobility, whereby only a handful of these studies have been concentrated on developing countries. The resultant findings indicated that education mobility is positively correlated with some macro-economic indicators, such as economic development, public education spending, and the strength of financial markets \citep{torche2019educational}. \citet{azam2015like}, por example, investigated the variation of intergenerational educational persistence across states in India and come to the conclusion that states with a higher per capita expenditure on primary education achieved higher levels of mobility across generations. 
+
+Similar empirical evidence were also found in comparative studies for Latin America. Using harmonized data for 18 Latin American nations, \citet{neidhofer2019intergenerational} could confirm a positive impact of public spending in education and economic growth on the chances of intergenerational educational mobility. Using a sample for 16 countries \citep{behrman2001intergenerational} found that specially the public spending in primary and secondary education have a positive impact for mobility, while a relatively greater share of educational budgets to higher education tends to reinforce the importance of family background, reducing in this way, the chances of mobility. In the same study, the authors indicated also that better developed financial markets increase social mobility given that they can help to reduce the dependence of family income on the educational outcomes of children. Working with a sample of 26 African countries, \citet{alesina2019intergenerational} pointed to the importance of economic development for education mobility. In regions with more vibrant economies - normally in areas close to the coast and national capitals, and less affected by contagious diseases - are the chances of upward mobility higher \citep{torche2019educational}.
+
+ 
+
+
+
+%From a theoretical point of view we can also expect, a change in the intergenerational mobility if the costs of education increase in case of school/college fees or if the return to human capital decreases \citep{smeeding2011persistence}.
+
+
+ 
+ 
+Assuming that the investigation of the causal effects of mobility is viewed with increasing mistrust in the academic community – due to the methodological difficulties of measuring causation within the intergenerational persistence framework \citep{bjorklund2009intergenerational, fessler2012gender, chetty2014land} – this paper isn't, in principle, looking for causal relationships, but rather aims to generate stylised facts and trends, thereby improving our understanding of the mechanisms behind the correlation between income inequality and the persistence of economic outcomes across generations represented by the GGC. Consequently, the empirical approach applied in the second part of this paper resembles that paper of \citet{kearney2014income}.
+
+%%Consequently, the empirical approach applied in the second part of this paper resembles that renowned papers of \citet{chetty2014land}, \citet{guell2018correlating} and \citet{kearney2014income}.
+
+\citet{kearney2014income} proposed curtailed investment in human capital as an important channel via which an increase in income inequality may adversely affect the mobility chances of the younger generations. According to the authors, an increase in the gap between the bottom and the top of the income distribution could change the expected return on human capital investment for children from socially disadvantaged families. In this case, children born into poverty generally do not believe that a school-leaving qualification will help them move up the economic ladder, which thus reinforces their economic marginalisation. Based on a formal model and five sources of individual-level data for the USA, the paper confirmed the hypothesis that low-income youths are more likely to drop out of school if they live in a place with greater income inequality.
+
+
+%\footnote{By way of information, Appendix C provides an overview of the stylized model of \citet{kearney2014income} to the decision to dropout of school.}
+
+%\begin{itemize}
+%\color{red}
+%\item Explain modell of \citet{kearney2014income} in detais in the next section and use the model
+%\end{itemize}
+
+
+
+
+
+%\begin{itemize}
+%\color{red}
+%\item Theoretical Model for Solon Model - Solon (2013)
+%\end{itemize}
+
+
+%\begin{itemize}
+%\color{red}
+%\item The Becker and Tomes model - Notation : Marchon 2008 - Brazil
+%\end{itemize}
+
+
+
+\section{Data} \label{Data}
+
+
+
+The data for this study stems from the Brazilian National Household Sample Survey (PNAD), which is a representative household survey conducted annually by the Brazilian Institute of Geography and Statistics (IBGE) to collect socio-economic and demographic information about the Brazilian population, including household composition, education, labour, income, migration, and fertility.
+
+To investigate mobility, I use the data wave from PNAD’s Socio-Occupational Mobility Survey. Every year the PNAD investigates an additional topic on the basis of the ‘Supplementary Survey’, and in year 2014 its focus was socio-occupational mobility. For the survey, respondents 16 years and older were asked to provide information about their parents’ professional occupation and level of education.\footnote{The information about the education and occupation of parents refers to the level when the respondents were 15 years old.} 
+
+The two main outcomes of interest in this paper are years of schooling and levels of education, for both children and parents.\footnote{In those cases where the educational level of the father and mother is known, this paper will use the educational attainment of the most educated parent in the empirical estimations.} The educational levels are classified into four identical categories: no school certificate and primary, secondary, and tertiary education, with primary education referring to the compulsory schooling. 
+
+Given that the PNAD does not provide the number of years of schooling for the parents, I calculated this variable according to the information about the highest level of education attended. Next, I inserted a dummy variable for ‘economic marginalisation’, which refers to children from parents with no school certificate. In addition, I use the (total) personal income to calculate the Gini coefficient and the 75/10 ratio of income inequality. Finally, information about gender, year of birth, location of residence (rural or urban areas), and whether the respondent grew up in a two-parent family are used as control variables. 
+
+
+%\footnote{Given that the questionnaires of the supplementary survey to mobility were applied in only half of the households selected to PNAD-2014, this paper will estimate the indicators of inequality based on the whole sample of PNAD-2014.}
+
+
+I excluded individuals under $25$ years old from the sample, given that approximately $42$ per cent of them were still attending school, training, or university in 2014. Similarly, I excluded persons over $75$ years of age due to the positive correlation between education and life expectancy.\footnote{According to the Brazilian Institute of Geography and Statistics (IBGE), the life expectancy in Brazil in 2014 was 75.2 years.} Consequently, this paper considers people born between 1940 and 1989 in the empirical analysis and works with a sample of $46,051$ individuals. 
+
+%Finally, the observations were categorised into 10-year birth cohorts (1940–1949, 1950–1959, 1960–1969, 1970–1979, and 1980–1989) in order to minimise the lifecycle bias resulting from the variation in average years of schooling and in education dispersion over time.
+
+%\footnote{For the empirical estimations, this paper applies the weights presented in the sample, representing the inverse of the probability of an observation being selected into the sample.}
+
+%With the purpose of isolating the potential effects of interstate migration on the measure of educational mobility, this paper excludes from the investigation the individuals who were residing permanently in a state in year 2014 where they were not living at the age of 15 years.\footnote{Among the 57,896 observations from the Socio-occupational Mobility Survey of PNAD-2014, around $13.8\%$ of the individuals were interstate migrants.} 
+
+
+\long\def\comment#1{}
+\comment{
+
+For the indicator of income inequality, I created the continuous variable ‘$75/10$ ratio’, which represents the relation between the income of the richest $25\%$ and the poorest $10\%$ of the income distribution. This paper argues that this ratio is the most relevant inequality metric for educational mobility in Brazil, since it identifies the distance between the bottom and the top of income distribution that will serve as key motivator for the investment in human capital.\footnote{This paper assumes that in Brazil the 75/10 ratio of income inequality works better than the 90/10 for the individual estimation of educational returns, given that empirical evidence have already showed that inherited wealth and capital income play a greater role for the achievement of the top $10\%$ of the income distribution than the educational level.} Given that the measures of inequality were determined retrospectively for the year in which the individuals (should) have completed compulsory education, I used the earlier PNAD sample surveys for the calculations.\footnote{Please see Section \ref{Dropout-Model} for the empirical background and the Online Appendix for a full description of the harmonisation process that needed to be undertaken in order to fit the data over time.}
+
+
+
+
+Table \ref{tab:descriptive} reports the summary statistics on income distribution, educational attainment, average age, and share of rural population divided by the states and macro-regions of Brazil. Figures \ref{fig:Evolution-Mean}, \ref{fig:Mean-Schooling} and \ref{fig:Composition-Level} visually display the development of education across birth cohorts, the variation in years of schooling and the variation in the levels of education across Brazilian states,respectively.
+
+In the light of the table \ref{tab:descriptive}, it is possible to observe the average educational attainment of children and parents. Note that in all states the average schooling of descendants is higher than that of their forebears and that the mothers are almost always more educated than their spouses.\footnote{The exceptions are: Amapá, Espírito Santo, Rio de Janeiro, São Paulo, Paraná, Santa Catarina, Rio Grande do Sul and Mato Grosso do Sul, where the average education of fathers is higher than that of mothers.} Columns (7) to (9) list the proportions of people who were enrolled in school in 2014. According to data from PNAD-2014, all states in Brazil are close to the objective of achieving universal primary education for children between 7 and 14 years old.\footnote{The estimated values varied between $0.965$ in Acre and $0.994$ in São Paulo.} However, beyond the age of compulsory schooling, the deviation in the net enrolment ratio across states increases significantly. The proportion of children aged 15-17 enrolled in school is lowest in Roraima ($0.758$) and highest in the Distrito Federal ($0.895$) and in the south-eastern states, such as São Paulo ($0.864$), Minas Gerais ($0.867$) and Rio de Janeiro ($0.874$). Moreover the variation in the share of adults between 18 and 24 years who are still attending school, training or university is even greater. This ratio ranges from $0.263$ in Pernambuco to $0.414$ in Distrito Federal.
+
+Figure \ref{fig:Mean-Schooling} indicates significant differences in average educational attainment across Brazilian states. In southern states such as São Paulo, Rio de Janeiro and Santa Catarina, children have higher average years of schooling relative to those in the states in the north-east. Finally, Chart \ref{fig:Composition-Level} illustrates the main reason for these differences in average education: The share of individuals with no school-leaving certificate in the north-eastern states is greater than in the other macro-regions of Brazil.
+
+// Finalising ignore
+}
+
+\section{Conceptual Framework} \label{Framework}
+
+This paper employs a two-step empirical framework. I start by measuring intergenerational persistence in education, using linear regression models \citep{checchi2013intergenerational} and transition matrices \citep{Jantti&Etal2006}. I then apply an econometric method to investigate whether children from disadvantaged families have a lower chance of completing secondary education \citep{kearney2014income}.
+
+\subsection{Intergenerational Educational Mobility}
+
+\subsubsection*{A. Mobility Matrices}
+
+Following \citet{Daouli&Demoussis&Giannakopoulos2010}, this section classifies the educational outcomes of children (generation $t$) and parents (generation $t+1$) into four categories: no school certificate and primary, secondary, and tertiary education. Thereafter, I estimate the intergenerational transition matrices $\mathbb{P}$ with the number of states $S$, such that:
+
+%A trasition matrix is a stochastic process $\{X_0, X_1, X_2, ...\}$ with state $S$, where $S$ has size $\mathbb{R}$ (possibly infinite) such that:
+
+\begin{equation} \label{eq:Notation}
+p_{ij} = \mathbb{P} (X_{t+1} = j \mid X_t = i) \quad \textrm{for} \quad i, j \in S, \quad t = 0,1,2,...
+\end{equation}
+
+The estimated transition matrices present two important properties:
+
+\begin{equation} \label{eq:NonNegativ}
+\forall \quad i,j \in \mathbb{R}, \quad P(i,j) \geq 0, \quad \textrm{and} \quad
+\end{equation}
+
+\begin{equation} \label{eq:EqualOne}
+\sum_{j=1}^{N} p_{ij} = \sum_{j=1}^{N} \mathbb{P} (X_{t+1} = j \mid X_t = i) =  \sum_{j=1}^{N} \mathbb{P}_{\{X_t = i\}} (X_{t+1} = j) = 1.
+\end{equation}
+
+In transition matrix $\mathbb{P}$, the value of $p_{i,j}$ denotes the proportion of children from parents with the educational attainment $j$ who achieved the education level $i$. Given that the estimations are based on identical education levels for children and their parents, the diagonal cells from the square matrices $\mathbb{P}$ represent immobility or inheritance in the intergenerational transition from state $j$ to state $i$ \citep{xie2013intergenerational, reddy2015changes}. Consequently, the ‘immobility ratio’ (ImR) can be calculated as a percentage of the sum total of all entries on the main diagonal of the matrix $\mathbb{P}$ and its number of states $S$ \citep{Heineck&Riphahn2007}:
+
+\begin{equation} \label{eq:ImobilityRatio}
+ImR=\frac{\Tr(\mathbb{P})}{S}=\frac{\sum_{i=1}^{N} \rho_{ij}}{S}
+\end{equation}
+
+
+Following \citet{corak2014comparison}, I describe upward and downward mobility – $UpM$ and $DoM$, respectively – as the probability that the children’s level of education exceeds or is less than the parents’ educational level $l$.
+
+
+\begin{equation} \label{eq:UpwardMobility}
+UpM = Pr \left(X_t > l \mid X_{t+1} = l \right) \qquad \textrm{and} \qquad DoM = Pr \left(X_t < l \mid X_{t+1} = l \right)
+\end{equation}
+
+
+
+In order to summarise the degree of mobility intrinsic in transition matrix $\mathbb{P}$, allowing for a ranking of the Brazilian states according to mobility levels, I follow \citet{checchi1999more, Daouli&Demoussis&Giannakopoulos2010} and calculate the Prais–Shorrocks indicator based on the trace $(Tr(\mathbb{P}))$ and the number of states in the transition matrix.
+
+
+\begin{equation} \label{eq:PraisShorrocks}
+M_{PS}(\mathbb{P})=\frac{S - Tr(\mathbb{P})}{S -1} \qquad \textrm{with} \qquad M_{PS}\in [0,1]
+\end{equation}
+
+The $M_{PS}(\mathbb{P})$ provides a measure of the normalised distance between the identity matrix and the independent matrix. It ranges from $0$ to $1$, with values closer to one indicating a higher level of intergenerational educational mobility.
+
+%In order to summarize the degree of mobility intrinsic in a transition matrix $\mathbb{P}$, allowing a ranking of the Brazilian states according to mobility levels, I follow \citet{Altzinger&Schnetzer2010} and calculate the determinant index $(DET)$. 
+
+
+%\begin{equation} \label{eq:Determinant}
+%DET(\mathbb{P})=1-\vert det(\mathbb{P})\vert^{\frac{1}{n-1}} \qquad \textrm{with} \qquad DET(\mathbb{P}) \in [0,1]
+%\end{equation} 
+
+
+%Following \citet{long2013intergenerational, reddy2015changes, xie2013intergenerational} I calculate the “mobility rate" $(M)$ from the proportion of individuals who fall in the off-diagonal cells of the transition matrix. Since $f_{ij}$ gives the observed frequency in the $ith$ row $(i=1,...,N)$ and $jth$ columm $(j=1,...,N)$ in a mobility matrix with N rows and N columms, the “mobility rate" can be described as:
+
+%\begin{equation} \label{eq:M}
+%M=1- \left(\sum_{i=1}^{N} f_{ii}\right) \Bigg/ f_{++}
+%\end{equation}
+
+%here $\sum_{i=1}^{N} f_{ii}$ refers to the trace of the square matrix $P$ and $f_{++}=\sum_{i=1}^{N} \sum_{j=1}^{N}f_{ij}$ is the grand total of cells of the same matrix.
+
+
+
+
+\subsubsection*{B. Linear Regression Model}
+
+Following the standard empirical model presented in the economic literature on intergenerational mobility  \citep[see for example][]{hertz2007inheritance, black2010recent, blanden2013cross}, this paper estimates the educational persistence between parents and children with the regression equation:
+
+
+\begin{equation} \label{eq:OLS}
+educ^c_{is}=\alpha+\beta \: educ^p_{is}+\epsilon_i \quad \textrm{for} \quad i=1,2,...N
+\end{equation}
+
+where $educ^c_{is}$ is the years of schooling of a child from familiy $i$ resident in the state $s$, and $educ^p_{is}$ denotes the same variable for his or her parents. The error term $\epsilon_i$ reflects the combined effects on a child’s education of factors orthogonal to parental education, and the slope coefficient $\beta$ is the parameter of interest, representing the elasticity of children’s education with respect to their parents’ education. The coefficient $\beta$ is commonly known in the economic literature as the ‘regression coefficient’ and gives the value of each $1$ per cent difference in parental education across families that will be transmitted as an educational difference to their children \citep{blanden2013cross}.
+
+Given the changes in the mandatory education over time in Brazil, and their resultant effects on average schooling and standard deviations (see figures A1 and A2 in the Online Appendix.), I follow \citet{ checchi2013intergenerational} and \citet{azam2016intergenerational} and normalise the years of schooling in Equation \eqref{eq:OLS} by the corresponding standard deviation. The OLS estimate of $\beta$ is given by:
+
+
+\begin{equation} \label{eq:Beta}
+\hat{\beta} = \rho_s^{cp} \: \frac{\sigma^c_s}{\sigma^p_s}, \qquad \textrm{with} \qquad \sigma=\sqrt{\frac{1}{N}\sum_{i=1}^{N}(x_1-\mu)^2}
+\end{equation} 
+
+
+where $\sigma^{c}_s$ and $\sigma^{p}_s$ correspond to the standard deviation in education for children and parents in state $s$, while the coefficient $\rho^{cp}_s$ captures the association between children’s and parents’ education, respectively. Based on equations \eqref{eq:OLS} and \eqref{eq:Beta}, the resulting empirical model can be summarised as:
+
+
+\begin{equation} \label{eq:OLSRho}
+\frac{educ^c_{is}}{\sigma^c_s}=\delta \:+\: \rho \left(\frac{educ^p_{is}}{\sigma^p_s}\right) \:+\: \epsilon_i \qquad \textrm{with} \qquad \rho \in [0,1]
+\end{equation}
+
+In this regard, the coefficient $\rho$ is defined in the economic literature as the ‘relative’ measure of intergenerational mobility or the ‘correlation coefficient’. The higher its value, the stronger the correlation between the educational attainment of children and parents. 
+
+Given that the estimations are based on the pooled sample, equation \eqref{eq:OLSRho} includes a vector of dummy variables $UF$ with the state of residence of the child $i$. Moreover, I use a vector X comprising controls for gender, race, and year of birth. Finally, some interaction terms between the variables are assumed. Thus, the resulting fully interacted model takes the following form:
+
+\begin{dmath} \label{eq:OLSFixed}
+\frac{educ^c_{is}}{\sigma^c_s} \:=\: \delta \:+\: \rho \: \frac{educ^p_{is}}{\sigma^p_s} \:+\: \eta \left(\frac{educ^p_{is}}{\sigma^p_s} \times UF_i \right) \:+\: \lambda \: UF_i \:+\: \gamma \left(X_i \times UF_i \right) \:+\: \epsilon_{is}
+\end{dmath}
+
+
+%\lambda_1 \: agedev_{is} + \lambda_2 \: \left(\frac{agedev^2_{is}}{100}\right) + \lambda_3 \: \left(\frac{parenteduc_{is}}{\sigma^p_s} \times agedev_{is} \right) + \lambda_4 \: \left(\frac{parenteduc_{is}}{\sigma^p_s} \times \frac{agedev^2_{is}}{100}\right) + \psi \: rural_{is} + \omega \: female_{is} + \epsilon_{is}
+
+
+%Following \citet{assaad2016does} this paper considers also the change in intergenerational educational mobility across birth cohorts by adding few controls in the empirical model. In equation \ref{eq:OLSFixed}, I include the variable $agedev$, capturing the difference between child’s age and the average age of children in the sample, its square divided by 100, and the interaction of each with parent’s schooling. Finally, the dummy variables $urban$ and $male$ are included to control the fixed effects across locality of residence and gender. Thus, the following empirical estimations are based on the regression model given by:
+
+
+
+%\begin{dmath} \label{eq:OLSFixed}
+%\frac{childeduc_{is}}{\sigma^c_s} = \delta + \rho \:\frac{parenteduc_{is}}{\sigma^p_s} + \lambda_1 \: agedev_{is} + \lambda_2 \: \left(\frac{agedev^2_{is}}{100}\right) + \lambda_3 \: \left(\frac{parenteduc_{is}}{\sigma^p_s} \times agedev_{is} \right) + \lambda_4 \: \left(\frac{parenteduc_{is}}{\sigma^p_s} \times \frac{agedev^2_{is}}{100}\right) + \psi \: rural_{is} + \omega \: female_{is} + \epsilon_{is}
+%\end{dmath}
+
+
+
+\long\def\comment#1{}
+\comment{
+--> Ignoring only for the journal publication
+
+In order to investigate the variation of the correlation coefficient $\rho$ across Brazilian states, this paper employs the statistical decomposition proposed by \citet{checchi2013intergenerational}, which demonstrates that $\rho$ captures not only the variation in child-father education transmission, but also external phenomena, such as, the variation over time in educational attainment and the changes in copulsory schooling. Suppose that $E$ denotes the expected value, while $c$ and $p$ are respectively the realisations of $childeduc$ and $parenteduc$; or in other words, the normalized schooling of children and parents by their corresponding standard deviations. The OLS estimation of the correlation coefficient $\rho$ from equation \eqref{eq:OLSFixed} can be rewrite as: 
+
+
+\begin{equation} \label{eq:Decomposition}
+\rho = \int \underbrace{(c - E(c)) (p - E(p))}_{\text{(A)}} \underbrace{Pr(c \mid p)}_{\text{(B)}} \underbrace{Pr(p)}_{\text{(C)}}
+\end{equation}
+
+
+This issue illustrates that the variation in the value of $\rho$ may result from three factors: (A) the variation in the dispersion of children's or parents' (standardized) education around their respective means; (B) the variation in children education conditional on that of their parents; and (C) the variation in the unconditional distribution of parents’ education.
+
+According to \citet{checchi2013intergenerational} the focus of policy makers by the topic intergenerational persistence in education should be focused on the term $(B)$. Given that the changes in term $(A)$ occur because a uniform convergence towards higher levels of education and the term $(C)$ could be significantly affected by changes in institutional frameworks that often go together with the development process, such as the increase in the educational attainment of parents over time.
+
+// Finalising ignore
+}
+
+\subsection{Linking Inequality and School Dropouts}
+\label{Dropout-Model}
+
+%\subsubsection*{A. Probit Latent Variable Model}
+
+
+%Given that the primary education is compulsory in Brazil and its no attendance is subject to legal consequences.
+
+In this section, I follow \citet{kearney2014income} and apply a probit model aimed at investigating whether children from marginalised socio-economic backgrounds living in states with greater income inequality levels have a lower chance of completing secondary education. 
+
+In this underlying latent model, the observed binary response $(ComSec_{i,t})$ assumes the value $1$ if the $i^{th}$ individual born in year $t$ has completed secondary education and this is a function of socio-economic background, income inequality in the state of residence, and individual characteristics. Thus, the empirical probit model can be written as:
+
+
+\begin{equation} \label{eq:EduOutcome}
+\begin{split}
+ComSec_{i,t}=\pi_0 \:+\: \pi_1 \left(MSB_{i} \times Ineq_{s,t+14} \right) \:+\: \pi_2 \: MSB_{i}  \:+\: \pi_3 \: Ineq_{s,t+14} \\ \:+\: \gamma_1 \: male_{i} \:+\: \gamma_2 \: rural_{i} \:+\: \gamma_3 \: bothP_{i} \:+\: \gamma_4 \: race_{i} \:+\: \gamma_5 \: birth_{i} \:+\: \epsilon_{i} 
+\end{split}
+\end{equation}
+
+%\begin{equation} \label{eq:EduOutcome}
+%\begin{split}
+%\mbox{$ComSec_{i,t}$}=\left\{
+%\begin{array}{rl}
+%1 & \mbox{if the $i$-th individual born in year $t$ completed secondary education} \\
+%0 & \mbox{otherwise.}
+%\end{array} \right.
+%\end{split}
+%\end{equation}
+
+%\noindent
+
+
+
+
+%\begin{dmath} \label{eq:EduOutcome}
+%EduOutcome_{isc}=\pi_0 + \pi_1 \left(ratio_s \times NE_{is}\right) \:+\: \pi_2 \left(ratio_s \times SE_{is}\right) \:+\: \pi_3 NE_{is} \:+\: \pi_4 SE_{is} \:+\: \gamma_1 \: agedev_{is} \:+\: \gamma_2 \: rural_{is} \:+\: \gamma_3 \: male_{is} \:+\: \gamma_4 \: singlePa_{is} \:+\: \epsilon_{is}
+%\end{dmath}
+
+
+%\begin{dmath} \label{eq:EduOutcome}
+%EduOutcome_{isc}=\pi_0 \:+\: \pi_1 \left(Illite_{is} \times ratio_s \right) \:+\: \pi_2 \left(NoEduc_{is} \times ratio_s \right) \\ \:+\: \pi_3 \: Illite_{is} \:+\: \pi_4 \: NoEduc_{is}  \:+\: \pi_5 \: ratio_{s} \\ \:+\: \gamma_1 \: male_{is} \:+\: \gamma_2 \: rural_{is} \:+\: \gamma_3 \: singlePa_{is} \:+\: \gamma_4 \: state_{is} \:+\: \gamma_5 \: cohort_{is} \:+\: \gamma_6 \: race_{is} \:+\: \epsilon_{is}
+%\end{dmath}
+
+
+%\footnote{As mentioned in section \ref{Data}, the ratio 75 to 10 indicates the income gap between the $25\%$ richest to the $10\%$ poorest of the income distribution (i.e. the $75^{th}$ percentile to the $10^{th}$ percentile).}
+
+
+The (marginalised) socio-economic background is summarised in the variable $MSB_i$, which represents individuals from (two) parents with no school certificate. The variable $Ineq$ refers to income inequality, measured by the 75/10 ratio, in the individual’s state  of residence $(s)$ $14$ years after their birth $(t+14)$.\footnote{Following the theoretical model of \citet{Solon2004}, what is particularly relevant for the accumulation of human capital is the level of income inequality when children have completed their compulsory education and are facing a decision about whether or not to pursue more years of schooling. Given that until the year 2009, education in Brazil was compulsory  for children aged 7 to 14 years, the equation \eqref{eq:EduOutcome} uses the $75/10$ ratio from the year in which the individual turned $14$ as measure of inequality.} The model also includes controls for gender $(male)$, location of residence $(rural)$, self-declared race/ethnicity $(race)$, and birth year $(birth)$, as well as a dummy indicating whether the children lived with both parents in the same household at age 15 $(bothP)$. These control variables tend to exclude from the results the effects of circumstances that are beyond the individual's control, but affect his/her decision for (further) education.
+
+
+The parameter $\pi_1$ estimated from the interaction term between the continuous variable $Ineq_{s,t+14}$ and the discrete (binary) variable $MSB_i$ is the main coefficient of interest and indicates whether individuals with a lower family-education background living in states with high income inequality have a lower probability of completing secondary education. In order to present a more informative view of the expected changes in the educational outcome of children as a function of changes in the explanatory variables (economic background and income inequality), the marginal effects are estimated from equation \eqref{eq:EduOutcome}.
+
+
+%\begin{equation} \label{eq:MaeginalEffect}
+%\frac{\partial E (ComSec \vert \boldsymbol{x})}{\partial \boldsymbol{x}} \Bigg\vert_{\boldsymbol{x}=\tilde{\boldsymbol{x}}} = \quad \frac{\partial F (\boldsymbol{x} \boldsymbol{\beta})}{\partial \boldsymbol{x}} \Bigg \vert_{\boldsymbol{x}=\tilde{\boldsymbol{x}}}= f(\tilde{\boldsymbol{x}} \boldsymbol{{\beta}}) \boldsymbol{{\beta}} 
+%\end{equation}
+
+
+For the categorical variables, the marginal effects indicate how $ComSec_{i,t}$ is predicted as $MSB_i$ changes from 0 to 1, holding all the other covariates constant at their average values, while for the continuous variable $Ineq_{s,t+14}$, the results from the marginal effects indicate how much the increase in the inequality ratio will change children’s probability of achieving a secondary education.
+
+
+
+
+
+
+
+\section{Empirical Results} \label{Results}
+
+This section presents the study’s empirical findings. I start with the estimation of intergenerational educational mobility based on the transition matrix and the linear regression model. This is followed by the results on whether mobility at the state level is correlated with income inequality. Section \ref{Dropout} deals with one important mechanism behind the relationship between inequality and mobility illustrated by the GGC, namely, whether greater income inequality contributes to a higher school-dropout rate for economically marginalised children.
+
+
+\subsection{Intergenerational Educational Mobility} \label{Mobility}
+
+Mobility matrices and linear regression models have been widely used in the economic literature to measure the extent of intergenerational educational mobility. These two empirical approaches complement each other and together provide a more detailed picture of mobility. The regression model takes into account the variation in standard deviation across both generations and presents a degree of mobility free from bias that can be caused by an increase in average education over time. The transition matrix approach, in comparison, has the advantage of providing a more comprehensive overview of the direction of the mobility \citep{corak1999intergenerational, Fields2002}.
+
+
+\subsubsection*{A. Mobility Matrices}
+
+The Figure \ref{fig:Evolution-Educ} measures the children’s probability of attaining a certain educational level as a function of parents’ education. If we analyse the four charts together, we see only minimal changes over time in the intergenerational persistence of education in Brazil. Note that regardless of birth year, the chance of attaining higher education is strongly correlated with the parents’ educational background. In summary, it is possible to state that the children of more highly educated parents tend to become more highly educated adults, while the children of less educated parents tend to become adults with less education. However, the data clearly show that the probability of attaining the compulsory level of education has increased considerably over time. As can be seen in the figure \ref{fig:Evolution-Educ}, the proportion of people with no school certificate and only primary education is becoming increasingly smaller.
+
+Following on this brief description of the development of mobility over time, I now turn to the variation in the intergenerational persistence of education across the Brazilian states. Figure \ref{fig:Figure-IMob-Up-Down} presents the direction of mobility, displaying the results of equations \eqref{eq:ImobilityRatio} and \eqref{eq:UpwardMobility}. Figure \ref{fig:Mobility-Indexes} places the states in increasing order, according to the degree of mobility estimated from equation \eqref{eq:PraisShorrocks}.
+
+Figure \ref{fig:Figure-IMob-Up-Down} illustrates the two different directions in mobility. Individuals who achieve a higher educational level than their parents move upward on the educational scale, while downward mobility refers to the cases where the children’s level of schooling remains lower than that of their parents. In Brazil $38.8\%$ of children have achieved a higher level of education than their parents, while only around $15\%$ have experienced downward mobility. 
+
+However, these values vary strongly across the states. Paraiba is the state in Brazil with the highest level of intergenerational immobility in education $(49.1\%)$, approximately $12$ percentage points more than the results obtained in Rio Grande do Norte, the state with the lowest level of persistence in education across generations $(37.3\%)$. The levels of upward mobility exhibit even greater variation across the states, from $30.4\%$ in Pará to $52.1\%$ in Distrito Federal.  
+
+If we look more closely into the mobility rates of the most mobile state, we can observe that the high level of mobility was mainly due to the larger downward mobility: Almost a third of the population in Rio Grande do Norte $(30.3\%)$ reached a lower level of education than their parents. In this way, Rio Grande do Norte presents also the greatest level of downward mobility across the $27$ Brazilian states, being this value nearly five times larger than in Distrito Federal $(6.2\%)$ and three times higher than in São Paulo $(10.7\%)$ - the states with the lowest level of downward mobility.
+
+
+%If we look more closely into the mobility rates of the most mobile state, we can observe that the high level of mobility was mainly due to the larger upward mobility: More than half of the population in Roraima $(52.4\%)$ reached a higher level of education than their parents. Finally, it is possible to observe that the downward mobility in states from the south region of Brazil is generally lower than in the others macro-regions.
+
+
+Figure \ref{fig:Mobility-Indexes} ranks the Brazilian states on the basis of the Prais-Shorrocks indicator from equation \eqref{eq:PraisShorrocks} and provides more detailed information on the movement of children within the education distribution. The red circles indicate the ratio of children from parents with no school-leaving certificate who have successfully completed tertiary education, representing the maximum possible degree of upward mobility. The indicator ‘top (bottom) persistence’ displays the proportion of children from parents with tertiary education (no certificate) who have achieved the same educational level as their parents.
+
+The bottom persistence shows the lack of mobility at the lowest extreme of the transition matrix. In Brazil, nearly half of children $(49.2\%)$ from parents without a school certificate have not completed (primary) education, highlighting once again the strong intergenerational persistence in educational levels. This value also varies strongly across the states, from $32.2\%$ in Distrito Federal to $69.7\%$ in Piauí. 
+
+%Figure \ref{fig:Mobility-Indexes} indicates that the chances of ascending from the bottom of the education distribution are especially low for individuals living in the north-eastern states.
+
+%$M_{PS}(\mathbb{P})$
+With a Prais-Schorrocks index equal to $0.836$, Rio Grande do Norte (RN) leads the Brazilian rankings for intergenerational mobility. The main reason for this is that RN exhibits very low persistence at the top of distribution. Only $15.1\%$ of children from parents with a tertiary education achieved a college degree. By way of comparison, this value is $92.4\%$ in Distrito Federal, $82.3\%$ in Roraima, and $78.5\%$ in São Paulo.
+
+%Finally, Figure \ref{fig:Mobility-Indexes} illustrates how extremely difficult it is to climb the educational ladder in Brazil. In only four of the 27 states do the chances of moving from the bottom to the top of the educational distribution exceed $10\%$, i.e., Mato Grosso $10.9\%$, Amapá $11\%$, Roraima $16.4\%$ and Distrito Federal $16.6\%$.
+
+
+ 
+
+%While RR presents a high level of botton to top mobility and a very low persistence in the bottom of distribution, the state of SC has a transition matrix relatively close to the "invariant matrix", illustrating a situation with a higher level of equality of opportunities.
+
+
+
+
+
+\subsubsection*{B. Linear Regression Model}
+
+In this section, I estimate the educational persistence between children and parents for each state based on equation \eqref{eq:OLSFixed}. Figure \ref{fig:RhoS-1940-1989} presents the results of this exercise based on a geographical breakdown. The lighter areas denote states with lower levels of educational persistence across generations (or higher mobility values). For the sample as a whole, the correlation coefficient generated a value of $0.475$, while the variation in intergenerational educational persistence across Brazilian states reached a maximum of $0.257$, which represents the difference between Rio de Janeiro ($0.510$) and Roraima ($0.253$). 
+
+
+%Among the top five in educational mobility apart from Roraima, we find the states of Amapá ($0.351$), Goiás ($0.356$), Tocantins ($0.370$) and Maranhão ($0.377$). Bahia ($0.488$), Distrito Federal ($0.492$), Alagoas ($0.497$), Acre ($0.502$), and Rio de Janeiro ($0.510$) located at the other end of the scale. 
+
+%indicating that a 1-year difference in parents’ schooling is correlated with a 0.483-year difference in children’s education (both of which based on the average education in the respective generation)\footnote{The state of Roraima presents an intergenerational educational persistence of $0.179$. However, this coefficient will not be used in the analysis, because it is not statistically significant at $99\%$ level of confidence (See table \ref{tab:Rho-Cohorts}).}
+
+
+
+As already indicated in Figure \ref{fig:Evolution-Educ}, children’s chances of attaining primary education have increased significantly over time in Brazil. Accordingly, the PNAD dataset reports a strong variation in average years of schooling and standard deviation across the birth cohorts (see figures A1 and A2 in Online Appendix). These findings are strong indications that the degree of intergenerational mobility may have changed in recent decades. In order to test this hypothesis, I divided the full sample into five birth cohorts, each of which covered 10 consecutive birth years, and subsequently estimated the predictive margins from equation \eqref{eq:OLSFixed} with a two-way interaction (education by birth cohort) to investigate how children’s chances of mobility change according to their year of birth.
+
+The results of this exercise are plotted in Figure \ref{fig:Marginal-Effect} and confirm a decrease in the association between parents’ and children’s education over time. Note that for all birth cohorts, as parents’ schooling increases, the linear prediction for children’s education also increases. However, the increase (slope) is greater for children born between 1940 and 1949 than for the 1980–1989 cohort. At low levels of parental education, there is virtually no difference across birth cohorts (the children of parents with a low educational level don’t achieve a high level of education no matter when they were born). As parents’ educational level increases, the education gap between children becomes increasingly larger, because children born between 1940 and 1949 benefit more from the greater human capital of their parents than the younger generations. Given this variation of correlation coefficients over time, table \ref{tab:Rho-Cohorts} displays the levels of mobility (separately) across birth cohorts.
+
+%\footnote{The table \ref{tab:Rho-Cohorts} needs to be still created.}
+
+%From the results three important trends can be stated: (i) the position of the states in the mobility ranking does not remain constant across the cohorts; (ii) the intergenerational educational mobility has increased in all Brazilian states over time; and (iii) the variation in the correlation coefficient across the states was reduced very significantly, or in other words, the chances of mobility became more homogeneous in Brazil.
+
+%The positive variation of mobility over time implies that the investigation of the correlation between education of parents and children should be considered in different birth cohorts. 
+
+%\hfill \break 
+
+%\begin{itemize}
+%\color{red}
+%\item Bottom to top quintile (American Dream): Corak and Heisz 1999; Hertz 2006, Chetty etal 2014 pg. 1562
+%\end{itemize}
+
+
+
+\long\def\comment#1{}
+\comment{
+--> Ignoring only for the journal publication
+
+\subsection{Correlating Intergenerational Mobility}
+\label{Correlating}
+
+Independent of the indicator used to measure intergenerational mobility, the findings presented in Section \ref{Mobility} allow us to establish this paper’s first important result: The chances of attaining educational mobility vary significantly from one Brazilian state to another. 
+
+%\hfill \break
+% The starting point for this question is to remember the three fundamental institutions which can play a strong role in the chances of mobility for children: the family, the labor market and the state \citep{corak2013income}.
+
+This section addresses the question of why intergenerational persistence in education varies so widely across Brazilian states. With this goal in mind, I follow the theoretical approach of \citet{chetty2014land} and \citet{guell2018correlating} and correlate the findings from mobility with some socioeconomic indicators, discussed in the economic literature as jointly responsible for the intergenerational transmission of economic outcomes.\footnote{In this context it is important to stress once again that these indicators cannot necessarily be interpreted as being causal for the changes of educational mobility within Brazil, yet they do give an initial background to understand this variation across the states. In this section, I assume that income inequality, earnings premium and the other socio-economic outcomes are endogenously determined and have no control for a vast number of other variables which can affect the chances of mobility across generations \citep{chetty2014land}.}
+
+
+%In this section I use the correlation coefficient as a measure of mobility in order to enable an accurate comparison of the conclusions with the results from cross-country literature. As already observed by \citet{chetty2014land}, the cross-regions studies have exclusively used the measure of regression coefficients to investigate the variation in intergeneration mobility.
+
+\subsubsection{The Great Gatsby Curve}
+
+// Finalising ignore
+}
+
+
+
+
+\subsection{The Great Gatsby Curve}
+
+As already discussed in Section \ref{Literature}, \citet{Solon2004} has concluded that the current level of income inequality between families can affect the investment in their children’s human capital and, consequently, these children’s chances of intergenerational mobility. It can therefore be expected that the variation in mobility presented in Figure \ref{fig:RhoS-1940-1989} can be explained by the significant variation in inequality across Brazilian states. 
+
+%As shown in figure \ref{fig:OutcomeShare}, income inequality (measured by Gini coefficient) varied in the year 2014 from $0.416$ in Santa Catarina (SC) to $0.577$ in Distrito Federal (DF).
+  
+  
+%\footnote{Education is compulsory in Brazil between ages 7 and 14, and as already explained in XX, particularly important for the the decision to continue with the schooling is the level of inequality in the year of the completion of the compulsory education.}
+
+According to the theoretical model of \citet{Solon2004}, what is particularly relevant for the accumulation of human capital is the level of inequality when children have completed their compulsory education and face a decision about whether or not to pursue further schooling. Therefore, this paper has used – as a measure of inequality – the Gini coefficients for the years in which the individuals should have concluded their compulsory schooling.
+
+Given the variation over time in mobility shown in Table \ref{tab:Rho-Cohorts}, I focused the investigation on one single birth cohort containing individuals born between 1970 and 1979 in order to minimise the lifecycle bias.\footnote{The youngest cohort (1980-1989) has not been chosen for the investigation because approximately $9.2\%$ of the individuals in this group were enrolled in the educational system in 2014. The oldest birth cohorts (1940–1949 and 1950–1959) needed to be excluded from the analysis because there are no data available for the measure of the Gini coefficient for the years before 1976.} Consequently, the measures of inequality are based on the PNAD samples between $1984$ and $1993$, and in order to eliminate possible short-term fluctuations in inequality across these years, I average the Gini coefficients throughout the period under consideration.
+
+Figure \ref{fig:GGC} plots the ‘Great Gatsby curve’ for the Brazilian states. On the y-axis we find the level of intergenerational persistence in education estimated from equation \eqref{eq:OLSFixed}, while income inequality is plotted on the horizontal axis.\footnote{The original ‘Great Gatsby curve’ used the intergenerational elasticity (regression coefficient) on the y-axis instead of the correlation coefficient. However, in the context of developing countries where the access to formal education was considerably expanded in recent decades, the relative measure of mobility will make more sense to the investigation of mobility \citep{torche2019educational}. \citet{leone2017gender} confirmed for Brazil a significant increase in the intergenerational educational mobility over time, however, he showed that this increase was principally caused by the general increase over time in the years of schooling (‘elevator effect’) and not by changes in parents-children transmission.} The findings confirm the statistically significant relationship between the Gini coefficient and intergenerational mobility: States with a higher level of income disparity, such as Paraíba (PB) and Ceará (CE), presented higher values of persistence in education (or low levels of mobility), while the correlation coefficients tended to be lower in states with a more equal distribution of income, such as Santa Catarina (SC) and Amazonas (AM).
+
+%\footnote{As already observed by \citet{chetty2014land}, the cross-regional studies have exclusively used the measure of regression coefficients to investigate the variation in intergeneration mobility. In this section I therefore use the correlation coefficient as a measure of mobility in order to enable an accurate comparison of the conclusions with the results from the cross-country literature.}
+
+%When the state of Roraima is excluded from the investigation the correlation coefficient increases to $0.4918$.
+
+%However, the negative correlation between income inequality and mobility does not hold true for all states. Amapá (AP) can be considered a ‘point outside the curve”, because the state had the most equal distribution of income in the country, but presented a relatively high persistence in education across generations. In addition, some states with similar Gini coefficients, such as Bahia (BA), Goiás (GO), and Rio Grande do Norte (RN), present very different indices of intergenerational mobility.
+
+%However, the negative correlation between income inequality and mobility does not hold true for all states. Distrito Federal (DF), Maranhão (MA) and Alagoas (AL) can be considered “points outside the curve”. Distrito Federal has the greatest Gini-coefficient in Brazil, but it does not present the highest level of intergenerational persistence in education. Similarly, Maranhão has a relatively high mobility, but it does not have one of the most equal distribution of income in the country. In addition, some states with similar Gini coefficients, such as Goiás (GO), Paraná (PR), Rondônia (RO) and Mato Grosso (MT), present very different indices of intergenerational persistence of education.
+
+%\hfill \break 
+
+%\begin{itemize}
+%\color{red}
+%\item Extension of GGB:  Areas within the U.S. that have greater income inequality also tend to have less upward mobility for children from low-income families - Chetty (2014) Where is the Land of Opportunity?  (https://www.brookings.edu/blog/social-mobility-memos/2015/05/19/the-great-utility-of-the-great-gatsby-curve/)
+%\end{itemize}
+
+%\begin{itemize}
+%\color{red}
+%\item Corak, pg 83 (2013): The cross-country differences illustrated in the Great Gatsby Curve could refl ect differences in the degree of upward mobility for those born to low-income fathers, or differences in the stickiness of ntergenerational status for those born to top income parents.
+%\end{itemize}
+
+
+\long\def\comment#1{}
+\comment{
+--> Ignorating only for the journal publication.
+
+ 
+\subsubsection{Returns to Human Capital}
+
+Until now the main results from this work can be summarised as follows: Across Brazilian states, there is a variation in the degree of intergeneration mobility and this variation is negative correlated with the level of income inequality. In this section, I will expand the understanding of this relationship including a new outcome for the investigation: the returns to human capital, that was defined as the ratio of average income of individuals with a tertiary education to the average income of those with no school-leaving certificate. 
+
+As can be observed in figure \ref{fig:Earnings3-1} the earnings preminum ranges strongly across Brasilian states. The average income of a college graduate in Bahia (BA) is $4.5$ times greater than the average earnings of individuals with no education. This ratio decreased to $2.6$ Santa Catarina (SC) and $2.7$ times in Goiás (GO)
+
+\citet{corak2013income} suggests that the correlation between mobility and inequality presented in the ‘Great Gatsby Curve’ can be derived from the variation of the returns to education across states. The also called ‘expected earnings return’ enables us to identify the economic incentive to the investiment in human capital. Following the model of \citet{Solon2004}, an increase in the expected earnings return to human capital would take wealthy families to invest more financial resources in the education of children in order to maximize their intergenerational utility function, which means that the investiment gap in education between families would rise, thus inducing an increase in the income inequality in the future. Based on this model it is expected that intergenerational persistence in education will be stronger in states with higher earnings premium. 
+
+Figure \ref{fig:Earnings3-1} investigates this hypothesis, plotting on the vertical axis the intergenerational educational persistence and on the horizontal axis the earnings premium that college graduates have over persons lacking primary education. As the results illustrate, there is a clear and statistically significant negative association between earnings return to human capital and intergenerational mobility: In states where the return to education is higher (for example RJ and BA), the mobility between parents and children tend to be lower.
+
+% PS: Show the r for the case without RR and proof again this charts !!!
+
+%\footnote{Given that the values of mobility refer once again to the birth cohort 1970-1979, the estimations of earnings premium was also concentrated exclusively on this individuals.}
+
+
+
+%\subsubsection{School dropout rate} 
+
+%According to \citet{Solon2004} the state plays a particularly important role in determining the level of mobility in a country. In this respect, public investiment in education, structure of taxation and regulation in education system are key drivers to reduce the dependence of parents's outcome on the success chances of their children \citep{bjorklund2009intergenerational}.
+
+%Article 205 of the Brazilian Constitution states that education is a fundamental right of the citizen and a duty of the state. For this reason, education at all levels is available for free at public institutions. Since 1971 primary education has been compulsory for all children in the age group of 7 to 14 years.  However, as shown in the Table XX\footnote{The table XX must still be created.}, the adoption of this law did not result in significant short-term changes in enrollment rates. The net enrolment in primary school has increased steadily in the last decades and only in 1999 has it reached a level above $95\%$.
+
+%Before focusing on a possible causal mechanism linking the school dropout rate to the variation in intergenerational mobility, this section aims to highlight the aggregate correlation between these two outcomes. Figure \ref{fig:Dropout-1940-1989}  investigates whether states that have been more successful in reducing the dropout rate in primary education, have also achieved higher levels of mobility across generations.
+
+%Aggregate data confirm this hypothesis, indicating that states with greater levels of early school-leavers tend to present a higher intergenerational persistence in education across generations. In Sergipe (SE), Piauí (PI) and Alagoas (AL), for example, more than $40\%$ of the population were unable to complete the primary education. So it is no accident that these states have presented low values of intergenerational mobility.
+
+
+\subsubsection{Mobility and Socio-economic Outcomes}
+
+Figure \ref{fig:Pearson-Outcomes} includes in the investigation of correlation a larger set of economic and social outcomes. For this propose the degrees of intergenerational persistence in education presented in figure \ref{fig:RhoS-1940-1989} were correlated with twelve different socio-economic indicators at state level: Investment in education, GDP per capita, average household income, child mortality rate, life expectancy at bith, homicide rate, employment rate, share of population in urban areas, proportion of interstate migrants and net enrolment rate (primary, secondary and tertiary education). 
+
+
+
+Figure \ref{fig:Pearson-Outcomes} reports the results of this investigation presenting the pearson correlation coefficients. For a better presentation of the results, the socio-economic outcomes have been sorted into four categories: School system, economic outcomes, human development and demography.\footnote{The presented indicators refer primarily to own estimates based on the PNAD-2014. However, because some macroeconomic variables cannot be calculated on the basis of PNAD, I have also used further available administrative data from public institutions. See table \ref{tab:Databease-Pearson} in the appendix for an overview of the used databases.}
+
+At state level, mobility is negatively associated with public investment in education, net enrolment rate in primary education, share of interstate migrants and employment rate – i.e. the higher these indicators, the lower is the persistence in education and therefore the higher the level of intergenerational mobility.
+
+
+// Finalising ignore
+}
+
+
+\subsection{Linking Inequality and School Dropouts} \label{Dropout}
+
+In this section, I move away from the analysis of intergenerational persistence in education via the correlation hypothesis to an investigation of the determinants which could better explain the association between inequality and mobility illustrated by the ‘Great Gatsby Curve’. At this point, it is important to introduce the concept of ‘economic marginalisation’ presented by \citet{kearney2014income}, which can be described as the process of a person setting aside participation in the educational system given their very low expected-earnings premium. In this case, young individuals do not believe that an investment in human capital can increase their chances of mobility, which leads them to leave school early.
+
+According to the human capital approach developed by \citet{kearney2014income}, the marginality arises as a consequence of higher income inequality. An increase in the $75/10$ ratio of income distribution might lead to direct social exclusion, particularly for children from socially vulnerable families that do not see the possibility of climbing up the social ladder via education. The marginalised population often lives in disadvantaged areas with negative neighbourhood behavioural patterns and notably restricted access to high-quality schools, thus reducing their belief in personal advancement through schooling, and consequently making social mobility more difficult \citep{rothwell2015geographic}. With this problem in mind, the empirical objective of this section is to investigate, whether children from socially disadvantaged households living in states with greater income inequality have a lower chance of completing (secondary) education. 
+
+ 
+
+Figure \ref{fig:Drop-Income} provides the first empirical evidence for the subsequently applied econometric model. It presents the proportion of the population with secondary-school education, divided by the inequality groups and the educational achievement of parents, which is used as a proxy for ‘economic marginalisation’.\footnote{For this exercise, the 27 states in Brazil have been classified into three inequality groups (low, middle and high) according to the $75/10$ ratio of income distribution.} The findings highlight the effect of marginalisation on the decision to leave school early. Note that independent of the inequality level, less than $20\%$ of children from illiterate parents have completed secondary education. In contrast, more than $80\%$ of children of parents with a graduate degree have a secondary school-leaving qualification. In addition, Figure \ref{fig:Drop-Income} confirms that for vulnerable children, dropping out of school is associated with income inequality: The children of illiterate parents and parents with no (primary) education living in states with lower income inequality have a higher chance of completing secondary education than vulnerable children from high-inequality states. 
+
+%Figures \ref{fig:Drop-Income} introduce the two main variables used in the identification strategy: the income gap and the share of the population with a secondary education. \ref{fig:Ratio5010a} illustrates the variation across Brazilian states in the ratio of the income of the upper-bound value of the third quartile (i.e. the $25\%$ of individuals with the highest income) to that of the first decile. The resulting visual presents an almost perfect geographic distribution of inequality and a significant variation across states: In Rio de Janeiro the income of the richest $25\%$ corresponds to $2.76$ times the income of the poorest $10\%$, while this ratio is $8.32$ in Piauí. 
+ 
+ 
+ 
+
+%For a better overview, figure \ref{fig:Ratio5010a} provides the variation in the 75/10 ratio of income distribution across the Brazilian states, and figure \ref{fig:Drop-Income} presents the share of the population with secondary education divided by inequality levels.
+
+%Note that independent of the inequality level, less than $5\%$ of children from parents with a graduate degree have dropped out the primary education. The same proportion exceeds $58\%$ for descendants from Illiterate parents.
+
+%Rather, I regard the effect of socio-economic marginalization and inequality on the rate of early school leavers. 
+
+
+
+
+
+\subsubsection{Probit Latent Variable Model}
+\label{Latent-Model}
+
+%for all inviduals in the sample and indicates the relevance of the explanatory variables on probability to drop out the educational system.
+
+In order to empirically test the assumption regarding economic marginalisation, I run equation \eqref{eq:EduOutcome} and present the results in Table \ref{tab:Dropout}. The first column contains the results for the whole sample, and the subsequent columns contain the values for the five-year birth cohorts.\footnote{Because there is no nationally representative database for the period prior to 1981 that could be harmonised in a reliable way with the most recent samples of PNAD, this section limited the estimates to individuals born from the year 1965 onwards, thereby using the income inequality after the year 1981. See the Online Appendix for a detailed description of the data harmonisation.} 
+
+%Parental educational level, gender, location of residence, race, year of birth, and whether a child has been living with both parents have a statistically significant effect on the chance of completing secondary education. Being male, for example, decreases the probability of achieving a (secondary) school-leaving certificate by $20.3$ percentage points. As expected, children of parents with no school certificate have a lower chance of completing secondary education $(40.5\%)$, compared to offspring of parents with at least a primary education.
+
+The interaction term between the categorical variable ‘socio-economic marginalisation’ and the continuous variable ‘income inequality’ is the focus of this investigation and confirms the statistically significant effect of income disparity on educational attainment. The negative coefficient indicates that children of parents with no school certificate are more disadvantaged by an increase in income inequality. Specifically, each additional point in the $75/10$ ratio decreases the likelihood of achieving secondary education by $5.4\%$ for children of parents without education.
+
+%The same 1-point increase in inequality has an even greater effect of the chances to leave the secondary education $(6.76\%)$. 
+
+%Both values are statistically significant and can be easily comprehensible in the current context of compulsory education. In Brazil the education is compulsory between ages 7 and 14, which is equivalent to the age of the students in primary education. Then, the obligatoriness of the fundamental education reduces the effect of marginalization on the doupout rate. But, this lack of perspective of young people from socially disadvantaged families emerges stronger when the compulsory requirement no more exists.
+
+%Table \ref{tab:Dropout} showed that the interaction ``Parents with no education" by ``Ratio 10/40" is statistically significant while the interaction ``Illiterate Parents" by ``Ratio 25/10" is not. 
+
+For a better overview of the interaction between income inequality and economic marginalisation, I estimate the marginal effects from equation \eqref{eq:EduOutcome} and display the predicted probabilities for all the $10^{th}$ values of the ratio 75/10 (from 3 to 12) in Figure \ref{fig-NoEduc_Ratio7510R2-Peryear}. Note that independent of the level of inequality, children of parents with no education have an even lower chance of completing secondary school. Moreover, both curves have different shapes and slopes: The slope of the no-education curve is higher, indicating that the effects of an increase in income inequality are disproportionately higher for children of parents with no education. As a consequence, at a low level of income inequality, there is a relatively small difference in the probability of achieving a secondary school certificate between children from educated and uneducated parents. However, as the 75/10 ratio increases, the gap between these two groups becomes increasingly bigger.
+
+
+
+
+%Note that independent of the level of inequality, have children from parents with no education ever a lower chance to complete the secondary school. In addition, both curves have an increasing shape, indicating that the chances to leave early the education system rise if the ratio 75/10 increases. However, it is possible to observe that the curves have different slopes: The slope of the No-Education-Curve is higher, indicating that the effects of an increasing inequality are disproportionately higher for children from parents with no education.
+
+
+%For a better overview of the association between parent's and children's education, I estimate the marginal effects from equation \eqref{eq:EduOutcome} in order to isolate the values of all other covariates. Table \ref{tab:Adjusted-Predictions} presents the discrete changes in probability of dropout rate between children from different educational backgrounds reporting in the ``margin" column the average predicted probabilities. 
+
+%\textcolor{blue}{Based on the estimations from equation  \eqref{eq:MaeginalEffect}, $0.426$ would be the average dropout rate in primary education, if all children would have illiterate parents (assuming that all other variables remained constant at their average values), and $0.254$ if everyone were treated as if their parents could read or write. The variation in dropout rate would be ever higher considering parents with and without a primary education ($0.418$ and $0.166$).} 
+
+%\textcolor{blue}{Table \ref{tab:Contrasts-Dropout} summarizes in a comprehensive overview the essential differences in average predicted probabilities by the educational outcome of children. A contrast of $0.305$ says, for example, that children from parents with no education are on average about $30.5\%$ more likely to drop out the secondary education than descendants from parents with (at least) a primary education.}
+
+%Figure \ref{fig-Contrast-TerEdu_ratio7510} displays the variation of the contrasts in adjusted predictions by the ratio $25/10$ and summarises the effects of the higher school dropout rate for children from marginalized households on the chances to obtain a college degree. Since the dropout rate for children from parents with no education increases more strongly by rising inequality, have these children an even lower probability to conclude the education system with a tertiary education by an aggravation of inequality. 
+
+
+%the contrasts (gap in educational attainment) between these two groups rises by an aggravation in the income inequality.
+
+
+
+
+%https://www3.nd.edu/~rwilliam/stats2/l51.pdf
+%https://www.stata.com/meeting/germany12/abstracts/desug12_royston.pdf
+
+
+
+\subsubsection{Robustness Checks}
+
+%As described in detail by \citet{neumayer2017robustness}, econometric inferences become more credible and effective if they are sufficiently independent from the model specification. For that reason, this section tests the same economic marginalisation hypothesis using alternative model specifications and alternative econometric approaches in order to improve the validity of the empirical evidence presented in the previous section.
+
+
+\subsubsection*{\small A. Alternative Econometric Approaches}
+
+%As previously described, the objective of Section \ref{Latent-Model} was to identify whether children from (socio-economically) marginalised households living in states with greater income inequality are more disadvantaged in their school careers. 
+
+In the section before, I used as a proxy for socio-economic marginalisation, a dummy variable in the equation \eqref{eq:EduOutcome} indicating children from parents with no primary education $(NoEducP_i)$. As usual in such circumstances, the empirical model assumed that the correlations between the residual and the predictors are zero. But now, based on the theoretical approach of \citet{wooldridge2010econometric}, I relax this assumption and consider the case where the probit model contains a binary explanatory variable that is endogenous. 
+
+The ‘feeling of marginalisation’ varies according to the parents’ economic situation, and having both parents in the household can shift the family’s budget constraints, providing higher socio-economic status for the family, similarly to a higher level of parental education. I therefore use for the variable responsible for the socio-economic marginalisation $(NoEduP_i)$ the instrumental variable ‘both parents’ $(bothP_i)$ which is a binary variable equal to one if the individual lived with both parents in the household at the age of $15$.
+
+
+In this section, I continue to use equation \eqref{eq:EduOutcome} to study the effects of economic marginalisation on the chances of completing secondary education, but the empirical investigations have been conducted on the basis of three different empirical approaches: ordinary least squares (OLS) estimations of a linear probability model (LPM), two-stage least squares (2SLS) estimations of the LPM, and a bivariate probit that drops the variable ‘both parents” $(bothP_i)$ from the probit for $MSB_i$.\footnote{To facilitate comparison, Table \ref{tab:Rob.Checks} also contains the estimation results from the probit model in Section \ref{Latent-Model}, in which the variable $bothP_i$ was treated as exogenous.}
+
+Table \ref{tab:Rob.Checks} provides the results of the robustness checks using the whole sample and confirms that the estimates from Section \ref{Latent-Model} are also robust to alternative econometric approaches. For brevity’s sake, the table reports only the coefficients $\pi_1$ from the interaction term between income inequality $(Ineq_s)$ and the proxy for socio-economic marginalisation $(MSB_i)$. Next, I have used margins to obtain the predicted probabilities for this interaction and have also displayed the adjusted predictions of educational chances at representative values of income inequality (APRs), i.e. for every $10^{th}$ value for the distribution of the 75/10 ratio.
+ 
+As in the main model specification, all three expanded models presented negative and statistically significant values for the interaction term indicating that the higher the inequality level in the state, the lower the share of students with a secondary school-leaving qualification. The nonlinear models (columns 1 and 4) give larger estimated coefficients for this interaction than the linear model (columns 2 and 3): $-0.0540$ and $-0.0487$ versus $-0.0179$ and $-0.0175$, respectively, suggesting that the nonlinearity in the probit models plays a decisive role in determining the chances of formal educational achievement.
+
+
+With the estimations of marginal effects for different inequality levels, it is possible to observe that the effects of economic marginalisation differ greatly according to the level of inequality. When $MSB_i$ is assumed to be exogenous, the probit and LPM models provide very similar average partial effects by increasing income disparity. Children of parents with no formal education in the lowest inequality decile have, for example, a $22\%$ lower chance of achieving a secondary education certificate than pupils from parents with at least primary education. The same difference in the top decile is approximately 40 per cent. This empirical evidence remains practically unchanged when $bothP$ is used as IV in the LPM estimation.
+
+Lastly, but by no means least importantly, the use of the bivariate probit, assuming that $MSB_i$ and $bothP_i$ are correlated, presents substantially lower estimated APRs than the (normal) probit model. However, the estimates continue to indicate the same direction and statistical significance.
+
+
+%\vspace{1cm}
+%\textcolor{red}{From this perspective, inferences become more valid if estimated results are sufficiently independent from the model specification, that is, if all plausible alternative specifications give similar results (Neumayer and Plümper 2016). A baseline model estimate is robust to plausible alternative model specifications if and only if all estimates have the same direction and are all statistically significant.}
+
+
+
+\subsubsection*{\small B. Alternative Model Specifications}
+
+In the following, I explore the dependence of parameter $\pi_1$, estimated from equation \eqref{eq:EduOutcome}, on four specific changes in model specification: In column 5, the estimations were limited to individuals who have never lived in another Brazilian state or another country. Column 6 used the ratio 90/10 as an indicator of income inequality, instead of the 75/10 ratio. In column 7, I changed the variable responsible for socio-economic marginalisation, substituting parents with no (primary) education for illiterate parents. Finally, in column 8 the dummy variable representing children with illiterate parents has been added to the empirical model and estimated in combination with $NoEducP_i$.\footnote{For the specification 8, the empirical model assumes the following form: \\ $ComSec_{i,t}=\pi_0 \:+\: \pi_1 \left(NoEducP_{i} \times Ineq_{s,t+14} \right) \:+\: \pi_2 \left(IlliteP_{i} \times Ineq_{s,t+14} \right) \:+\: \pi_3 \: NoEducP_{i} \:+\: \pi_4 \: IlliteP_{s}  \:+\: \pi_5 \: Ineq_{s,t+14} \:+\: \gamma_1 \: male_{i} \:+\: \gamma_2 \: rural_{i} \:+\: \gamma_3 \: bothP_{i} \:+\: \gamma_4 \: race_{i} \:+\: \gamma_5 \: birthc_{i} \:+\: \epsilon_{i}$ } 
+
+
+
+
+%Next, I used margins to get the predicted probabilities for this explored interaction and displayed in the table also the average partial effects (APE) for every $10th$ value of the inequality distribution.
+
+
+%\textcolor{red}{People often ask what the marginal effect of an interaction term is. Stata’smargins command replies: there isn’t one. You just have the marginal effects of the component terms. The value of the interaction term can’t change independently of the values of the component terms, so you can’t estimate a separate effect for the interaction. (\href{https://www3.nd.edu/~rwilliam/stats/Margins01.pdf}{Link: pg. 44.})}
+
+
+All four expanded models generated robust results, demonstrating the significantly negative impact of income inequality on educational attainment, as already indicated in Section \ref{Latent-Model}. In this context, it is hardly surprising that the results for column 5, with only individuals who have never lived in another state, indicated a higher effect of inequality on educational outcomes than the other specifications. As already noted by \citet{kearney2014income}, boys and girls who have been born into a region with an extremely uneven distribution of wealth and have never seen another reality tend to underestimate the returns on schooling given their lower belief in social mobility through education.
+
+
+Once again, the estimations of marginal effects for different inequality levels pointed to an increase in the gap in educational attainment by the aggravation of income disparity. According to the model with only the local population, for example, the advantage of having parents with primary education is $21.0\%$ at the bottom of the distribution and $42.3\%$ at the other extreme of the inequality scale. These results are consistent with the findings presented in Figure \ref{fig-NoEduc_Ratio7510R2-Peryear} and show that – keeping all the other variables constant – the adverse effect of socio-economic marginalisation on the chance of completing secondary education tends to be stronger in states with greater income disparity.
+
+
+
+
+
+
+
+
+\section{Conclusions} \label{Conclusion}
+
+The estimates presented in this paper are based on data from the mobility supplement from the PNAD-2014, which is a nationally representative survey from Brazil detailing the educational attainments for two generations within the same family. The empirical findings provided here, have shown for the first time that intergenerational persistence in education varies substantially across Brazilian states. For example, the probability that a child born to parents without a school certificate will achieve a university degree is $3.2\%$ in Pará, but $16.6\%$ in Roraima. Together with findings from other countries \citep{chetty2014land, azam2015like, guell2018correlating} this work strengthens the assumption that mobility levels can vary considerably within a single country.
+
+This paper has also examined the spatial variation in intergenerational educational mobility across Brazilian states, and for that purpose correlated mobility with income inequality at state level. I have found compelling empirical evidence for a statistically significant association between intergenerational mobility and income inequality, thus confirming the existence of the ‘Great Gatsby curve’ at the national level as well: persistence in educational levels across generations tends to be stronger in states with a more unequal distribution of income. 
+
+%In addition, the available findings support the hypothesis of \citet{Solon2004} that expected earnings return to human capital and intergenerational mobility are negatively correlated: the persistence in education is greater in states with higher earnings premium.
+
+Finally, this work has aimed directly at illuminating the mechanisms underlying the link between inequality and mobility presented in the ‘Great Gatsby curve’ - currently the biggest gap in this field of research. Thanks to the empirical approach proposed by \citet{kearney2014income}, it was possible to study the effects of an increase in income inequality on the chances of education for children from socially vulnerable families. I have found compelling evidence that offspring born into families with no education are more likely to leave school early if they live in states where the gap between the bottom and the middle of the income distribution is wider. These findings are particularly relevant for the literature because they are independent of the econometric model and remain robust to different model specifications and alternative econometric approaches.
+
+
+
+\section*{Data accessibility}
+
+\footnotesize Repository name: Mendeley Data
+
+Data identification number: \href{https://data.mendeley.com/datasets/cc7g3nt5kh/1}{DOI: 10.17632/cc7g3nt5kh.1}
+
+\href{ftp://ftp.ibge.gov.br/Trabalho_e_Rendimento/Pesquisa_Nacional_por_Amostra_de_Domicilios_anual/microdados/2014/}{Direct URL to data}.
+
+
+\section*{Acknowledgement(s)}
+
+\footnotesize A previous version of this paper was presented at the $7^{th}$ Annual Sustainable Development Conference 2019, the ECINEQ-Conference 2019, the DIAL Mid-term Conference 2019, the Equal Chances: Equality of Opportunity and Social Mobility around the World conference, the $17^{th}$ Nordic Conference on Development Economics, and the ECSR $2^{nd}$ Thematic Workshop on Wealth Inequality and Mobility, as well as in seminars at the United Nations Research Institute for Social Development, the GIGA German Institute of Global and Area Studies, the Free University of Berlin, the University of São Paulo, and the University of Minas Gerais. I thank the participants of all these events for useful discussion and comments. The author gratefully acknowledges Barbara Fritz, Jann Lay, Rodolfo Hoffmann, and Guido Neidhöfer for their critical comments on an early version of this paper. 
+
+
+%\section*{Funding}
+%\vspace{-10pt}
+%This work was supported by the Friedrich Ebert Foundation.
+
+
+
+\section*{Disclosure statement}
+
+No potential conflict of interest was reported by the author.
+
+
+
+
+
+\theendnotes
+
+
+
+\let\oldthebibliography\thebibliography
+\let\endoldthebibliography\endthebibliography
+\renewenvironment{thebibliography}[1]{
+  \begin{oldthebibliography}{#1}
+    \setlength{\itemsep}{0em}
+    \setlength{\parskip}{0em}
+}
+{
+  \end{oldthebibliography}
+}
+
+%\newpage
+{\footnotesize
+\bibliography{ReferenceGeo}
+\bibliographystyle{apa}}
+
+\newpage
+%\appendix
+%\section{Appendix}
+
+
+
+
+\appendix
+
+\newpage
+
+\numberwithin{equation}{section}
+\setcounter{equation}{0}
+
+
+
+
+
+\section*{Appendix}
+
+
+\renewcommand*\listfigurename{Figures}
+\renewcommand*\listtablename{Tables}
+
+{
+  \hypersetup{linkcolor=black}
+ \listoffigures  
+  \listoftables
+ }
+
+
+\titleformat*{\subsection}{\Large\bfseries}
+\subsection*{Supplementary data} \label{Supp.Information}
+
+%Additional supporting information may be found in the online version of this article at the publisher’s web site:
+
+Supplementary data to this article can be found in the Online Appendix at the publisher’s web site. The appendix provides the following additional supporting information:
+
+
+
+\setlist[enumerate]{itemsep=-2mm}
+\begin{enumerate}
+\item \textbf{Structure of the Brazilian Educational System.}
+\item \textbf{Codification of years of schooling.}
+\item \textbf{Data Harmonisation.}
+\item \textbf{A Model of the Intergenerational Transmission of Income Inequality.}
+\item \textbf{A Stylised Model for Dropout of Education System.}
+\item \textbf{Figure A1: Development of Average Schooling, per State.}
+\item \textbf{Figure A2: Development of Inequality in Schooling, per State.}
+\item \textbf{Figure A3: Average Years of Schooling.}
+\item \textbf{Figure A4: Levels of Education, by Regions and States.}
+\item \textbf{Figure A5: Income inequality across states.}
+\item \textbf{Figure A6: Ratio 75/10 of income distribution.}
+\item \textbf{Table A1: Structure of Brazilian Educational System.}
+\item \textbf{Table A2: Codification of Parents' Years of Schooling.}
+\item \textbf{Table A3: Weighted Descriptive Statistics (PNAD-2014).}
+\end{enumerate}
+
+ 
+
+
+\newgeometry{top=1cm,left=1cm,right=5cm,bottom=1.5cm}
+\begin{landscape}
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1.8]{Figure/Evolution-Educ}
+\vspace{-0.2em}
+\begin{minipage}{1.69\textwidth} % choose width suitably
+{\scriptsize
+Notes: Children's education for both genders. Parents’ schooling refers to the educational level of the better educated parent.\\
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Children’s Predicted Probabilities of Educational Attainment}}
+\label{fig:Evolution-Educ}
+\end{figure}
+\end{landscape}
+\restoregeometry
+
+
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{Figure/IMob-Up-Down}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Note: Downward (upward) mobility represents the share of children who have achieved a lower (higher) level of education than their most educated parent.\\
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=1cm}
+\caption{\textbf{Immobility Ratio and Upward–Downward Mobility}}
+\label{fig:Figure-IMob-Up-Down}
+\end{figure}
+
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{Figure/Mobility-Indexes}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Notes: The Prais-Shorrocks index provides a measure of the normalised distance between the identity matrix and the independent matrix. It takes a value of zero (one) when no (all) children move away from the educational level of their parents. The bottom-to-top reports the proportion of individuals born into families with no education that have achieved a university degree. The top (bottom) persistence shows the share of children born to parents with tertiary (no) education who have attained the same educational level as their parents.
+
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Intergenerational Mobility Indexes}}
+\label{fig:Mobility-Indexes}
+\end{figure}
+
+
+
+\newpage
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{Figure/RhoS-1940-1989-All}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Note: The closer the estimated value is to one, the stronger the association between parents' and children's educational attainment and, consequently, the lower the intergenerational mobility.
+
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Intergenerational Persistence in Education}}
+\label{fig:RhoS-1940-1989}
+\end{figure}
+
+
+
+\begin{figure}[H]
+\centering
+\includegraphics[scale=1]{Figure/Marginal-Effect-birthc}
+\begin{minipage}{0.88\textwidth} % choose width suitably
+{\scriptsize
+\vspace{-8.5pt}
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\vspace{-5.0pt}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Adjusted Predictions of Birth Cohorts}}
+\label{fig:Marginal-Effect}
+\end{figure}
+
+
+\newpage
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{Figure/GGG-1970-1979}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Notes: r = Pearson's correlation. Asterisk indicates correlation coefficients with p-values of $.1$ or lower. Gini coefficients refer to the average values between 1984 and 1993. \\
+Source: PNADs, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{The Great Gatsby Curve}}
+\label{fig:GGC}
+\end{figure}
+
+
+
+
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{Figure/ComSec-Inequality-7510}
+%\includegraphics[scale=1]{Figure/Drop-Income-7510}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Note: Estimations of income inequality based on 75/10 ratio of total income of the economically active population aged 15 or over  and with earnings greater than zero. The 75/10 ratio represents the relation between the income earned by individuals in the 75th percentile and the earnings of individuals in the 10th percentile. \\
+Source: PNAD-2014, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Educational Attainment and Inequality}}
+\label{fig:Drop-Income}
+\end{figure}
+
+
+
+
+
+\newpage
+\begin{figure}[htb]
+\centering
+\includegraphics[scale=1]{Figure/NoEduc_Ratio7510R2-Peryear}
+\begin{minipage}{0.87\textwidth} % choose width suitably
+{\scriptsize
+Notes: The 75/10 ratio represents the relation between the income earned by individuals in the 75th percentile and the earnings of individuals in the 10th percentile. Estimations of income inequality based on the 75/10 ratio of total income of the economically active population aged 15 or over and with earnings greater than zero.
+
+Source: PNADs, own estimates.\par}
+\end{minipage}
+\captionsetup{justification=centering,margin=2cm}
+\caption{\textbf{Adjusted Predictions for Secondary Education}}
+\label{fig-NoEduc_Ratio7510R2-Peryear}
+\end{figure}
+
+
+
+
+
+
+
+
+
+\newgeometry{top=10cm,right=1cm}
+\begin{landscape}
+
+
+%\section{Appendix: Tables}
+
+
+\newgeometry{top=1cm,right=-8cm}
+% Table generated by Excel2LaTeX from sheet 'Tabelle2'
+\begin{table}[H]
+  \centering
+  \caption{\textbf{Correlation Coefficients, by Birth Cohort.}}
+\vspace*{-2mm}
+  \label{tab:Rho-Cohorts}%
+  \begin{adjustbox}{max height=\textheight,max width=\textwidth}
+    \begin{tabular}{p{15.28em}lclllllllllllllllll}
+    \toprule
+     \multicolumn{2}{p{14.725em}}{\textbf{\centering{State}}} &       & \multicolumn{2}{p{10.945em}}{\textbf{Cohort: 1940-1989}} &       & \multicolumn{2}{p{9.61em}}{\textbf{Cohort: 1940-1949}} &       & \multicolumn{2}{p{9.61em}}{\textbf{Cohort: 1950-1959}} &       & \multicolumn{2}{p{9.61em}}{\textbf{Cohort: 1960-1969}} &       & \multicolumn{2}{p{9.61em}}{\textbf{Cohort: 1970-1979}} &       & \multicolumn{2}{p{9.61em}}{\textbf{Cohort: 1980-1989}} \\
+\cmidrule{1-2}\cmidrule{4-5}\cmidrule{7-8}\cmidrule{10-11}\cmidrule{13-14}\cmidrule{16-17}\cmidrule{19-20}    \textbf{Name} & \multicolumn{1}{p{4.445em}}{\textbf{Abbrev.}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{7.39em}}{\textbf{Correlation}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{6.055em}}{\textbf{Correlation}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{6.055em}}{\textbf{Correlation}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{6.055em}}{\textbf{Correlation}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{6.055em}}{\textbf{Correlation}} &       & \multicolumn{1}{p{3.555em}}{\textbf{Obs.}} & \multicolumn{1}{p{6.055em}}{\textbf{Correlation}} \\
+    \midrule
+    Rondônia & \multicolumn{1}{p{4.445em}}{RO} &       & \multicolumn{1}{c}{669} & \multicolumn{1}{p{7.39em}}{0.379***} &       & \multicolumn{1}{c}{56} & \multicolumn{1}{p{6.055em}}{0.115} &       & \multicolumn{1}{c}{84} & \multicolumn{1}{p{6.055em}}{0.611***} &       & \multicolumn{1}{c}{121} & \multicolumn{1}{p{6.055em}}{0.260**} &       & \multicolumn{1}{c}{191} & \multicolumn{1}{p{6.055em}}{0.304***} &       & \multicolumn{1}{c}{217} & \multicolumn{1}{p{6.055em}}{0.512***} \\
+    Acre  & \multicolumn{1}{p{4.445em}}{AC} &       & \multicolumn{1}{c}{325} & \multicolumn{1}{p{7.39em}}{0.502***} &       & \multicolumn{1}{c}{19} & \multicolumn{1}{p{6.055em}}{0.254} &       & \multicolumn{1}{c}{39} & \multicolumn{1}{p{6.055em}}{0.655***} &       & \multicolumn{1}{c}{45} & \multicolumn{1}{p{6.055em}}{0.491**} &       & \multicolumn{1}{c}{92} & \multicolumn{1}{p{6.055em}}{0.524***} &       & \multicolumn{1}{c}{130} & \multicolumn{1}{p{6.055em}}{0.526***} \\
+    Amazonas & \multicolumn{1}{p{4.445em}}{AM} &       & \multicolumn{1}{c}{915} & \multicolumn{1}{p{7.39em}}{0.419***} &       & \multicolumn{1}{c}{64} & \multicolumn{1}{p{6.055em}}{0.822***} &       & \multicolumn{1}{c}{105} & \multicolumn{1}{p{6.055em}}{0.463***} &       & \multicolumn{1}{c}{152} & \multicolumn{1}{p{6.055em}}{0.395***} &       & \multicolumn{1}{c}{264} & \multicolumn{1}{p{6.055em}}{0.361***} &       & \multicolumn{1}{c}{330} & \multicolumn{1}{p{6.055em}}{0.424***} \\
+    Roraima & \multicolumn{1}{p{4.445em}}{RR} &       & \multicolumn{1}{c}{190} & \multicolumn{1}{p{7.39em}}{0.253***} &       & \multicolumn{1}{c}{7} & \multicolumn{1}{p{6.055em}}{0.118} &       & \multicolumn{1}{c}{32} & \multicolumn{1}{p{6.055em}}{-0.0118} &       & \multicolumn{1}{c}{21} & \multicolumn{1}{p{6.055em}}{0.373} &       & \multicolumn{1}{c}{55} & \multicolumn{1}{p{6.055em}}{0.232} &       & \multicolumn{1}{c}{75} & \multicolumn{1}{p{6.055em}}{0.401***} \\
+    Pará  & \multicolumn{1}{p{4.445em}}{PA} &       & \multicolumn{1}{c}{1.673} & \multicolumn{1}{p{7.39em}}{0.439***} &       & \multicolumn{1}{c}{139} & \multicolumn{1}{p{6.055em}}{0.518***} &       & \multicolumn{1}{c}{230} & \multicolumn{1}{p{6.055em}}{0.561***} &       & \multicolumn{1}{c}{315} & \multicolumn{1}{p{6.055em}}{0.465***} &       & \multicolumn{1}{c}{430} & \multicolumn{1}{p{6.055em}}{0.442***} &       & \multicolumn{1}{c}{559} & \multicolumn{1}{p{6.055em}}{0.428***} \\
+    Amapá & \multicolumn{1}{p{4.445em}}{AP} &       & \multicolumn{1}{c}{198} & \multicolumn{1}{p{7.39em}}{0.351***} &       & \multicolumn{1}{c}{12} & \multicolumn{1}{p{6.055em}}{0.441} &       & \multicolumn{1}{c}{25} & \multicolumn{1}{p{6.055em}}{0.223} &       & \multicolumn{1}{c}{35} & \multicolumn{1}{p{6.055em}}{0.321} &       & \multicolumn{1}{c}{48} & \multicolumn{1}{p{6.055em}}{0.511***} &       & \multicolumn{1}{c}{78} & \multicolumn{1}{p{6.055em}}{0.361**} \\
+    Tocantins & \multicolumn{1}{p{4.445em}}{TO} &       & \multicolumn{1}{c}{484} & \multicolumn{1}{p{7.39em}}{0.370***} &       & \multicolumn{1}{c}{56} & \multicolumn{1}{p{6.055em}}{0.301*} &       & \multicolumn{1}{c}{73} & \multicolumn{1}{p{6.055em}}{0.354**} &       & \multicolumn{1}{c}{98} & \multicolumn{1}{p{6.055em}}{0.213} &       & \multicolumn{1}{c}{121} & \multicolumn{1}{p{6.055em}}{0.476***} &       & \multicolumn{1}{c}{136} & \multicolumn{1}{p{6.055em}}{0.414***} \\
+    \textbf{North} &       &       & \multicolumn{1}{c}{\textbf{4.454}} & \multicolumn{1}{p{7.39em}}{\textbf{0.425***}} &       & \multicolumn{1}{c}{\textbf{353}} & \multicolumn{1}{p{6.055em}}{\textbf{0.511***}} &       & \multicolumn{1}{c}{\textbf{588}} & \multicolumn{1}{p{6.055em}}{\textbf{0.503***}} &       & \multicolumn{1}{c}{\textbf{787}} & \multicolumn{1}{p{6.055em}}{\textbf{0.401***}} &       & \multicolumn{1}{c}{\textbf{1.201}} & \multicolumn{1}{p{6.055em}}{\textbf{0.419***}} &       & \multicolumn{1}{c}{\textbf{1.525}} & \multicolumn{1}{p{6.055em}}{\textbf{0.460***}} \\
+    Maranhão & \multicolumn{1}{p{4.445em}}{MA} &       & \multicolumn{1}{c}{620} & \multicolumn{1}{p{7.39em}}{0.377***} &       & \multicolumn{1}{c}{60} & \multicolumn{1}{p{6.055em}}{0.176} &       & \multicolumn{1}{c}{87} & \multicolumn{1}{p{6.055em}}{0.321**} &       & \multicolumn{1}{c}{111} & \multicolumn{1}{p{6.055em}}{0.384***} &       & \multicolumn{1}{c}{156} & \multicolumn{1}{p{6.055em}}{0.336***} &       & \multicolumn{1}{c}{206} & \multicolumn{1}{p{6.055em}}{0.462***} \\
+    Piauí & \multicolumn{1}{p{4.445em}}{PI} &       & \multicolumn{1}{c}{562} & \multicolumn{1}{p{7.39em}}{0.480***} &       & \multicolumn{1}{c}{63} & \multicolumn{1}{p{6.055em}}{0.696***} &       & \multicolumn{1}{c}{86} & \multicolumn{1}{p{6.055em}}{0.552***} &       & \multicolumn{1}{c}{89} & \multicolumn{1}{p{6.055em}}{0.458***} &       & \multicolumn{1}{c}{163} & \multicolumn{1}{p{6.055em}}{0.426***} &       & \multicolumn{1}{c}{161} & \multicolumn{1}{p{6.055em}}{0.529***} \\
+    Ceará & \multicolumn{1}{p{4.445em}}{CE} &       & \multicolumn{1}{c}{1.464} & \multicolumn{1}{p{7.39em}}{0.440***} &       & \multicolumn{1}{c}{147} & \multicolumn{1}{p{6.055em}}{0.458***} &       & \multicolumn{1}{c}{212} & \multicolumn{1}{p{6.055em}}{0.456***} &       & \multicolumn{1}{c}{305} & \multicolumn{1}{p{6.055em}}{0.469***} &       & \multicolumn{1}{c}{344} & \multicolumn{1}{p{6.055em}}{0.493***} &       & \multicolumn{1}{c}{456} & \multicolumn{1}{p{6.055em}}{0.469***} \\
+    Rio Grande do Norte & \multicolumn{1}{p{4.445em}}{RN} &       & \multicolumn{1}{c}{486} & \multicolumn{1}{p{7.39em}}{0.410***} &       & \multicolumn{1}{c}{51} & \multicolumn{1}{p{6.055em}}{0.631***} &       & \multicolumn{1}{c}{51} & \multicolumn{1}{p{6.055em}}{0.491***} &       & \multicolumn{1}{c}{122} & \multicolumn{1}{p{6.055em}}{0.437***} &       & \multicolumn{1}{c}{124} & \multicolumn{1}{p{6.055em}}{0.369***} &       & \multicolumn{1}{c}{138} & \multicolumn{1}{p{6.055em}}{0.468***} \\
+    Paraíba & \multicolumn{1}{p{4.445em}}{PB} &       & \multicolumn{1}{c}{598} & \multicolumn{1}{p{7.39em}}{0.461***} &       & \multicolumn{1}{c}{56} & \multicolumn{1}{p{6.055em}}{0.400**} &       & \multicolumn{1}{c}{74} & \multicolumn{1}{p{6.055em}}{0.594***} &       & \multicolumn{1}{c}{137} & \multicolumn{1}{p{6.055em}}{0.481***} &       & \multicolumn{1}{c}{153} & \multicolumn{1}{p{6.055em}}{0.559***} &       & \multicolumn{1}{c}{178} & \multicolumn{1}{p{6.055em}}{0.388***} \\
+    Pernambuco & \multicolumn{1}{p{4.445em}}{PE} &       & \multicolumn{1}{c}{1.965} & \multicolumn{1}{p{7.39em}}{0.472***} &       & \multicolumn{1}{c}{228} & \multicolumn{1}{p{6.055em}}{0.437***} &       & \multicolumn{1}{c}{291} & \multicolumn{1}{p{6.055em}}{0.500***} &       & \multicolumn{1}{c}{409} & \multicolumn{1}{p{6.055em}}{0.531***} &       & \multicolumn{1}{c}{483} & \multicolumn{1}{p{6.055em}}{0.545***} &       & \multicolumn{1}{c}{554} & \multicolumn{1}{p{6.055em}}{0.419***} \\
+    Alagoas & \multicolumn{1}{p{4.445em}}{AL} &       & \multicolumn{1}{c}{371} & \multicolumn{1}{p{7.39em}}{0.497***} &       & \multicolumn{1}{c}{37} & \multicolumn{1}{p{6.055em}}{0.710***} &       & \multicolumn{1}{c}{59} & \multicolumn{1}{p{6.055em}}{0.649***} &       & \multicolumn{1}{c}{67} & \multicolumn{1}{p{6.055em}}{0.358**} &       & \multicolumn{1}{c}{93} & \multicolumn{1}{p{6.055em}}{0.500***} &       & \multicolumn{1}{c}{115} & \multicolumn{1}{p{6.055em}}{0.518***} \\
+    Sergipe & \multicolumn{1}{p{4.445em}}{SE} &       & \multicolumn{1}{c}{530} & \multicolumn{1}{p{7.39em}}{0.471***} &       & \multicolumn{1}{c}{58} & \multicolumn{1}{p{6.055em}}{0.634***} &       & \multicolumn{1}{c}{70} & \multicolumn{1}{p{6.055em}}{0.449***} &       & \multicolumn{1}{c}{94} & \multicolumn{1}{p{6.055em}}{0.549***} &       & \multicolumn{1}{c}{143} & \multicolumn{1}{p{6.055em}}{0.484***} &       & \multicolumn{1}{c}{165} & \multicolumn{1}{p{6.055em}}{0.485***} \\
+    Bahia & \multicolumn{1}{p{4.445em}}{BA} &       & \multicolumn{1}{c}{2.744} & \multicolumn{1}{p{7.39em}}{0.488***} &       & \multicolumn{1}{c}{263} & \multicolumn{1}{p{6.055em}}{0.628***} &       & \multicolumn{1}{c}{378} & \multicolumn{1}{p{6.055em}}{0.529***} &       & \multicolumn{1}{c}{602} & \multicolumn{1}{p{6.055em}}{0.469***} &       & \multicolumn{1}{c}{644} & \multicolumn{1}{p{6.055em}}{0.501***} &       & \multicolumn{1}{c}{857} & \multicolumn{1}{p{6.055em}}{0.533***} \\
+    \textbf{North-east} &       &       & \multicolumn{1}{c}{\textbf{9.340}} & \multicolumn{1}{p{7.39em}}{\textbf{0.466***}} &       & \multicolumn{1}{c}{\textbf{963}} & \multicolumn{1}{p{6.055em}}{\textbf{0.517***}} &       & \multicolumn{1}{c}{\textbf{1.308}} & \multicolumn{1}{p{6.055em}}{\textbf{0.519***}} &       & \multicolumn{1}{c}{\textbf{1.936}} & \multicolumn{1}{p{6.055em}}{\textbf{0.474***}} &       & \multicolumn{1}{c}{\textbf{2.303}} & \multicolumn{1}{p{6.055em}}{\textbf{0.484***}} &       & \multicolumn{1}{c}{\textbf{2.830}} & \multicolumn{1}{p{6.055em}}{\textbf{0.493***}} \\
+    Minas Gerais & \multicolumn{1}{p{4.445em}}{MG} &       & \multicolumn{1}{c}{3.746} & \multicolumn{1}{p{7.39em}}{0.454***} &       & \multicolumn{1}{c}{415} & \multicolumn{1}{p{6.055em}}{0.637***} &       & \multicolumn{1}{c}{608} & \multicolumn{1}{p{6.055em}}{0.433***} &       & \multicolumn{1}{c}{759} & \multicolumn{1}{p{6.055em}}{0.459***} &       & \multicolumn{1}{c}{945} & \multicolumn{1}{p{6.055em}}{0.450***} &       & \multicolumn{1}{c}{1.019} & \multicolumn{1}{p{6.055em}}{0.491***} \\
+    Espírito Santo & \multicolumn{1}{p{4.445em}}{ES} &       & \multicolumn{1}{c}{733} & \multicolumn{1}{p{7.39em}}{0.451***} &       & \multicolumn{1}{c}{56} & \multicolumn{1}{p{6.055em}}{0.529***} &       & \multicolumn{1}{c}{118} & \multicolumn{1}{p{6.055em}}{0.523***} &       & \multicolumn{1}{c}{152} & \multicolumn{1}{p{6.055em}}{0.310***} &       & \multicolumn{1}{c}{193} & \multicolumn{1}{p{6.055em}}{0.572***} &       & \multicolumn{1}{c}{214} & \multicolumn{1}{p{6.055em}}{0.457***} \\
+    Rio de Janeiro & \multicolumn{1}{p{4.445em}}{RJ} &       & \multicolumn{1}{c}{2.813} & \multicolumn{1}{p{7.39em}}{0.510***} &       & \multicolumn{1}{c}{359} & \multicolumn{1}{p{6.055em}}{0.529***} &       & \multicolumn{1}{c}{527} & \multicolumn{1}{p{6.055em}}{0.591***} &       & \multicolumn{1}{c}{536} & \multicolumn{1}{p{6.055em}}{0.418***} &       & \multicolumn{1}{c}{668} & \multicolumn{1}{p{6.055em}}{0.481***} &       & \multicolumn{1}{c}{723} & \multicolumn{1}{p{6.055em}}{0.575***} \\
+    São Paulo & \multicolumn{1}{p{4.445em}}{SP} &       & \multicolumn{1}{c}{4.565} & \multicolumn{1}{p{7.39em}}{0.449***} &       & \multicolumn{1}{c}{492} & \multicolumn{1}{p{6.055em}}{0.524***} &       & \multicolumn{1}{c}{766} & \multicolumn{1}{p{6.055em}}{0.495***} &       & \multicolumn{1}{c}{906} & \multicolumn{1}{p{6.055em}}{0.449***} &       & \multicolumn{1}{c}{1.161} & \multicolumn{1}{p{6.055em}}{0.496***} &       & \multicolumn{1}{c}{1.240} & \multicolumn{1}{p{6.055em}}{0.448***} \\
+    \textbf{South-east} &       &       & \multicolumn{1}{c}{\textbf{11.857}} & \multicolumn{1}{p{7.39em}}{\textbf{0.472***}} &       & \multicolumn{1}{c}{\textbf{1.322}} & \multicolumn{1}{p{6.055em}}{\textbf{0.556***}} &       & \multicolumn{1}{c}{\textbf{2.019}} & \multicolumn{1}{p{6.055em}}{\textbf{0.511***}} &       & \multicolumn{1}{c}{\textbf{2.353}} & \multicolumn{1}{p{6.055em}}{\textbf{0.452***}} &       & \multicolumn{1}{c}{\textbf{2.967}} & \multicolumn{1}{p{6.055em}}{\textbf{0.488***}} &       & \multicolumn{1}{c}{\textbf{3.196}} & \multicolumn{1}{p{6.055em}}{\textbf{0.499***}} \\
+    Paraná & \multicolumn{1}{p{4.445em}}{PR} &       & \multicolumn{1}{c}{2.237} & \multicolumn{1}{p{7.39em}}{0.409***} &       & \multicolumn{1}{c}{215} & \multicolumn{1}{p{6.055em}}{0.456***} &       & \multicolumn{1}{c}{375} & \multicolumn{1}{p{6.055em}}{0.449***} &       & \multicolumn{1}{c}{507} & \multicolumn{1}{p{6.055em}}{0.363***} &       & \multicolumn{1}{c}{528} & \multicolumn{1}{p{6.055em}}{0.424***} &       & \multicolumn{1}{c}{612} & \multicolumn{1}{p{6.055em}}{0.480***} \\
+    Santa Catarina & \multicolumn{1}{p{4.445em}}{SC} &       & \multicolumn{1}{c}{1.083} & \multicolumn{1}{p{7.39em}}{0.407***} &       & \multicolumn{1}{c}{93} & \multicolumn{1}{p{6.055em}}{0.537***} &       & \multicolumn{1}{c}{182} & \multicolumn{1}{p{6.055em}}{0.456***} &       & \multicolumn{1}{c}{256} & \multicolumn{1}{p{6.055em}}{0.318***} &       & \multicolumn{1}{c}{275} & \multicolumn{1}{p{6.055em}}{0.439***} &       & \multicolumn{1}{c}{277} & \multicolumn{1}{p{6.055em}}{0.515***} \\
+    Rio Grande do Sul & \multicolumn{1}{p{4.445em}}{RS} &       & \multicolumn{1}{c}{3.120} & \multicolumn{1}{p{7.39em}}{0.439***} &       & \multicolumn{1}{c}{371} & \multicolumn{1}{p{6.055em}}{0.454***} &       & \multicolumn{1}{c}{586} & \multicolumn{1}{p{6.055em}}{0.489***} &       & \multicolumn{1}{c}{671} & \multicolumn{1}{p{6.055em}}{0.444***} &       & \multicolumn{1}{c}{693} & \multicolumn{1}{p{6.055em}}{0.423***} &       & \multicolumn{1}{c}{799} & \multicolumn{1}{p{6.055em}}{0.501***} \\
+    \textbf{South} &       &       & \multicolumn{1}{c}{\textbf{6.440}} & \multicolumn{1}{p{7.39em}}{\textbf{0.421***}} &       & \multicolumn{1}{c}{\textbf{679}} & \multicolumn{1}{p{6.055em}}{\textbf{0.480***}} &       & \multicolumn{1}{c}{\textbf{1.143}} & \multicolumn{1}{p{6.055em}}{\textbf{0.467***}} &       & \multicolumn{1}{c}{\textbf{1.434}} & \multicolumn{1}{p{6.055em}}{\textbf{0.386***}} &       & \multicolumn{1}{c}{\textbf{1.496}} & \multicolumn{1}{p{6.055em}}{\textbf{0.427***}} &       & \multicolumn{1}{c}{\textbf{1.688}} & \multicolumn{1}{p{6.055em}}{\textbf{0.500***}} \\
+    Mato Grosso do Sul & \multicolumn{1}{p{4.445em}}{MS} &       & \multicolumn{1}{c}{674} & \multicolumn{1}{p{7.39em}}{0.476***} &       & \multicolumn{1}{c}{59} & \multicolumn{1}{p{6.055em}}{0.809***} &       & \multicolumn{1}{c}{104} & \multicolumn{1}{p{6.055em}}{0.464***} &       & \multicolumn{1}{c}{131} & \multicolumn{1}{p{6.055em}}{0.534***} &       & \multicolumn{1}{c}{175} & \multicolumn{1}{p{6.055em}}{0.546***} &       & \multicolumn{1}{c}{205} & \multicolumn{1}{p{6.055em}}{0.399***} \\
+    Mato Grosso & \multicolumn{1}{p{4.445em}}{MT} &       & \multicolumn{1}{c}{695} & \multicolumn{1}{p{7.39em}}{0.419***} &       & \multicolumn{1}{c}{50} & \multicolumn{1}{p{6.055em}}{0.368*} &       & \multicolumn{1}{c}{100} & \multicolumn{1}{p{6.055em}}{0.444***} &       & \multicolumn{1}{c}{143} & \multicolumn{1}{p{6.055em}}{0.421***} &       & \multicolumn{1}{c}{187} & \multicolumn{1}{p{6.055em}}{0.407***} &       & \multicolumn{1}{c}{215} & \multicolumn{1}{p{6.055em}}{0.461***} \\
+    Goiás & \multicolumn{1}{p{4.445em}}{GO} &       & \multicolumn{1}{c}{1.375} & \multicolumn{1}{p{7.39em}}{0.356***} &       & \multicolumn{1}{c}{129} & \multicolumn{1}{p{6.055em}}{0.271**} &       & \multicolumn{1}{c}{217} & \multicolumn{1}{p{6.055em}}{0.454***} &       & \multicolumn{1}{c}{267} & \multicolumn{1}{p{6.055em}}{0.319***} &       & \multicolumn{1}{c}{349} & \multicolumn{1}{p{6.055em}}{0.399***} &       & \multicolumn{1}{c}{413} & \multicolumn{1}{p{6.055em}}{0.408***} \\
+    Distrito Federal & \multicolumn{1}{p{4.445em}}{DF} &       & \multicolumn{1}{c}{922} & \multicolumn{1}{p{7.39em}}{0.492***} &       & \multicolumn{1}{c}{85} & \multicolumn{1}{p{6.055em}}{0.600***} &       & \multicolumn{1}{c}{107} & \multicolumn{1}{p{6.055em}}{0.590***} &       & \multicolumn{1}{c}{171} & \multicolumn{1}{p{6.055em}}{0.441***} &       & \multicolumn{1}{c}{269} & \multicolumn{1}{p{6.055em}}{0.475***} &       & \multicolumn{1}{c}{290} & \multicolumn{1}{p{6.055em}}{0.452***} \\
+    \textbf{West Central} &       &       & \multicolumn{1}{c}{\textbf{3.666}} & \multicolumn{1}{p{7.39em}}{\textbf{0.445***}} &       & \multicolumn{1}{c}{\textbf{323}} & \multicolumn{1}{p{6.055em}}{\textbf{0.482***}} &       & \multicolumn{1}{c}{\textbf{528}} & \multicolumn{1}{p{6.055em}}{\textbf{0.501***}} &       & \multicolumn{1}{c}{\textbf{712}} & \multicolumn{1}{p{6.055em}}{\textbf{0.428***}} &       & \multicolumn{1}{c}{\textbf{980}} & \multicolumn{1}{p{6.055em}}{\textbf{0.458***}} &       & \multicolumn{1}{c}{\textbf{1.123}} & \multicolumn{1}{p{6.055em}}{\textbf{0.473***}} \\
+    \textbf{Brazil} &       &       & \multicolumn{1}{c}{\textbf{35.757}} & \multicolumn{1}{p{7.39em}}{\textbf{0.475***}} &       & \multicolumn{1}{c}{\textbf{3.640}} & \multicolumn{1}{p{6.055em}}{\textbf{0.536***}} &       & \multicolumn{1}{c}{\textbf{5.586}} & \multicolumn{1}{p{6.055em}}{\textbf{0.517***}} &       & \multicolumn{1}{c}{\textbf{7.222}} & \multicolumn{1}{p{6.055em}}{\textbf{0.454***}} &       & \multicolumn{1}{c}{\textbf{8.947}} & \multicolumn{1}{p{6.055em}}{\textbf{0.492***}} &       & \multicolumn{1}{c}{\textbf{10.362}} & \multicolumn{1}{p{6.055em}}{\textbf{0.533***}} \\
+    \midrule
+    \multicolumn{20}{p{98.515em}}{Notes: Estimations based on OLS regressions using years of schooling of children and their (better-educated) parent. Results are controlled by the variation over time in standard deviation in education. The lower the correlation coefficients, the lower the persistence in education across generations (or the higher the level of mobility). Statistically significant: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$.} \\
+    \multicolumn{20}{p{98em}}{Source: PNAD-2014, own estimates} \\
+    \end{tabular}%
+  \label{tab:addlabel}%
+  \end{adjustbox}
+\end{table}%
+
+\end{landscape}
+\restoregeometry
+
+
+
+
+
+% Table generated by Excel2LaTeX from sheet 'Latex'
+\begin{table}[htbp]
+  \centering
+%  \captionsetup{justification=centering,margin=1cm}
+\caption{\textbf{The Impact of Inequality on Educational Attainment.}}
+\vspace*{-2mm}
+  \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{lllllllllllll}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Birth Cohort}} &       & \multicolumn{1}{c}{\textbf{All}} &       & \multicolumn{1}{c}{\textbf{1965}} &       & \multicolumn{1}{c}{\textbf{1970}} &       & \multicolumn{1}{c}{\textbf{1975}} &       & \multicolumn{1}{c}{\textbf{1980}} &       & \multicolumn{1}{c}{\textbf{1985}} \\
+    \multicolumn{1}{c}{Birth years} &       & \multicolumn{1}{c}{(1965-1989)} &       & \multicolumn{1}{c}{(1965-1969)} &       & \multicolumn{1}{c}{(1970-1974)} &       & \multicolumn{1}{c}{(1975-1979)} &       & \multicolumn{1}{c}{(1980-1984)} &       & \multicolumn{1}{c}{(1985-1989)} \\
+\cmidrule{3-3}\cmidrule{5-5}\cmidrule{7-7}\cmidrule{9-9}\cmidrule{11-11}\cmidrule{13-13}    Socio-economic Marginalisation \# Inequality &       & \multicolumn{1}{c}{-0.0542***} &       & \multicolumn{1}{c}{-0.0486} &       & \multicolumn{1}{c}{-0.0353} &       & \multicolumn{1}{c}{-0.00346} &       & \multicolumn{1}{c}{-0.0982**} &       & \multicolumn{1}{c}{-0.0519} \\
+          &       & \multicolumn{1}{c}{(0.0186)} &       & \multicolumn{1}{c}{(0.0644)} &       & \multicolumn{1}{c}{(0.0473)} &       & \multicolumn{1}{c}{(0.0335)} &       & \multicolumn{1}{c}{(0.0486)} &       & \multicolumn{1}{c}{(0.0462)} \\
+    Socio-economic Marginalisation &       & \multicolumn{1}{c}{-0.405***} &       & \multicolumn{1}{c}{-0.535} &       & \multicolumn{1}{c}{-0.492*} &       & \multicolumn{1}{c}{-0.705***} &       & \multicolumn{1}{c}{-0.261} &       & \multicolumn{1}{c}{-0.270} \\
+          &       & \multicolumn{1}{c}{(0.104)} &       & \multicolumn{1}{c}{(0.350)} &       & \multicolumn{1}{c}{(0.287)} &       & \multicolumn{1}{c}{(0.208)} &       & \multicolumn{1}{c}{(0.251)} &       & \multicolumn{1}{c}{(0.237)} \\
+    Inequality &       & \multicolumn{1}{c}{0.0129} &       & \multicolumn{1}{c}{-0.0256} &       & \multicolumn{1}{c}{0.0387} &       & \multicolumn{1}{c}{-0.0164} &       & \multicolumn{1}{c}{0.0929***} &       & \multicolumn{1}{c}{-0.0170} \\
+          &       & \multicolumn{1}{c}{(0.0138)} &       & \multicolumn{1}{c}{(0.0503)} &       & \multicolumn{1}{c}{(0.0377)} &       & \multicolumn{1}{c}{(0.0242)} &       & \multicolumn{1}{c}{(0.0327)} &       & \multicolumn{1}{c}{(0.0320)} \\
+    Male  &       & \multicolumn{1}{c}{-0.203***} &       & \multicolumn{1}{c}{-0.0988*} &       & \multicolumn{1}{c}{-0.114**} &       & \multicolumn{1}{c}{-0.217***} &       & \multicolumn{1}{c}{-0.291***} &       & \multicolumn{1}{c}{-0.257***} \\
+          &       & \multicolumn{1}{c}{(0.0208)} &       & \multicolumn{1}{c}{(0.0531)} &       & \multicolumn{1}{c}{(0.0487)} &       & \multicolumn{1}{c}{(0.0455)} &       & \multicolumn{1}{c}{(0.0425)} &       & \multicolumn{1}{c}{(0.0445)} \\
+    Rural &       & \multicolumn{1}{c}{-0.650***} &       & \multicolumn{1}{c}{-0.575***} &       & \multicolumn{1}{c}{-0.812***} &       & \multicolumn{1}{c}{-0.784***} &       & \multicolumn{1}{c}{-0.687***} &       & \multicolumn{1}{c}{-0.490***} \\
+          &       & \multicolumn{1}{c}{(0.0333)} &       & \multicolumn{1}{c}{(0.0854)} &       & \multicolumn{1}{c}{(0.0831)} &       & \multicolumn{1}{c}{(0.0723)} &       & \multicolumn{1}{c}{(0.0674)} &       & \multicolumn{1}{c}{(0.0692)} \\
+    Living with both parent &       & \multicolumn{1}{c}{0.0830***} &       & \multicolumn{1}{c}{-0.0687} &       & \multicolumn{1}{c}{0.0312} &       & \multicolumn{1}{c}{0.0614} &       & \multicolumn{1}{c}{0.0505} &       & \multicolumn{1}{c}{0.256***} \\
+          &       & \multicolumn{1}{c}{(0.0248)} &       & \multicolumn{1}{c}{(0.0683)} &       & \multicolumn{1}{c}{(0.0601)} &       & \multicolumn{1}{c}{(0.0537)} &       & \multicolumn{1}{c}{(0.0497)} &       & \multicolumn{1}{c}{(0.0494)} \\
+    Birth year &       & \multicolumn{1}{c}{0.0159***} &       & \multicolumn{1}{c}{0.00722} &       & \multicolumn{1}{c}{-0.00521} &       & \multicolumn{1}{c}{0.0157} &       & \multicolumn{1}{c}{0.0116} &       & \multicolumn{1}{c}{-0.0373**} \\
+          &       & \multicolumn{1}{c}{(0.00156)} &       & \multicolumn{1}{c}{(0.0184)} &       & \multicolumn{1}{c}{(0.0171)} &       & \multicolumn{1}{c}{(0.0161)} &       & \multicolumn{1}{c}{(0.0155)} &       & \multicolumn{1}{c}{(0.0158)} \\
+    White (reference) &       & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} \\
+    Black &       & \multicolumn{1}{c}{-0.160***} &       & \multicolumn{1}{c}{-0.189**} &       & \multicolumn{1}{c}{-0.217**} &       & \multicolumn{1}{c}{-0.0887} &       & \multicolumn{1}{c}{-0.184**} &       & \multicolumn{1}{c}{-0.152*} \\
+          &       & \multicolumn{1}{c}{(0.0366)} &       & \multicolumn{1}{c}{(0.0927)} &       & \multicolumn{1}{c}{(0.0872)} &       & \multicolumn{1}{c}{(0.0801)} &       & \multicolumn{1}{c}{(0.0730)} &       & \multicolumn{1}{c}{(0.0787)} \\
+    Mixed (white/black) &       & \multicolumn{1}{c}{-0.271***} &       & \multicolumn{1}{c}{-0.374***} &       & \multicolumn{1}{c}{-0.305***} &       & \multicolumn{1}{c}{-0.302***} &       & \multicolumn{1}{c}{-0.256***} &       & \multicolumn{1}{c}{-0.166***} \\
+          &       & \multicolumn{1}{c}{(0.0222)} &       & \multicolumn{1}{c}{(0.0568)} &       & \multicolumn{1}{c}{(0.0521)} &       & \multicolumn{1}{c}{(0.0489)} &       & \multicolumn{1}{c}{(0.0455)} &       & \multicolumn{1}{c}{(0.0476)} \\
+    Asian &       & \multicolumn{1}{c}{0.296*} &       & \multicolumn{1}{c}{0.635} &       & \multicolumn{1}{c}{0.938***} &       & \multicolumn{1}{c}{0.356} &       & \multicolumn{1}{c}{-0.413} &       & \multicolumn{1}{c}{0.130} \\
+          &       & \multicolumn{1}{c}{(0.159)} &       & \multicolumn{1}{c}{(0.387)} &       & \multicolumn{1}{c}{(0.353)} &       & \multicolumn{1}{c}{(0.373)} &       & \multicolumn{1}{c}{(0.282)} &       & \multicolumn{1}{c}{(0.355)} \\
+    Indigenous &       & \multicolumn{1}{c}{-0.346*} &       & \multicolumn{1}{c}{-0.653} &       & \multicolumn{1}{c}{-0.555} &       & \multicolumn{1}{c}{-0.209} &       & \multicolumn{1}{c}{-0.147} &       & \multicolumn{1}{c}{-0.381} \\
+          &       & \multicolumn{1}{c}{(0.191)} &       & \multicolumn{1}{c}{(0.619)} &       & \multicolumn{1}{c}{(0.457)} &       & \multicolumn{1}{c}{(0.396)} &       & \multicolumn{1}{c}{(0.357)} &       & \multicolumn{1}{c}{(0.362)} \\
+    Constant &       & \multicolumn{1}{c}{-30.86***} &       & \multicolumn{1}{c}{-13.43} &       & \multicolumn{1}{c}{10.54} &       & \multicolumn{1}{c}{-30.38} &       & \multicolumn{1}{c}{-22.57} &       & \multicolumn{1}{c}{74.74**} \\
+          &       & \multicolumn{1}{c}{(3.109)} &       & \multicolumn{1}{c}{(36.29)} &       & \multicolumn{1}{c}{(33.80)} &       & \multicolumn{1}{c}{(31.78)} &       & \multicolumn{1}{c}{(30.73)} &       & \multicolumn{1}{c}{(31.47)} \\
+          &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} \\
+    Observations &       & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{3,699} &       & \multicolumn{1}{c}{4,223} &       & \multicolumn{1}{c}{4,724} &       & \multicolumn{1}{c}{5,387} &       & \multicolumn{1}{c}{4,975} \\
+    \midrule
+    \multicolumn{13}{p{63.685em}}{Notes: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$. Standard errors in parentheses. $dy/dx$ for factor levels is the discrete change from the base level. All predictors at their mean value.} \\
+    \multicolumn{6}{l}{Source: PNAD-2014, own estimates.} \\
+    \end{tabular}%
+  \label{tab:Dropout}%
+  \end{adjustbox}
+\end{table}%
+
+
+
+
+%Table generated by Excel2LaTeX from sheet 'Rob.Checks'
+\begin{table}[H]
+  \centering
+%\captionsetup{justification=centering,margin=1cm}
+\caption{\textbf{Robustness Checks}}
+\vspace*{-2mm}
+ \begin{adjustbox}{max width=\textwidth}
+    \begin{tabular}{llllllllllllllll}
+    \toprule
+          & Main Model &       & \multicolumn{5}{c}{Alternative Econometric Approaches} &       & \multicolumn{7}{c}{Alternative Model Specifications} \\
+\cmidrule{2-2}\cmidrule{4-8}\cmidrule{10-16}          & \multicolumn{1}{c}{\textbf{(1)}} &       & \multicolumn{1}{c}{\textbf{(2)}} &       & \multicolumn{1}{c}{\textbf{(3)}} &       & \multicolumn{1}{c}{\textbf{(4)}} &       & \multicolumn{1}{c}{\textbf{(5)}} &       & \multicolumn{1}{c}{\textbf{(6)}} &       & \multicolumn{1}{c}{\textbf{(7)}} &       & \multicolumn{1}{c}{\textbf{(8)}} \\
+    \textbf{Model} & \multicolumn{1}{c}{\textbf{Probit}} &       & \multicolumn{1}{c}{\textbf{LPM}} &       & \multicolumn{1}{c}{\textbf{LPM}} &       & \multicolumn{1}{c}{\textbf{Bivariate Probit}} &       & \multicolumn{1}{c}{\textbf{Probit}} &       & \multicolumn{1}{c}{\textbf{Probit}} &       & \multicolumn{1}{c}{\textbf{Probit}} &       & \multicolumn{1}{c}{\textbf{Probit}} \\
+    \textbf{Estimation method} & \multicolumn{1}{c}{\textbf{MLE}} &       & \multicolumn{1}{c}{\textbf{OLS}} &       & \multicolumn{1}{c}{\textbf{2SLS}} &       & \multicolumn{1}{c}{\textbf{MLE}} &       & \multicolumn{1}{c}{\textbf{MLE}} &       & \multicolumn{1}{c}{\textbf{MLE}} &       & \multicolumn{1}{c}{\textbf{MLE}} &       & \multicolumn{1}{c}{\textbf{MLE}} \\
+    \textbf{Changes to Specidication (1)} & \multicolumn{1}{c}{\textbf{-}} &       & \multicolumn{1}{c}{\textbf{No}} &       & \multicolumn{1}{c}{\textbf{No}} &       & \multicolumn{1}{c}{\textbf{No}} &       & \multicolumn{1}{c}{\textbf{No Migrants}} &       & \multicolumn{1}{c}{\textbf{Ratio 90/10}} &       & \multicolumn{1}{c}{\textbf{Illiterate Parents}} &       & \multicolumn{1}{c}{\textbf{Illite. $\&$ No Educ.}} \\
+\cmidrule{2-2}\cmidrule{4-4}\cmidrule{6-6}\cmidrule{8-8}\cmidrule{10-10}\cmidrule{12-12}\cmidrule{14-14}\cmidrule{16-16}    Coefficient of MSB  \# Inequality & \multicolumn{1}{c}{-0.0540***} &       & \multicolumn{1}{c}{-0.0179***} &       & \multicolumn{1}{c}{-0.0175***} &       & \multicolumn{1}{c}{-0.0487***} &       & \multicolumn{1}{c}{-0.0695*} &       & \multicolumn{1}{c}{-0.0199**} &       & \multicolumn{1}{c}{-0.0318} &       & \multicolumn{1}{c}{-0.0307} \\
+          & \multicolumn{1}{c}{(0.0186)} &       & \multicolumn{1}{c}{(0.00636)} &       & \multicolumn{1}{c}{(0.00636)} &       & \multicolumn{1}{c}{(0.0178)} &       & \multicolumn{1}{c}{(0.0418)} &       & \multicolumn{1}{c}{(0.00796)} &       & \multicolumn{1}{c}{(0.0227)} &       & \multicolumn{1}{c}{(0.0216)} \\
+    APRs for MSB and Inequality &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+    1bn.\_at & \multicolumn{1}{c}{-0.223***} &       & \multicolumn{1}{c}{-0.220***} &       & \multicolumn{1}{c}{-0.223***} &       & \multicolumn{1}{c}{-0.175***} &       & \multicolumn{1}{c}{-0.210***} &       & \multicolumn{1}{c}{-0.209***} &       & \multicolumn{1}{c}{-0.236***} &       & \multicolumn{1}{c}{-0.201***} \\
+          & \multicolumn{1}{c}{(0.0196)} &       & \multicolumn{1}{c}{(0.0179)} &       & \multicolumn{1}{c}{(0.0179)} &       & \multicolumn{1}{c}{(0.0212)} &       & \multicolumn{1}{c}{(0.0430)} &       & \multicolumn{1}{c}{(0.0271)} &       & \multicolumn{1}{c}{(0.0257)} &       & \multicolumn{1}{c}{(0.0227)} \\
+    2.\_at & \multicolumn{1}{c}{-0.244***} &       & \multicolumn{1}{c}{-0.238***} &       & \multicolumn{1}{c}{-0.241***} &       & \multicolumn{1}{c}{-0.190***} &       & \multicolumn{1}{c}{-0.237***} &       & \multicolumn{1}{c}{-0.217***} &       & \multicolumn{1}{c}{-0.247***} &       & \multicolumn{1}{c}{-0.213***} \\
+          & \multicolumn{1}{c}{(0.0134)} &       & \multicolumn{1}{c}{(0.0125)} &       & \multicolumn{1}{c}{(0.0125)} &       & \multicolumn{1}{c}{(0.0210)} &       & \multicolumn{1}{c}{(0.0288)} &       & \multicolumn{1}{c}{(0.0242)} &       & \multicolumn{1}{c}{(0.0184)} &       & \multicolumn{1}{c}{(0.0154)} \\
+    3.\_at & \multicolumn{1}{c}{-0.264***} &       & \multicolumn{1}{c}{-0.256***} &       & \multicolumn{1}{c}{-0.258***} &       & \multicolumn{1}{c}{-0.205***} &       & \multicolumn{1}{c}{-0.263***} &       & \multicolumn{1}{c}{-0.224***} &       & \multicolumn{1}{c}{-0.258***} &       & \multicolumn{1}{c}{-0.225***} \\
+          & \multicolumn{1}{c}{(0.00884)} &       & \multicolumn{1}{c}{(0.00863)} &       & \multicolumn{1}{c}{(0.00861)} &       & \multicolumn{1}{c}{(0.0210)} &       & \multicolumn{1}{c}{(0.0181)} &       & \multicolumn{1}{c}{(0.0213)} &       & \multicolumn{1}{c}{(0.0130)} &       & \multicolumn{1}{c}{(0.0101)} \\
+    4.\_at & \multicolumn{1}{c}{-0.284***} &       & \multicolumn{1}{c}{-0.274***} &       & \multicolumn{1}{c}{-0.276***} &       & \multicolumn{1}{c}{-0.220***} &       & \multicolumn{1}{c}{-0.289***} &       & \multicolumn{1}{c}{-0.232***} &       & \multicolumn{1}{c}{-0.268***} &       & \multicolumn{1}{c}{-0.237***} \\
+          & \multicolumn{1}{c}{(0.00876)} &       & \multicolumn{1}{c}{(0.00853)} &       & \multicolumn{1}{c}{(0.00851)} &       & \multicolumn{1}{c}{(0.0215)} &       & \multicolumn{1}{c}{(0.0183)} &       & \multicolumn{1}{c}{(0.0185)} &       & \multicolumn{1}{c}{(0.0115)} &       & \multicolumn{1}{c}{(0.0102)} \\
+    5.\_at & \multicolumn{1}{c}{-0.305***} &       & \multicolumn{1}{c}{-0.291***} &       & \multicolumn{1}{c}{-0.293***} &       & \multicolumn{1}{c}{-0.236***} &       & \multicolumn{1}{c}{-0.314***} &       & \multicolumn{1}{c}{-0.240***} &       & \multicolumn{1}{c}{-0.278***} &       & \multicolumn{1}{c}{-0.248***} \\
+          & \multicolumn{1}{c}{(0.0130)} &       & \multicolumn{1}{c}{(0.0123)} &       & \multicolumn{1}{c}{(0.0123)} &       & \multicolumn{1}{c}{(0.0223)} &       & \multicolumn{1}{c}{(0.0286)} &       & \multicolumn{1}{c}{(0.0159)} &       & \multicolumn{1}{c}{(0.0149)} &       & \multicolumn{1}{c}{(0.0155)} \\
+    6.\_at & \multicolumn{1}{c}{-0.324***} &       & \multicolumn{1}{c}{-0.309***} &       & \multicolumn{1}{c}{-0.311***} &       & \multicolumn{1}{c}{-0.253***} &       & \multicolumn{1}{c}{-0.338***} &       & \multicolumn{1}{c}{-0.248***} &       & \multicolumn{1}{c}{-0.288***} &       & \multicolumn{1}{c}{-0.260***} \\
+          & \multicolumn{1}{c}{(0.0187)} &       & \multicolumn{1}{c}{(0.0177)} &       & \multicolumn{1}{c}{(0.0177)} &       & \multicolumn{1}{c}{(0.0235)} &       & \multicolumn{1}{c}{(0.0417)} &       & \multicolumn{1}{c}{(0.0133)} &       & \multicolumn{1}{c}{(0.0205)} &       & \multicolumn{1}{c}{(0.0225)} \\
+    7.\_at & \multicolumn{1}{c}{-0.344***} &       & \multicolumn{1}{c}{-0.327***} &       & \multicolumn{1}{c}{-0.328***} &       & \multicolumn{1}{c}{-0.270***} &       & \multicolumn{1}{c}{-0.361***} &       & \multicolumn{1}{c}{-0.255***} &       & \multicolumn{1}{c}{-0.298***} &       & \multicolumn{1}{c}{-0.272***} \\
+          & \multicolumn{1}{c}{(0.0248)} &       & \multicolumn{1}{c}{(0.0235)} &       & \multicolumn{1}{c}{(0.0235)} &       & \multicolumn{1}{c}{(0.0251)} &       & \multicolumn{1}{c}{(0.0553)} &       & \multicolumn{1}{c}{(0.0111)} &       & \multicolumn{1}{c}{(0.0267)} &       & \multicolumn{1}{c}{(0.0300)} \\
+    8.\_at & \multicolumn{1}{c}{-0.363***} &       & \multicolumn{1}{c}{-0.345***} &       & \multicolumn{1}{c}{-0.346***} &       & \multicolumn{1}{c}{-0.287***} &       & \multicolumn{1}{c}{-0.383***} &       & \multicolumn{1}{c}{-0.263***} &       & \multicolumn{1}{c}{-0.307***} &       & \multicolumn{1}{c}{-0.283***} \\
+          & \multicolumn{1}{c}{(0.0309)} &       & \multicolumn{1}{c}{(0.0296)} &       & \multicolumn{1}{c}{(0.0296)} &       & \multicolumn{1}{c}{(0.0271)} &       & \multicolumn{1}{c}{(0.0687)} &       & \multicolumn{1}{c}{(0.00927)} &       & \multicolumn{1}{c}{(0.0330)} &       & \multicolumn{1}{c}{(0.0376)} \\
+    9.\_at & \multicolumn{1}{c}{-0.382***} &       & \multicolumn{1}{c}{-0.363***} &       & \multicolumn{1}{c}{-0.363***} &       & \multicolumn{1}{c}{-0.305***} &       & \multicolumn{1}{c}{-0.404***} &       & \multicolumn{1}{c}{-0.271***} &       & \multicolumn{1}{c}{-0.315***} &       & \multicolumn{1}{c}{-0.295***} \\
+          & \multicolumn{1}{c}{(0.0369)} &       & \multicolumn{1}{c}{(0.0358)} &       & \multicolumn{1}{c}{(0.0358)} &       & \multicolumn{1}{c}{(0.0294)} &       & \multicolumn{1}{c}{(0.0819)} &       & \multicolumn{1}{c}{(0.00822)} &       & \multicolumn{1}{c}{(0.0392)} &       & \multicolumn{1}{c}{(0.0452)} \\
+   10.\_at & \multicolumn{1}{c}{-0.401***} &       & \multicolumn{1}{c}{-0.381***} &       & \multicolumn{1}{c}{-0.381***} &       & \multicolumn{1}{c}{-0.323***} &       & \multicolumn{1}{c}{-0.423***} &       & \multicolumn{1}{c}{-0.278***} &       & \multicolumn{1}{c}{-0.324***} &       & \multicolumn{1}{c}{-0.306***} \\
+          & \multicolumn{1}{c}{(0.0427)} &       & \multicolumn{1}{c}{(0.0420)} &       & \multicolumn{1}{c}{(0.0420)} &       & \multicolumn{1}{c}{(0.0320)} &       & \multicolumn{1}{c}{(0.0947)} &       & \multicolumn{1}{c}{(0.00819)} &       & \multicolumn{1}{c}{(0.0452)} &       & \multicolumn{1}{c}{(0.0528)} \\
+          & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       & \multicolumn{1}{c}{} &       &       &       &       &       &       &       &  \\
+    Observations & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{5,340} &       & \multicolumn{1}{c}{23,008} &       & \multicolumn{1}{c}{24,842} &       & \multicolumn{1}{c}{21,668} \\
+     \midrule
+     \end{tabular}%
+     \end{adjustbox}
+   \begin{minipage}{1\textwidth} \tiny Notes: The coefficients of the interaction between the socio-economic marginalization (MSB) and the inequality level show how the effects of having (un-)educated parents on the children's chance of schooling change by different values of inequality. The adjusted predictions at representative values (APRs) fixed the covariate ‘ratio 75/10’ to each of the $10$ deciles of the inequality distribution, showing respectively the gap in the chances to achieve a secondary school certificate for the two investigated populations - children from parents with and without (primary) education. For the LPMs, the standard errors are robust to arbitrary heteroskedasticy. Statistically significant: $^{*}p<0.05$, $^{**}p<0.01$, $^{***}p<0.001$. Standard errors in parentheses. All predictors at their mean value. \\ Source: PNAD-2014, own estimates.
+    \end{minipage}
+    \label{tab:Rob.Checks}%
+   \end{table}%
+
+
+
+\end{document}
+
+
+

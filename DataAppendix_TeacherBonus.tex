@@ -1,0 +1,1017 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,bookmarks=false, hypertexnames=true]{hyperref} 
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{scalefnt}
+\usepackage{pdflscape}
+\usepackage{draftwatermark}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{natbib} [options]
+\bibliographystyle{apa}
+\usepackage{fixmath}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage{varwidth}
+\usepackage{breqn}
+\usepackage{mathtools}
+\usepackage{adjustbox}
+\usepackage{pdflscape,array}
+\usepackage{caption}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{lscape}
+\usepackage[titletoc]{appendix}
+\usepackage[skip=1pt]{caption}
+\usepackage{algorithm2e}
+\usepackage{float}
+\usepackage{tabularx} 
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{threeparttable}% Alternative for Notes below table
+\usepackage{bm}
+\usepackage{ltablex,array}
+\usepackage{ragged2e}
+\usepackage{stmaryrd}
+\usepackage{ltablex,array}
+\usepackage{color,soul}
+\usepackage{titling,lipsum}
+\usepackage{tocloft}
+\usepackage{listings}
+%\usepackage[nottoc,notlot,notlof]{tocbibind}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+ 
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},   
+    commentstyle=\color{codegreen},
+    %keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    %stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,         
+    breaklines=true,                 
+    captionpos=b,                    
+    keepspaces=true,                 
+    numbers=left,                    
+    numbersep=5pt,                  
+    showspaces=false,                
+    showstringspaces=false,
+    showtabs=false,                  
+    tabsize=2
+}
+ 
+\lstset{style=mystyle}
+
+
+
+
+
+
+
+% Note/Source/Text after Tables
+\newcommand{\Figtext}[1]{%
+ \begin{tablenotes}[para,flushleft]
+ \hspace{6pt}
+ \hangindent=1.75em
+ #1
+ \end{tablenotes}
+}
+
+\newcommand{\Fignote}[1]{\Figtext{\emph{Note:~}~#1}}
+\newcommand{\Figsource}[1]{\Figtext{\emph{Source:~}~#1}}
+\newcommand{\Starnote}{\Figtext{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}}% Add significance note with \starnote
+
+
+
+
+    
+
+\captionsetup[table]{position=top,skip=7pt} 
+\DeclareMathOperator{\Tr}{Tr}         
+\captionsetup[figure]{
+    position=above,
+}
+
+
+
+\newcommand{\Rho}{\mathrm{P}}
+\newcommand{\Chi}{\mathrm{X}}
+
+\let\ACMmaketitle=\maketitle
+\renewcommand{\maketitle}{\begingroup\let\footnote=\thanks \ACMmaketitle\endgroup}
+
+
+
+% *****************************************************************
+% Estout related things
+% *****************************************************************
+\newcommand{\sym}[1]{\rlap{#1}}% Thanks to David Carlisle
+
+\let\estinput=\input% define a new input command so that we can still flatten the document
+
+\newcommand{\estwide}[3]{
+		\vspace{.75ex}{
+			\begin{tabular*}
+			{\textwidth}{@{\hskip\tabcolsep\extracolsep\fill}l*{#2}{#3}}
+			\toprule
+			\estinput{#1}
+			\bottomrule
+			\addlinespace[.75ex]
+			\end{tabular*}
+			}
+		}	
+
+\newcommand{\estauto}[3]{
+		\vspace{.75ex}{
+			\begin{tabular}{l*{#2}{#3}}
+			\toprule
+			\estinput{#1}
+			\bottomrule
+			\addlinespace[.75ex]
+			\end{tabular}
+			}
+		}
+
+% Allow line breaks with \\ in specialcells
+	\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+% *****************************************************************
+% Custom subcaptions
+% *****************************************************************
+% Note/Source/Text after Tables
+\newcommand{\figtext}[1]{
+	\vspace{-1.9ex}
+	\captionsetup{justification=justified,font=footnotesize}
+	\caption*{\hspace{6pt}\hangindent=1.5em #1}
+	}
+\newcommand{\fignote}[1]{\figtext{\emph{Note:~}~#1}}
+
+\newcommand{\figsource}[1]{\figtext{\emph{Source:~}~#1}}
+
+% Add significance note with \starnote
+\newcommand{\starnote}{\figtext{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}}
+
+% *****************************************************************
+% siunitx
+% *****************************************************************
+\usepackage{siunitx} % centering in tables
+	\sisetup{
+		detect-mode,
+		tight-spacing		= true,
+		group-digits		= false ,
+		input-signs		= ,
+		input-symbols		= ( ) [ ] - + *,
+		input-open-uncertainty	= ,
+		input-close-uncertainty	= ,
+		table-align-text-post	= false
+        }
+
+
+
+
+\title{Does a productivity bonus pay off? \\ \normalsize The effects of teacher-incentive pay on student achievement in Brazilian schools}
+
+
+
+
+\author{\vspace{-0.5em} Tharcisio Leone \\ \vspace{-0.5em} \small GIGA German Institute of Global and Area Studies \\ \small $\&$ Free University of Berlin}
+
+
+%\author{Tharcisio Leone\thanks{Filiation: German Institute for Global and Area Studies (GIGA) $\&$ Free University of Berlin. E-mail: \url{tharcisio.leone@giga-hamburg.de}. Website: \url{https://tharcisio-leone.com/}.}} 
+\SetWatermarkText{Preprint not \\ peer reviewed}
+\SetWatermarkScale{5}
+
+\begin{document}
+
+\maketitle
+
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1em}{2.5em}}
+\makeatother
+
+
+
+\renewcommand*\abstractname{Supplementary Material}
+
+\begin{abstract}
+This appendix refers to the working paper \textit{``Does a productivity bonus pay off? \\ The effects of teacher-incentive pay on student achievement in Brazilian schools"} and provides additional information on the research that had to be excluded from the working paper for the sake of conciseness.
+\end{abstract}
+
+%submitted to the ``Journal of Development Economics" on 16 of July 2019.
+
+
+
+
+\newpage
+
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+}
+
+\newpage
+
+\section{Brazilian Educational System}
+The legal framework for the current education system in Brazil was established by the National Educational Bases and Guidelines Law from 1996 and Constitutional Amendment No. 59/2009. Currently, the education system is divided into five levels: early childhood education, pre-primary, primary, secondary and higher education. The first level is not obligatory and is intended for children between the ages of 0 and 3. The legislation for compulsory education stipulates mandatory schooling for children in the age group of 4 to 17 years, comprising in this way pre-primary (two years), primary (nine years) and secondary schooling (three years).\footnote{Prior to the enactment of Constitutional Amendment no. 59, dated 11 November 2009, schooling in Brazil was compulsory for children between the ages of 7 and 14, and the education system had a 8+3 structure corresponding to eight years of (compulsory) primary education and three years of secondary schooling.} Individuals who have completed their secondary education become eligible for higher education, but the effective admission to these institutions is dependent primarily on the institutions’ application procedures.
+
+ 
+In all five educational levels, students may choose to attend (free, tax-funded) public schools, or (privately funded) private schools.\footnote{According to school census data from the year 2018, approximately $18.6$ percent of the $48.5$ million students in Brazil are enrolled in private schools \citep{Sinopse2018}.} The Federal Constitution of 1988 obliged the public sector to provide free and universal access to (compulsory) education for all and divided this responsibility among the different levels of competence: the federal government has a relatively limited responsibility concerning the education system, almost restricted to managing federal universities, legislating on the guidelines and bases for national education, and providing technical and financial aid to the states and municipalities in order to ensure a minimum quality standard for all the entities of the federation.\footnote{Concrete examples of the intervention of the federal government in the educational system are the promulgation of the National Educational Bases and Guidelines Law (LDB) in 1996, creating the principal legal framework regulating means and powers for educational actions, and the adoption of the National Education Plan enacted in 2014, which established a set of 20 development goals to be achieved by 2024.} By contrast, the states and municipalities are primarily responsible for the functioning of public schools, playing a crucial role in defining and structuring the curriculum frameworks, teaching methods and didactic material in the schools.\footnote{In Brazil, a total of $181,939$ schools are operating in the education system, among those $22.3$ percent are private, $60.6$ percent are municipal, $16.7$ percent are state, and $0.4$ percent are federal schools \citep{Sinopse2018}.}
+
+%States and municipalities in Brazil are legally obliged to invest in education at least $25$ per cent of their public revenue.
+
+Articles 10 and 11 of the National Educational Bases and Guidelines Law (LDB) establishes more comprehensively, the competencies of states and municipalities regarding the education system. Municipalities are obliged to provide early childhood education and pre-primary and primary schooling, while the main responsibility of states lies in secondary education. However, the LDB foresees in its article 10(6) that states need to ensure universality of primary education in cases where the municipalities are not able to guarantee all citizens this fundamental right. Consequently, in 2018 a total of $30,377$ state schools provided primary schooling for $15,946,416$ students, comprising approximately 33 percent of the total number of primary students; in the same year $23,103,124$ students (47 percent) were enrolled in $110,220$ municipal schools, $8,995,249$ (19 percent) in $40,641$ private schools and $411,078$ (1 percent) in 701 federal schools \citep{Sinopse2018}. 
+
+
+%See \href{http://tiny.cc/yb99hz}{online appendix} of this paper for a more comprehensive and detailed overview of Brazilian educational system.
+
+ 
+
+%Education system in Brazil is divided into five levels: early childhood education (between the ages of 0 and 3), pre-primary (4-5), primary (6-14), secondary (15-17) and higher education (from age 17), whereby the legislation for compulsory education stipulates mandatory schooling for children aged between 4 and 17 years.
+
+ 
+
+
+
+
+
+
+
+
+%\newpage
+\section{Education Development Index} \label{IDESP}
+
+
+
+The teacher-performance pay investigated in this paper is part of the School Quality Program (Programa de Qualidade da Escola) launched in 2007 by the São Paulo State Government. This program has set long-term goals for the improvement of the quality of schools within the state education network, which must be reached by 2030.\footnote{Unless otherwise indicated, the following statements are based on the technical note regarding the School Quality Program published by the São Paulo Secretariat of Education. See \citet{SEESP2018}.}
+
+To ensure that these goals are being met, the state has also created short-term targets for the schools in order to annually monitor the development of the education system. These short-term targets are referred to as the Education Development Index of the state of São Paulo (IDESP) and used to calculate the teacher bonus.
+
+IDESP evaluates the quality of the education system divided by levels of schooling: lower primary education (grades 1–5), upper primary education (grades 6–9) and secondary education (grades 10–12). The program's goal is that by 2030 all state schools in São Paulo achieve student performances similar to those in OECD countries. In practical terms, this means an IDESP of 7.0 in the first level, 6.0 in the second, and 5.0 in the third level of schooling.
+
+The methodology employed by IDESP enables the schools to annually monitor their progress toward the long-term goals. To that end, at the beginning of each academic year the São Paulo Secretariat of Education (SEE-SP) publishes the annual targets for the schools, considering their current performance in relation to the 2030 goals. IDESP is calculated individually for each school $s$ and educational level $l$ based on two different indexes: the indicator of performance $(IP_{sl})$ and the average passing rate $(PR_{ls})$. 
+
+
+\begin{equation} \label{eq:IDESP}
+IDESP_{sl} = IP_{sl} \cdot PR_{sl}
+\end{equation}
+
+These two indexes complement each other and are combined to create a synthetic indicator for quality in education, which promotes both learning achievement and grade progression. From the perspective of the government, it is not desirable for a student to repeat the same grade several times to learn the corresponding academic content; at the same time, students with learning deficits should not move on to the next grade.
+
+The indicator of performance, $IP_{sl}$, is measured as the average score of students by the goverment-run compulsory standardized test SARESP (Evaluation System of Learning Achievement in the State of São Paulo). For this calculation only the results in math and Portuguese (reading) for the 5th, 9th and 12th grades of schooling are taken into consideration.\footnote{The SARESP test is also carried out for natural sciences, human sciences and writing, as well as for the 3rd and 7th grades of schooling.} In accordance with the scores obtained by the SARESP test, the students are grouped into four categories of learning achievement: below the basic $(BB)$, basic $(Ba)$, appropriate $(Ap)$ and advanced $(Ad)$. Table \ref{tab:SARESP} describes the reference values for the definition of these performance levels.
+
+
+\begin{table}[H]
+  \centering
+ \refstepcounter{table}           \label{table:ReferenceSARESP}                        \centering            \textbf{Table \ref{table:ReferenceSARESP}. Reference values for SARESP} \vspace{2pt} \\ 
+  \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{lrcccccccc}
+    \toprule
+     &       & \multicolumn{2}{c}{\textbf{5th Grade}} &       & \multicolumn{2}{c}{\textbf{9th Grade}} &       & \multicolumn{2}{c}{\textbf{12th Grade}} \\
+\cmidrule{3-4}\cmidrule{6-7}\cmidrule{9-10}    \multicolumn{1}{c}{\textbf{Level}} &       & \textbf{Mathematics} & \textbf{Portuguese} &       & \textbf{Mathematics} & \textbf{Portuguese} &       & \textbf{Mathematics} & \textbf{Portuguese} \\
+    \midrule
+    \midrule
+    Below Basic &       & $x < 175$ & $x < 150$ &       & $x < 225$ & $x < 200$ &       & $x < 275$ & $x < 250$ \\
+    Basic &       & $175 \leq x < 225$ & $150 \leq x < 200$ &       & $225 \leq x < 300$ & $200 \leq x < 275$ &       & $275 \leq x < 350$ & $250 \leq x < 300$ \\
+    Appropriate &       & $225 \leq x < 275$ & $200 \leq x < 250$ &       & $300 \leq x < 350$ & $275 \leq x < 325$ &       & $350 \leq x < 400$ & $300 \leq x < 375$ \\
+    Advanced &       & $x \geq 275$ & $x \geq 250$ &       & $x \geq 350$ & $x \geq 325$ &       & $x \geq 400$ & $x \geq 375$ \\
+     \bottomrule
+      \end{tabular}%
+  \label{tab:SARESP}%
+\end{adjustbox}
+\end{table}%
+
+\vspace{-15pt} \hspace{-20pt}
+    \begin{minipage}{1\textwidth} 
+{\scriptsize
+Note: $x$ denotes the student score by SARESP. \\  Source: Author's own compilation based on \citet{SEESP2018}. \par}
+\end{minipage} 
+\vspace{5pt}
+   
+
+Then, the indicator of performance, $IP_{sl}$, refers to the relative quantity of students into each of these four performance levels and is calculated on the basis of the school quality gap:
+
+
+\begin{equation} \label{eq:Sgap}
+Sgap_{sgj} = (3 \cdot BB_{sgj}) + (2 \cdot Ba_{sgj}) + (1 \cdot Ap_{sgj}) + (0 \cdot Ad_{sgj})
+\end{equation}
+
+where $BB_{sgj}$, $Ba_{sgj}$, $Ap_{sgj}$ and $Ad_{sgj}$ are the percentage of students in the respective performance level listed in table \ref{tab:SARESP}, calculated individually for each of the three grades $g$ (5th, 9th and 12th) and two disciplines $j$ (math and Portuguese). Therefore, the school gap ranges from 0, when all students have achieved the level ``advanced", to 3, when all of them are found in the category ``below the basic".
+
+Using the school quality gap, the indicator of performance, can be calculated as follows 
+
+\begin{equation} \label{eq:IndPerformance}
+IP_{sgj} = \left(1 - \frac{Sgap_{sgj}}{3}\right) \cdot 10
+\end{equation}
+
+Finally, the indicator of performance ranges on a scale from 0 (maximal gap in quality) to 10 (no gap) and is reported individually for each school $s$ and grade $g$ based on the average values for mathematics and Portuguese, i.e. $IP_{sg} = \left(IP_{sg,j=Port} + IP_{sg,j=Math}\right) / \: 2$.
+
+The other indicator of education quality used in the IDESP measure is the passing rate $(PR_{sl})$, which is calculated using the data from the Brazilian School Census as
+
+
+\begin{equation} \label{eq:PassingRate}
+PR_{sl} = \frac{A_{sl}}{T_{sl}} = \frac{\text{Number of approved students in level of schooling} \: l}{\text{Total number of students in level of schooling} \: l}
+\end{equation}
+
+The passing rate is also calculated individually for each school and it refers to the proportion of students approved by each of the three levels of schooling $l$: lower primary education (grades 1–5), upper primary education (grades 6–9), and secondary education (grades 10–12).
+
+
+
+
+\section{Indicator for Realization of Targets} \label{ICM}
+
+%The long-term goals of the school quality program have been established taking into consideration the average performance of countries from the Organisation for Economic Cooperation and Development (OECD). Until 2030, all the state schools in São Paulo need to achieve student performances similar to OECD countries. In practical terms, this means a IDESP of $7.0$ in the 5th grade, $6.0$ in the 9th grade, and $5.0$ in the 12th grade.
+
+%Starting from these values, the SEE-SP publishes every year, in March, the short-term targets for the schools considering their current performance in relation to the 2030 goals. 
+
+
+As described above, each school receives individual short-term targets, the so-called IDESP, to be reached in the academic year. After the end of the evaluated period (in March of the following year to be more precise), the SEE-SP publishes the degree of achievement of IDESP, and consequently the value of the teacher bonus to be paid to the educational staff.\footnote{Teachers, school principals and other administrative officials who work in more than one school or educational level receive their bonus with a value proportionate to the workload allocated to each function.} For this purpose, peculiarities in regard to student body of the schools are also taken into consideration with the help of the Indicator for Realisation of Targets (ICM, or Índice de Cumprimento de Metas), which is measured individually for each school $s$ and level of schooling $l$ as follows:
+
+
+
+%Consequently, each school has individual (intermediate) targets to be reached that take into account its peculiarities with regard to student body, teaching staff, and infrastructure.
+
+%only the performance of the school in relation to the prior years is relevant for the definition of the targets, and not its results compared with the other schools, 
+
+
+
+
+\begin{equation} \label{eq:ICM}
+ICM = \left[\max{(IC;IQ)} \right] \cdot \left[1 +(NSE \cdot MOD) \right]
+\end{equation}
+
+with
+
+\begin{equation} \label{eq:IC}
+IC = \text{Compliance Index} = \left( \frac{IDESP_{EF} - IDESP_{BASE}}{IDESP_{META} - IDESP_{BASE}} \right)
+\end{equation}
+
+and 
+
+\begin{equation} \label{eq:AQ}
+IQ = \text{Additional for Quality} = \left( \frac{IDESP_{EF} - IDESP_{AG}}{IDESP_{MF} - IDESP_{AG}} \right)
+\end{equation}
+ 
+
+where $IDESP_{EF}$ is the IDESP achieved in the evaluated period, $IDESP_{BASE}$ the value considered as the basis (previous year), $IDESP_{META}$ the target for the evaluation period, $IDESP_{MF}$ the final goal for 2030, $IDESP_{AG}$ the aggregate result for all schools in the evaluation period, $INSE$ the indicator for socio-economic status of the school, and $MOD$ the modulator that represents the weight to be applied to the $INSE$.\footnote{See section \ref{INSE} for a detailed description of the indicator for socio-economic status (INSE) and its modulator (MOD).}
+
+
+The compliance index (IC) refers to the proportion of the target that the school has achieved in each of the phases of schooling, or in other words, it indicates how much the school has progressed in the evaluated period in comparison to the expected value. As from 2009, the additional aspect quality (IQ) also came to be used to measure the ICM and, consequently, to calculate the teacher bonus. This indicator illustrates the success of the considered school in achieving the long-term goal for 2030, indicating to what extent the school is on its way to achieving the final goal compared to the other schools.
+
+Because IC and IQ are exclusionary in equation \eqref{eq:ICM}, education system employees will get the bonus in two different situations: first, if the school education quality, measured by IDESP, improved in the evaluated year (IC $> 0$) and, second, if the school’s results were higher than the average value of IDESP achieved in the evaluated year (IQ $>0$).\footnote{The payment of the bonus in case of IQ $>0$ and IC $\leq 0$ is based on the premise that the improvement of the education quality becomes even more difficult when the school has already achieved a high level of performance. For this reason, the SEE-SP recognizes the need to remunerate these ``good" schools for the already existing high performance.}
+
+Finally, the Indicator for Realization of Targets (ICM) will be applied in the calculation of the teacher bonus as follows
+
+\begin{equation} \label{eq:Bonus}
+\text{Bonus} = 0.2 \cdot \text{ICM} \cdot \sum Y_{i,t} \cdot \frac{\sum WD_{i,t}}{\sum WD_{t}} \quad \iff \quad \frac{\sum WD_{i,t}}{\sum WD_{t}} \geq \frac{2}{3}
+\end{equation}
+
+with $\text{ICM} \in [0,1.2]$, and $\sum Y_{i,t}$ denoting the sum of the remuneration received by the official $i$ in the evaluated period $t$, $\sum WD_{t}$ the amount of working days in $t$, and $\sum WD_{i,t}$ the sum of days worked by the official $i$ in period $t$.
+
+Note that the bonus is proportional to the effective days worked in $t$, but no bonus will be paid for employees with a proportion of working days lower than $2/3$. Moreover, the ICM used for the measurement of the bonus in equation \eqref{eq:Bonus} is limited to values between 0 and 1.2. For the cases in which ICM $=0$ (IC $\leq 0$ and IQ $\leq 0$), the teachers will be paid no bonus. Similarly, the ICM included in equation \eqref{eq:Bonus} will not exceed the value of 1.2 even when the results from \eqref{eq:ICM} are higher than 1.2.\footnote{Only for illustration purposes: Assuming, for example, $\sum WD_{i,t}=\sum WD_{t}$, and ICM=1, the educational staff will receive an additional payment of $20$ percent of their last gross annual salary.} 
+
+
+
+
+
+%See \href{http://tiny.cc/badffz}{for the Critérios para pagamento da BR}
+
+
+\section{Indicator for Socio-economic Status} \label{INSE}
+
+For the calculation of the annual teacher bonus, the SEE-SP also takes into consideration the Indicator for Socio-economic Status (INSE or Indice de Nível Socioeconômico) of the schools where the educational staff works. This inclusion aims to valorize the efforts of teachers working in less privileged communities, incorporating into the evaluation of education quality the (negative) out-of-school factors that are largely beyond the teachers’ control but have strong impacts on the educational achievement of students.
+
+The idea behind this INSE index goes back to \citet{bourdieu1986forms}. In his theory of cultural reproduction, the author argued that cultural capital (e.g. economic and social capital) has a significant impact on student educational success. Because families with high socioeconomic status can provide their children with more cultural capital, these children enjoy an advantage in the educational system when compared with their peers from socially disadvantaged households \citep{jaeger2017cultural}.
+
+The data for the construction of the INSE were collected by means of questionnaires that were distributed to the parents of the students in the years 2008, 2009 and 2010, containing specific questions on the family income, education level and occupation of parents, and the existence of consumer durables in the household, such as car, TV, DVD player, washing machine, fridge, and so on. Using these data and IRT, the SEE/SP has constructed a single index for the socioeconomic status of the students. Finally, the INSE for the school was determined as the arithmetic average INSE of all students formerly enrolled in this school, and takes values from 0 to 10, with a value of 0 (10) corresponding to the schools with the highest (lowest) socialeconomic status.
+
+%\footnote{The item response theory (IRT) makes use of mathematical techniques to create measures of latent traits based on dichotomous and/or ordinal data. See \citet{van2013handbook, alves2009medidas} for a more detailed explanation of the IRT.}
+
+The modulator ($MOD$) is also integrated into the equation \eqref{eq:ICM} to calculate the teacher bonus. It is a relative weight applied to the INSE in order to calibrate the progress of the school towards its targets $(IDESP_{META})$. This weight indicates the degree of influence of the socialeconomic status on the performance of the students for each school.
+
+
+
+
+\section{GERES Data} \label{GERES}
+
+The GERES microdata is the final result of the project entitled \textit{``Estudo Longitudinal da Geração Escolar"} (Longitudinal Study of Quality and Equity in Brazilian Elementary Education), the first longitudinal data study in education concluded with success in Brazil.\footnote{
+The first longitudinal study in the Brazilian education system was called ``Avaliação do desempenho: fatores associados" and was conducted between 1999 and 2003, tracking the performance of students between the grades 4 and 8 of primary education. However, due to technical problems, the database has never been published \citep{brooke2011geres}.} This project tracked $21,569$ children from $309$ Brazilian schools during their first four years of schooling in order to gather information about their academic performance and the educational inputs involved in the learning process.\footnote{Unless otherwise indicated, all following explanations related to the database are based on \citet{brooke2011geres}, the project book provided as supplementary material to the GERES microdata.}
+
+The idea for GERES came from a desire to create a new, and for Brazil at that time unique, longitudinal dataset tracking students’ academic achievement over time. This dataset complements the already extensive list of cross-sectional educational data existing in the country.\footnote{With the implementation of the Brazilian National Evaluation System of Basic Education (SAEB) in the mid-1990s and the consequent expansion of educational assessment tests at state and municipal levels in the following years, Brazil has established a comprehensive and broad framework for the evaluation of student achievement. However, although the pupils undertake the performance tests in several years of their schooling life, for data privacy reasons, the competent governmental authorities have never provided to the research community an individual student ID number, which would allow us to track the performance of students over time.} The project was governed by six Brazilian universities and co-funded by the Ford Foundation and the Brazilian government by means of public resources from the Research Support Foundation of the State of Rio de Janeiro (FAPERJ), the Research Support Foundation of the State of Minas Gerais (FAPEMING), and the National Institute of Educational Studies and Research (INEP).\footnote{The universities involved in the planning and execution of the GERES project were: University of Minas Gerais (UFMG), University of Juiz de Fora (UFJF), University of Campinas (UNICAMP), University of Mato Grosso do Sul (UEMS), Pontifical Catholic University of Rio de Janeiro (PUC-Rio) and University of Bahia (UFBA).} 
+
+Table \ref{table:ScheduleGERES} describes the timeline for the GERES project. The GERES project began in 2004 with the creation of the institutional structure for the project and ran for seven years until the publication of the dataset and its supporting materials in 2011.
+
+
+
+%\footnote{To the best of my knowledge and belief, only \citet{ferrao2018estudo} have received permission to access the individual ID number of students and to connect their scores by the SAEB tests. However, it is important to mention that among the four co-authors of the paper, three of them are servants of the National Institute of Educational Studies and Research (INEP), the public institution involved in the organization and application of the SAEB.}
+
+
+
+
+% Table generated by Excel2LaTeX from sheet 'Cronograma'
+\begin{table}[H]
+  \centering
+ \refstepcounter{table}           \label{table:ScheduleGERES}                        \centering            \textbf{Table \ref{table:ScheduleGERES}. Timeline for test application} \\ 
+      \begin{tabular}{lll}
+    \toprule
+    \multicolumn{1}{c}{\textbf{Year}} & \multicolumn{1}{c}{\textbf{Timeline}} & \multicolumn{1}{c}{\textbf{Activities}} \\
+    \midrule
+    \multicolumn{1}{c}{2004} & March to December & Preparation phase and pre-testing \\
+    \midrule
+    \multicolumn{1}{c}{2005} & March / April & Tests of Mathematics and Portuguese (Wave 1) \\
+          &       & Questionnaire for schools \\
+          &       & Questionnaire for school principals \\
+\cmidrule{2-3}          & September to December & Questionnaire for students' parents  \\
+\cmidrule{2-3}          & October / November & Tests of Mathematics and Portuguese (Wave 2) \\
+          &       & Questionnaire for teachers \\
+    \midrule
+    \multicolumn{1}{c}{2006} & November & Tests of Mathematics and Portuguese (Wave 3) \\
+          &       & Questionnaire for teachers \\
+    \midrule
+    \multicolumn{1}{c}{2007} & November & Tests of Mathematics and Portuguese (Wave 4) \\
+          &       & Questionnaire for teachers \\
+          &       & Questionnaire for students (pre-testing version) \\
+          &       & Questionnaire for schools \\
+    \midrule
+    \multicolumn{1}{c}{2008} & November & Tests of Mathematics and Portuguese (Wave 5) \\
+          &       & Questionnaire for teachers \\
+          &       & Questionnaire for students (extended version)  \\ 
+    \bottomrule
+     \end{tabular}%
+     \end{table}%
+     \vspace{-20pt} \hspace{-10pt}
+    \begin{minipage}{1\textwidth} 
+{\scriptsize
+Source: Author's own compilation based on \citet{brooke2011geres}.\par}
+\end{minipage}  
+%\vspace{5pt}
+
+
+
+The application of proficiency tests and survey questionnaires took place between 2005 and 2008. In each of these years, GERES collected data on the academic achievement of students in mathematics and Portuguese, as well as the individual characteristics of their teachers.\footnote{Note that in the year 2005 the students were tested twice (waves 1 and 2). The first test in March sought to quantify the cognitive skills of the children at the beginning of the education system, and the second one in November to measure the academic achievement at the end of the first year of education.} Moreover, the project was complemented by two questionnaires on school features: one of school principal characteristics, and three household questionnaires aimed at gaining a better understanding of the familial contexts of the students involved in the project.
+
+
+The $309$ public and private schools involved in GERES are situated in five densely populated cities in Brazil: Belo Horizonte, Campinas, Campo Grande, Rio de Janeiro and Salvador, each city being located in a different state. The selection of these municipalities was made with one specific goal in mind: the reduction of logistics issues related to the test application, given that the cities are home to the main campuses of the participating universities. The cities chosen, a probabilistic procedure was then carried out for the representative selection of the $21,569$ ``GERES students". 
+
+
+Table \ref{table:SampleSize} illustrates the sample construction. First, using the 2003 school census a probabilistic sample of schools within the cities was chosen.\footnote{The school census is a compulsory annual data collection covering all levels of education in Brazil. This statistical survey contains detailed information about students, classes, teachers and public and private schools in the country. See \citet{diniz2007censo} for more details.} Next, the following schools were excluded from the analysis: schools in rural areas, schools with only multi-grade classrooms in the first-grade, schools with first grade pupils attending exclusively evening classes,\footnote{In Brazil, classes starting from 4 p.m. are considered evening classes.} as well as private schools with fewer than $10$ students and public schools with fewer than $20$ students enrolled in the first year of compulsory education. In addition, given the process of municipalization of schools that occurred in the state of Rio de Janeiro, no (remaining) state school has been added to the GERES sample.\footnote{See \citet{derqui2001educational} and \citet{dos1993recent} for more information about the municipalization of schools in Brazil.}
+
+% Table generated by Excel2LaTeX from sheet 'Tabelle2'
+\begin{table}[H]
+  \centering
+ \refstepcounter{table}           \label{table:SampleSize}                        \centering            \textbf{Table \ref{table:SampleSize}. GERES Sample Size} \\ 
+  \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{llllllll}
+    \toprule
+          &       & \multicolumn{1}{c}{\textbf{Total}} &       & \multicolumn{4}{c}{\textbf{GERES}} \\
+\cmidrule{3-3}\cmidrule{5-8}    \multicolumn{1}{c}{\textbf{City}} & \multicolumn{1}{c}{\textbf{Typ}} & \multicolumn{1}{p{4.39em}}{\textbf{ Schools }} &       & \multicolumn{1}{p{5.5em}}{\textbf{ Schools }} & \multicolumn{1}{p{5.5em}}{\textbf{ \% Sample }} & \multicolumn{1}{c}{\textbf{ Classes }} & \multicolumn{1}{c}{\textbf{ Students }} \\
+    \midrule
+          & State & \multicolumn{1}{c}{155 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{12.9} & \multicolumn{1}{c}{64 } & \multicolumn{1}{c}{1,682 } \\
+    Belo Horizonte & Municipal & \multicolumn{1}{c}{135 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{14.8} & \multicolumn{1}{c}{88 } & \multicolumn{1}{c}{2,036 } \\
+          & Private & \multicolumn{1}{c}{144 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{13.9} & \multicolumn{1}{c}{32 } & \multicolumn{1}{c}{669 } \\
+    \midrule
+          & State & \multicolumn{1}{c}{95 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{21.1} & \multicolumn{1}{c}{74 } & \multicolumn{1}{c}{2,158 } \\
+    Campinas & Municipal & \multicolumn{1}{c}{39 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{51.3} & \multicolumn{1}{c}{73 } & \multicolumn{1}{c}{1,919 } \\
+          & Private & \multicolumn{1}{c}{47 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{42.6} & \multicolumn{1}{c}{42 } & \multicolumn{1}{c}{804 } \\
+    \midrule
+          & State & \multicolumn{1}{c}{70 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{28.6} & \multicolumn{1}{c}{38 } & \multicolumn{1}{c}{845 } \\
+    Campo Grande & Municipal & \multicolumn{1}{c}{76 } &       & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{25.0} & \multicolumn{1}{c}{97 } & \multicolumn{1}{c}{2,418 } \\
+          & Private & \multicolumn{1}{c}{80 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{25.0} & \multicolumn{1}{c}{27 } & \multicolumn{1}{c}{342 } \\
+    \midrule
+          & State & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{-} & \multicolumn{1}{c}{-} & \multicolumn{1}{c}{-} & \multicolumn{1}{c}{-} \\
+    Rio de Janeiro & Municipal & \multicolumn{1}{c}{765 } &       & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{3.9} & \multicolumn{1}{c}{90 } & \multicolumn{1}{c}{2,527 } \\
+          & Private & \multicolumn{1}{c}{805 } &       & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{3.7} & \multicolumn{1}{c}{55 } & \multicolumn{1}{c}{1,032 } \\
+    \midrule
+          & State & \multicolumn{1}{c}{67 } &       & \multicolumn{1}{c}{21 } & \multicolumn{1}{c}{31.3} & \multicolumn{1}{c}{25 } & \multicolumn{1}{c}{692 } \\
+    Salvador & Municipal & \multicolumn{1}{c}{332 } &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{6.0} & \multicolumn{1}{c}{113 } & \multicolumn{1}{c}{3,032 } \\
+          & Private & \multicolumn{1}{c}{278} &       & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{7.2} & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{544 } \\
+    \midrule
+    \multicolumn{2}{p{12.5em}}{Special schools} & \multicolumn{1}{c}{9 } &       & \multicolumn{1}{c}{9 } & \multicolumn{1}{c}{100.0} & \multicolumn{1}{c}{35 } & \multicolumn{1}{c}{869 } \\
+    \midrule
+    \textbf{Total} &       & \multicolumn{1}{c}{\textbf{3,097}} &       & \multicolumn{1}{c}{\textbf{309}} & \multicolumn{1}{c}{\textbf{10.0}} & \multicolumn{1}{c}{\textbf{883}} & \multicolumn{1}{c}{\textbf{21,569}} \\
+    \bottomrule
+   \end{tabular}%
+  \end{adjustbox}
+\end{table}%
+
+\vspace{-13pt} \hspace{-20pt}
+    \begin{minipage}{1\textwidth} 
+{\scriptsize
+Notes: Special schools refer to federal schools or classes in participating universities. Because of the municipalization of primary education in Rio de Janeiro, no state schools were included in the GERES sample. \\ Source: GERES database (2005–2008); author’s own compilation based on \citet{brooke2011geres}.\par}
+\end{minipage}
+\vspace{5pt}  
+
+
+
+ 
+
+After all these exclusions, a new weighting adjustment—regarding the size of the schools and the average socioeconomic status of their students—was undertaken to ensure the reliability and representativeness of the data. Table \ref{table:SampleSize} above summarizes the main statistics involved in the sample construction. Note that GERES covers a total of $10$ percent of the schools in the five selected municipalities, but the sample size varies strongly across the cities. For Campinas, the city investigated in the paper, the GERES sample represents for all school types at least $25$ percent of the total student population.
+
+
+Once the sample was defined, all the pupils enrolled in the first year of compulsory education in these schools were selected for the project and had their academic achievements tracked during their first four years of schooling (grades 1–4).\footnote{Students who repeated a grade continued regularly taking part in the GERES waves.}
+
+
+Table \ref{table:N_Schools} summarizes the sample variation over time. Note that already by the first wave, approximately 10 percent of GERES students did not take the tests, and in the following years other losses of data occurred as well.\footnote{Students who missed the test could not re-take it on another date, but they remained in the sample and were able to participate in the other waves of GERES.} First, the schools from Salvador were withdrawn from the sample in the fifth wave due to internal issues of the local government and, second, the pupils that migrated to schools not part of GERES were no longer tracked. By contrast, the ``external" students who had transferred to GERES classes were added to the sample. In the total, $7,003$ students have completed all five waves of the project.
+
+
+\begin{table}[H]
+  \centering
+ \refstepcounter{table}           \label{table:N_Schools}                        \centering            \textbf{Table \ref{table:N_Schools}. GERES Sample per Wave} \\ 
+  \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{llllllllllllr}
+    \toprule
+          &       & \multicolumn{5}{c}{\textbf{Number of Schools / Wave}} &       & \multicolumn{5}{c}{\textbf{Number of Students / Wave}} \\
+\cmidrule{3-7}\cmidrule{9-13}    \multicolumn{1}{c}{\textbf{City}} & \multicolumn{1}{c}{\textbf{Typ}} & \multicolumn{1}{p{3.445em}}{\textbf{ 1st }} & \multicolumn{1}{p{3.445em}}{\textbf{ 2nd  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 3rd  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 4th  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 5th  }} &       & \multicolumn{1}{p{3.445em}}{\textbf{ 1st }} & \multicolumn{1}{p{3.445em}}{\textbf{ 2nd  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 3rd  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 4th  }} & \multicolumn{1}{p{3.445em}}{\textbf{ 5th  }} \\
+\cmidrule{1-7}\cmidrule{9-13}          & Special & \multicolumn{1}{c}{1 } & \multicolumn{1}{c}{1 } & \multicolumn{1}{c}{1 } & \multicolumn{1}{c}{1 } & \multicolumn{1}{c}{1 } &       & \multicolumn{1}{c}{88 } & \multicolumn{1}{c}{85 } & \multicolumn{1}{c}{87 } & \multicolumn{1}{c}{89 } & \multicolumn{1}{c}{92 } \\
+    Belo Horizonte & State & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } &       & \multicolumn{1}{c}{1,521 } & \multicolumn{1}{c}{1,554 } & \multicolumn{1}{c}{1,649 } & \multicolumn{1}{c}{1,670 } & \multicolumn{1}{c}{1,654 } \\
+          & Municipal & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } &       & \multicolumn{1}{c}{1,840 } & \multicolumn{1}{c}{1,888} & \multicolumn{1}{c}{2,096 } & \multicolumn{1}{c}{2,044 } & \multicolumn{1}{c}{2,000 } \\
+          & Private & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } &       & \multicolumn{1}{c}{641 } & \multicolumn{1}{c}{646 } & \multicolumn{1}{c}{655 } & \multicolumn{1}{c}{653 } & \multicolumn{1}{c}{653 } \\
+\cmidrule{1-7}\cmidrule{9-13}          & State & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{16 } &       & \multicolumn{1}{c}{1,939 } & \multicolumn{1}{c}{2,017} & \multicolumn{1}{c}{2,095 } & \multicolumn{1}{c}{2,201 } & \multicolumn{1}{c}{1,860 } \\
+    Campinas & Municipal & \multicolumn{1}{c}{21 } & \multicolumn{1}{c}{21 } & \multicolumn{1}{c}{21 } & \multicolumn{1}{c}{21 } & \multicolumn{1}{c}{21 } &       & \multicolumn{1}{c}{1,691 } & \multicolumn{1}{c}{1,761} & \multicolumn{1}{c}{1,886 } & \multicolumn{1}{c}{2,084 } & \multicolumn{1}{c}{2,203 } \\
+          & Private & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{18 } &       & \multicolumn{1}{c}{768 } & \multicolumn{1}{c}{781} & \multicolumn{1}{c}{748 } & \multicolumn{1}{c}{766 } & \multicolumn{1}{c}{738 } \\
+\cmidrule{1-7}\cmidrule{9-13}          & State & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{19 } & \multicolumn{1}{c}{18 } & \multicolumn{1}{c}{18 } &       & \multicolumn{1}{c}{734 } & \multicolumn{1}{c}{825} & \multicolumn{1}{c}{864 } & \multicolumn{1}{c}{875 } & \multicolumn{1}{c}{833 } \\
+    Campo Grande & Municipal & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } &       & \multicolumn{1}{c}{2,171 } & \multicolumn{1}{c}{2,247} & \multicolumn{1}{c}{2,197 } & \multicolumn{1}{c}{2,311 } & \multicolumn{1}{c}{2,115 } \\
+          & Private & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{20 } & \multicolumn{1}{c}{18 } & \multicolumn{1}{c}{14 } &       & \multicolumn{1}{c}{315 } & \multicolumn{1}{c}{330} & \multicolumn{1}{c}{260 } & \multicolumn{1}{c}{211 } & \multicolumn{1}{c}{188 } \\
+\cmidrule{1-7}\cmidrule{9-13}          & Special & \multicolumn{1}{c}{8 } & \multicolumn{1}{c}{8 } & \multicolumn{1}{c}{8 } & \multicolumn{1}{c}{8 } & \multicolumn{1}{c}{8 } &       & \multicolumn{1}{c}{730 } & \multicolumn{1}{c}{720} & \multicolumn{1}{c}{740 } & \multicolumn{1}{c}{764 } & \multicolumn{1}{c}{799 } \\
+    Rio de Janeiro & Municipal & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{36 } & \multicolumn{1}{c}{35 } &       & \multicolumn{1}{c}{2,271 } & \multicolumn{1}{c}{2,230} & \multicolumn{1}{c}{2,224 } & \multicolumn{1}{c}{3,575 } & \multicolumn{1}{c}{3,802 } \\
+          & Private & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{30 } & \multicolumn{1}{c}{28 } &       & \multicolumn{1}{c}{971 } & \multicolumn{1}{c}{949} & \multicolumn{1}{c}{934 } & \multicolumn{1}{c}{935 } & \multicolumn{1}{c}{778 } \\
+\cmidrule{1-7}\cmidrule{9-13}          & State & \multicolumn{1}{c}{11 } & \multicolumn{1}{c}{11 } & \multicolumn{1}{c}{11 } & \multicolumn{1}{c}{10 } & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{571 } & \multicolumn{1}{c}{575} & \multicolumn{1}{c}{757 } & \multicolumn{1}{c}{845 } & \multicolumn{1}{c}{-} \\
+    Salvador & Municipal & \multicolumn{1}{c}{26 } & \multicolumn{1}{c}{26 } & \multicolumn{1}{c}{26 } & \multicolumn{1}{c}{26 } & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{2,278 } & \multicolumn{1}{c}{2,332} & \multicolumn{1}{c}{2,629 } & \multicolumn{1}{c}{2,657 } & \multicolumn{1}{c}{-} \\
+          & Private & \multicolumn{1}{c}{18 } & \multicolumn{1}{c}{18 } & \multicolumn{1}{c}{18 } & \multicolumn{1}{c}{17 } & \multicolumn{1}{c}{-} &       & \multicolumn{1}{c}{495 } & \multicolumn{1}{c}{488} & \multicolumn{1}{c}{512 } & \multicolumn{1}{c}{477 } & \multicolumn{1}{c}{-} \\
+    \midrule
+    \textbf{Total} &       & \multicolumn{1}{c}{\textbf{303 }} & \multicolumn{1}{c}{\textbf{303 }} & \multicolumn{1}{c}{\textbf{303 }} & \multicolumn{1}{c}{\textbf{303 }} & \multicolumn{1}{c}{\textbf{238 }} &       & \multicolumn{1}{c}{\textbf{19,024 }} & \multicolumn{1}{c}{\textbf{19,428 }} & \multicolumn{1}{c}{\textbf{20,333 }} & \multicolumn{1}{c}{\textbf{22,157 }} & \multicolumn{1}{c}{\textbf{17,715 }} \\
+    \bottomrule
+    \end{tabular}%
+\end{adjustbox}
+  \end{table}%
+
+\vspace{-13pt} \hspace{-20pt}
+    \begin{minipage}{1\textwidth} 
+{\scriptsize
+Notes: Special schools refer to federal schools or classes in participating universities. Because of the municipalization of primary education in Rio de Janeiro, no state schools have been included in the GERES sample. Due to administrative issues the students from the city of Salvador were removed from the GERES project in year 2008, and therefore they have no test scores for the wave 5. \\ Source: GERES database (2005-2008), own compilation based on \citet{brooke2011geres}.\par}
+\end{minipage} 
+\vspace{5pt}
+
+
+
+
+
+
+
+
+
+%For the measure of student performance all the students needed to take annually two versions of standardised tests (the ``easy" and the ``difficult" exam for both math and portuguese) in order to minimize the possibility of measuring error by students with different cognitive skills. The researchers involved in the project, have arranged the order of the questions in the test in increasing difficulty level with the aim of reducing the stress impact of the test.  Then, within the tests, the order of questions were arranged in increasing difficulty level with the aim of improving the comparability of the results between the different grades.
+
+The test scores identifying the proficiency of students were calculated independently for math and Portuguese using the Item Response Theory (see section \ref{ItemTheory}). In each wave, the researchers involved in the project prepared two versions of the test (the ``easy" and the ``difficult" exam for both math and Portuguese) in order to minimize the possibility of measuring error by students with (very) different cognitive skills.\footnote{The development of two versions of the tests was necessary because the pre-testing phase showed very different educational outcomes: some students achieved a success rate of $100$ percent, while others had only wrong answers.} Then, students were allocated to the particular version of the test by taking into consideration their academic achievement in the previous wave; for the first wave, allocation was based on the basis of the student performance informed by the schools. Finally, the order of the questions in the test was arranged by ever-increasing difficulty level, the goal of which was the reduce the stress impact of the test, thereby improving the comparability of the results across children with distinct levels of stress management.
+
+
+
+% Table generated by Excel2LaTeX from sheet 'Profy-Level'
+\begin{table}[H]
+  \centering
+ \refstepcounter{table}           \label{table:AverageGrade}                        \centering            \textbf{Table \ref{table:AverageGrade}. Test Scores per Wave (mean and standard deviation)} \\ 
+  \begin{adjustbox}{width=1\textwidth}
+    \begin{tabular}{llllllllllllllll}
+    \toprule
+          &       & \multicolumn{2}{p{6.055em}}{\textbf{\hspace{12pt} Wave 1 }} &       & \multicolumn{2}{p{6.055em}}{\textbf{\hspace{12pt} Wave 2 }} &       & \multicolumn{2}{p{6.055em}}{\textbf{\hspace{12pt} Wave 3 }} &       & \multicolumn{2}{p{6.055em}}{\textbf{\hspace{12pt} Wave 4 }} &       & \multicolumn{2}{p{6.055em}}{\textbf{\hspace{12pt} Wave 5 }} \\
+\cmidrule{3-4}\cmidrule{6-7}\cmidrule{9-10}\cmidrule{12-13}\cmidrule{15-16}    \multicolumn{1}{c}{\textbf{City}} & \multicolumn{1}{c}{\textbf{Typ}} & \multicolumn{1}{p{3.445em}}{\textbf{ Mean }} & \multicolumn{1}{p{2.61em}}{\textbf{ SD }} &       & \multicolumn{1}{p{3.445em}}{\textbf{ Mean }} & \multicolumn{1}{p{2.61em}}{\textbf{ SD }} &       & \multicolumn{1}{p{3.445em}}{\textbf{ Mean }} & \multicolumn{1}{p{2.61em}}{\textbf{ SD }} &       & \multicolumn{1}{p{3.445em}}{\textbf{ Mean }} & \multicolumn{1}{p{2.61em}}{\textbf{ SD }} &       & \multicolumn{1}{p{3.445em}}{\textbf{ Mean }} & \multicolumn{1}{p{2.61em}}{\textbf{ SD }} \\
+    \midrule
+          & Special & \multicolumn{1}{c}{142.29} & \multicolumn{1}{c}{20.84} &       & \multicolumn{1}{c}{170.11} & \multicolumn{1}{c}{24.46} &       & \multicolumn{1}{c}{217.67} & \multicolumn{1}{c}{40.10} &       & \multicolumn{1}{c}{259.67} & \multicolumn{1}{c}{43.43} &       & \multicolumn{1}{c}{301.47} & \multicolumn{1}{c}{48.13} \\
+          & State & \multicolumn{1}{c}{102.33} & \multicolumn{1}{c}{28.65} &       & \multicolumn{1}{c}{131.48} & \multicolumn{1}{c}{31.62} &       & \multicolumn{1}{c}{146.21} & \multicolumn{1}{c}{52.46} &       & \multicolumn{1}{c}{188.29} & \multicolumn{1}{c}{59.20} &       & \multicolumn{1}{c}{229.87} & \multicolumn{1}{c}{63.05} \\
+    Mathematics & Municipal & \multicolumn{1}{c}{101.27} & \multicolumn{1}{c}{24.98} &       & \multicolumn{1}{c}{128.74} & \multicolumn{1}{c}{28.59} &       & \multicolumn{1}{c}{135.31} & \multicolumn{1}{c}{49.18} &       & \multicolumn{1}{c}{174.48} & \multicolumn{1}{c}{56.32} &       & \multicolumn{1}{c}{217.79} & \multicolumn{1}{c}{57.67} \\
+          & Private & \multicolumn{1}{c}{128.92} & \multicolumn{1}{c}{25.74} &       & \multicolumn{1}{c}{159.19} & \multicolumn{1}{c}{28.37} &       & \multicolumn{1}{c}{198.55} & \multicolumn{1}{c}{47.41} &       & \multicolumn{1}{c}{240.35} & \multicolumn{1}{c}{53.84} &       & \multicolumn{1}{c}{293.61} & \multicolumn{1}{c}{52.62} \\
+\cmidrule{2-16}          & \textbf{Total} & \multicolumn{1}{c}{\textbf{107.95}} & \multicolumn{1}{c}{\textbf{28.78}} &       & \multicolumn{1}{c}{\textbf{136.22}} & \multicolumn{1}{c}{\textbf{32.00}} &       & \multicolumn{1}{c}{\textbf{151.25}} & \multicolumn{1}{c}{\textbf{55.81}} &       & \multicolumn{1}{c}{\textbf{190.39}} & \multicolumn{1}{c}{\textbf{62.01}} &       & \multicolumn{1}{c}{\textbf{235.19}} & \multicolumn{1}{c}{\textbf{64.96}} \\
+    \midrule
+          & Special & \multicolumn{1}{c}{139.64} & \multicolumn{1}{c}{14.49} &       & \multicolumn{1}{c}{151.84} & \multicolumn{1}{c}{15.17} &       & \multicolumn{1}{c}{169.81} & \multicolumn{1}{c}{19.70} &       & \multicolumn{1}{c}{179.53} & \multicolumn{1}{c}{18.42} &       & \multicolumn{1}{c}{188.50} & \multicolumn{1}{c}{16.74} \\
+          & State & \multicolumn{1}{c}{101.24} & \multicolumn{1}{c}{15.01} &       & \multicolumn{1}{c}{120.84} & \multicolumn{1}{c}{21.93} &       & \multicolumn{1}{c}{136.00} & \multicolumn{1}{c}{25.41} &       & \multicolumn{1}{c}{151.50} & \multicolumn{1}{c}{25.46} &       & \multicolumn{1}{c}{162.79} & \multicolumn{1}{c}{24.76} \\
+    Portuguese & Municipal & \multicolumn{1}{c}{101.15} & \multicolumn{1}{c}{22.60} &       & \multicolumn{1}{c}{118.54} & \multicolumn{1}{c}{19.88} &       & \multicolumn{1}{c}{131.03} & \multicolumn{1}{c}{23.81} &       & \multicolumn{1}{c}{145.39} & \multicolumn{1}{c}{24.94} &       & \multicolumn{1}{c}{158.68} & \multicolumn{1}{c}{23.92} \\
+          & Private & \multicolumn{1}{c}{129.64} & \multicolumn{1}{c}{18.27} &       & \multicolumn{1}{c}{145.02} & \multicolumn{1}{c}{17.23} &       & \multicolumn{1}{c}{160.67} & \multicolumn{1}{c}{22.44} &       & \multicolumn{1}{c}{172.27} & \multicolumn{1}{c}{22.92} &       & \multicolumn{1}{c}{185.32} & \multicolumn{1}{c}{18.13} \\
+\cmidrule{2-16}          & \textbf{Total} & \multicolumn{1}{c}{\textbf{107.61}} & \multicolumn{1}{c}{\textbf{25.60}} &       & \multicolumn{1}{c}{\textbf{124.88}} & \multicolumn{1}{c}{\textbf{22.73}} &       & \multicolumn{1}{c}{\textbf{138.47}} & \multicolumn{1}{c}{\textbf{26.80}} &       & \multicolumn{1}{c}{\textbf{151.95}} & \multicolumn{1}{c}{\textbf{26.75}} &       & \multicolumn{1}{c}{\textbf{164.75}} & \multicolumn{1}{c}{\textbf{25.33}} \\
+    \bottomrule
+     \end{tabular}%
+ \end{adjustbox}
+\end{table}%
+
+\vspace{-15pt} \hspace{-20pt}
+    \begin{minipage}{1\textwidth} 
+{\scriptsize
+Notes: Special schools refer to federal schools or classes in participating universities. \\ Source: GERES database (2005–2008); author’s own estimates.\par}
+\end{minipage} 
+\vspace{5pt}
+
+
+Table \ref{table:AverageGrade} presents the average test scores of the GERES project and their respective standard deviations. Note that, on average, the performance of students improves over time, but so does the difference in performance between the schools. Pupils enrolled in private schools perform increasingly better than those from state and municipal schools, and the gap between them gradually widens as the children get older.
+
+
+
+
+\section{Item Response Theory} \label{ItemTheory}
+
+The proficiency test scores by GERES were estimated using Item Response Theory (IRT), an approach widely applied in studies of cognitive traits and educational outcomes\footnote{Unless otherwise indicated, the explanations of IRT are based on \citet{brooke2011geres}.}. In comparison with the Classical Test Theory (CTT), IRT can capture in a more effective way the relationship between the measurement process and the latent trait: in this case, academic ability in mathematics and Portuguese \citep{hambleton2013item}. In Brazil, IRT has also been adopted by government-run large-scale evaluations of educational achievements, such as SAEB and Prova Brasil.
+
+IRT makes use of an explicit mathematical model to predict the likelihood that a certain student will give a certain response to a certain item. Therefore, the hit probability for each response is derived as a function of student ability and predetermined item parameters \citep{van2013handbook}. Let us assume $Y$ as a dichotomous response to item $J$ with $Y_{1}, \cdots ,Y_{j}$, where $Y_j=1$ indicates a correct response and $Y_j=0$ otherwise, then the probability of a correct answer can be estimated with a three-parameter logistic (3PL) model as follows: 
+
+ 
+\begin{equation} \label{eq:IRT}
+P(Y_{jg} = 1 \vert a_j,b_j,c_j,\theta_i) = c_j + \frac{(1-c_j)}{1+e^{-Da_j(\theta-b_j)}}
+\end{equation}
+
+
+where $P(Y_{jg} = 1 \vert)$ denotes the probability of the answer $Y_{ig}$ that is attributed to student $i$ in group $g$ is correct given the item's discrimination $a_j$, the item's difficulty $b_j$, the pseudo-guessing parameter $c_j$ presenting the likelihood for a casual hit of the item, and the ability of student $\theta_i$. In addition, the 3PL makes use of a scaling constant $D$, which is commonly set to $D=1$ or $D=1.7$ depending on whether a logistic or normal-ogive metric is desired \citep{LeBeau2017, de2013theory}.
+
+The GERES proficiency tests were designed in two versions (an easy and a difficult one). Consequently, a total of 10 different tests for each subject has been developed. To link the scores across all these tests, the researchers involved in the project used a methodology called concurrent calibration, which consist of estimating the proficiency levels and the item parameters in a single calibration run, placing all parameter estimates onto a common scale \citep{kang2012linking}. Through this equating procedure, the students treated as a reference group on the base scale had an ability estimated at a mean of 0 and a standard deviation (SD) of 1. For the following waves, the mean and SD of the ability distribution were newly estimated by the item and ability parameter calibration process within each dataset.\footnote{For all estimates, the researchers employed the statistic software BILOG-MG, which uses marginal maximum likelihood to estimate the item parameters for the 3PL model in equation \eqref{eq:IRT}.} The calibration of the parameters was carried out by Maximum Marginal A Posteriori (MMAP), which was adapted for a model with multiple groups, and the proficiency levels were estimated by the Expected A Posteriori (EAP) method using normal prioris for all the groups.\footnote{For the theoretical foundations of Maximum Marginal A Posteriori (MMAP) and Expected A Posteriori (EAP), see \citet{doucet2002marginal} and \citet{kolen2010psychometric} respectively.} 
+
+
+
+
+
+
+
+
+
+\section{GMM Estimator} \label{GMM}
+
+Because the introduction of individual fixed effects in a value-added model causes a endogeneity problem \textemdash meaning that the lagged test score is correlated with the idiosyncratic error term \textemdash the estomations of OLS and FE models with lagged student achievement as control variable will be inconsistent \citep[see e.g.][]{bond2002dynamic, nickell1981biases}. 
+
+Therefore, the use of Generalized Method of Moments (GMM) has gained fundamental importance for the empirical investigations with panel data \citep[see e.g.][]{pesaran2015time,baltagi2008econometric}. The most significant contributions to the development of GMM estimators date back to \citet{hsiao1986analysis, arellano1989note, arellano1991some} and \citet{blundell1998initial}, and consist of a two-phase approach: First, the unobserved individual-specific effects are eliminated by means of first difference, and then the first difference or the lagged dependent variable is used as an instrument.\footnote{Unless otherwise stated, the following formal description is based on the \citet{baltagi2008econometric}.}
+
+In the interests of simplification, but without loss of generality, let us consider a reduced autoregressive model with no regressors
+
+
+
+\begin{equation} \label{eq:GMMLinear}
+y_{it} = \gamma y_{i,t-1} + u_{it}
+\end{equation}
+
+
+for $i= 1, \dotsc, N$, and $t= 1, \dotsc, T$. The variable $y_{i,t-1}$ is the lagged value of $y_{it}$, and the stochastic term is formed by a two-way error component, such as $u_{it} =\mu_{i} + \nu_{it}$ with $\mu_{i} \sim \text{IDD}(0, \sigma^2_{\mu})$ and $\nu_{it} \sim \text{IDD}(0, \sigma^2_{\nu})$. 
+
+By applying the first difference in \eqref{eq:GMMLinear} to offset out the individual effects, we have
+
+
+\begin{equation} \label{eq:GMM-FD}
+(y_{it} - y_{i,t-1}) = \gamma (y_{i,t-1} - y_{i,t-2}) + (\nu_{it} - \nu_{i,t-1})
+\end{equation}
+
+By $t=3$, \eqref{eq:GMM-FD} can be rewritten as
+
+
+\begin{equation} \label{eq:GMM-FDt3}
+(y_{i3} - y_{i,2}) = \gamma (y_{i,2} - y_{i,1}) + (\nu_{i3} - \nu_{i,2})
+\end{equation}
+
+
+Note that in \eqref{eq:GMM-FDt3}, $y_{i,1}$ can be used as valid instrument, because it is correlated with $(y_{i,2} - y_{i,1})$, but not with $(\nu_{i3} - \nu_{i,2})$ as long as the $\nu_{it}$ are not serially correlated. For $t>3$ this pattern is repeated with the addition of an extra valid instrument for each time period, so that by the end, the matrix of instruments $W_i$ for period $T$ is
+
+
+\begin{equation} \label{eq:GMM-Matrix}
+W_i = \left( \begin{array}{cccc}
+[y_{i1}] & 0 & \cdots & 0 \\
+0 & [y_{i1}, y_{i2}] & 0 & \vdots \\
+\vdots & 0 & \ddots & 0 \\
+0 & \cdots & 0 & [y_{i1}, \dotsc, y_{i,T-2}] \\
+\end{array}\right)
+\end{equation}
+
+Then, the matrix of instruments is $W=[W_1^{\prime}, \dotsc, W_N^{\prime}]^{\prime}$, and it is based on the moment conditions $E(W_i^{\prime} \Delta_{\nu_i})=0$. By pre-multiplying the differenced equation \eqref{eq:GMM-FD} in vector form by $W^{\prime}$, we have
+
+\vspace{-5pt}
+\begin{equation} \label{eq:GMM-Vector}
+W^{\prime} \Delta y = W^{\prime} (\Delta y_{-1})\gamma + W^{\prime} \Delta \nu
+\end{equation}
+
+
+Note that the instrumental procedure still does not account for the differenced error term in equation \eqref{eq:GMM-FD}. As mentioned by \citet{habimana2017flexible}, the differenced MA(1) error term $\Delta \nu_i$ has mean zero and variance $E(\Delta \nu_i \Delta \nu_i^{\prime})= \sigma^2_{\nu} G$, where $\Delta \nu_i^{\prime} = (\nu_{i3} - \nu_{i2}, \dotsc, \nu_{iT} - \nu_{i,T-1})$ and
+
+
+\begin{equation} \label{eq:GMM-Matrix}
+G = \left( \begin{array}{ccccccc}
+2 & -1 & 0 & \cdots & 0 & 0 & 0 \\
+-1 & 2 & -1 & \cdots & 0 & 0 & 0 \\
+0 & -1 & 2 & \cdots & 0 & 0 & 0 \\
+\vdots & \vdots  & \vdots & \ddots & \vdots & \vdots & \vdots \\
+0 & 0  & 0  & \cdots & 2 & -1 & 0 \\
+0 & 0  & 0  & \cdots & -1 & 2 & -1 \\
+0 & 0  & 0  & \cdots & 0 & -1 & 2 \\
+\end{array}\right)
+\end{equation}
+
+
+Therefore, the \citet{arellano1991some} preliminary one-step estimator can be found performing GLS on equation \eqref{eq:GMM-Vector} with the application of the G matrix.
+
+\begin{multline} \label{eq:GMM-AB-OneStep}
+\hat{\gamma}_1 = [(\Delta y_{-1})^{\prime} W(W^{\prime}(I_N \varotimes G)W)^{-1}W^{\prime}(\Delta y_{-1})]^{-1} \\ \times [(\Delta y_{-1})^{\prime} W(W^{\prime}(I_N \varotimes G)W)^{-1}W^{\prime}(\Delta y)]
+\end{multline}
+
+
+Following \citet{hansen1982large}, the optimal GMM estimator of $\gamma$ with ${N\to\infty}$ and $T$ fixed is equivalent to \eqref{eq:GMM-AB-OneStep}, except
+
+\begin{equation} \label{eq:GMM-AB-Hansen}
+W^{\prime}(I_N \varotimes G)W = \sum_{t=1}^N W_i^{\prime} GW_i
+\end{equation}
+
+
+is replaced by  
+
+\begin{equation} \label{eq:GMM-AB-HansenRep}
+V_N = \sum_{t=1}^N W_i^{\prime}(\Delta \nu_i)(\Delta \nu_i)^{\prime}W_i
+\end{equation}
+
+where $\Delta \nu$ is obtained from the preliminary one-step estimator $\hat{\gamma}_1$. Then, to provide more powerful coefficients with a smaller asymptotic variance, I follow the standard practice found in the literature and employ a two-step procedure to improve the efficiency of the GMM estimator \citep{hwang2018should}. The resulting two-step \citet{arellano1991some} estimator is given by:
+
+
+\begin{equation} \label{eq:GMM-AB-TwoStep}
+\hat{\gamma}_2 = [(\Delta y_{-1})^{\prime} W\hat{V}_N^{-1}W^{\prime}(\Delta y_{-1})]^{-1} \times [(\Delta y_{-1})^{\prime} W\hat{V}_N^{-1}W^{\prime}(\Delta y_{-1})]
+\end{equation}
+
+
+
+
+\citet{blundell1998initial} showed that the lagged-level instruments of \citet{arellano1991some} are weakened when $y$ exhibits a substantial persistence and/or when the variance of the unit-specific error component ($\sigma_{\mu}$) increases relatively to the variance of the idiosyncratic error term ($\sigma_{u}$). 
+
+
+%For the proof, they have focused on the case where $\gamma$ is just-identified, namely when $T=3$ there is only one orthogonality condition given by $E(y_{i1} \Delta \nu_{i3})=0$.
+
+
+
+To illustrate this point further, let us consider again the model with a lagged dependent variable from \eqref{eq:GMMLinear}. By $T=3$ the first-stage IV regression can be estimated by running $\Delta y_{i2}$ on $y_{i1}$. For $t=2$, for example, \eqref{eq:GMMLinear} can be re-written simply by subtracting $y_{i1}$ from both sides of the equation.
+
+
+\begin{equation} \label{eq:GMM-Blundell}
+\Delta y_{i2} = (\gamma - 1) y_{i,1} + \mu_{i} + \nu_{i2}
+\end{equation}
+
+
+Because $E=(y_{i1} \mu_{i})>0$, the expression $(\gamma - 1)$ is expected to be biased upwards. Then the probability limit of  $\hat{\gamma}$ is
+
+\begin{equation} \label{eq:GMM-plim}
+plim(\hat{\gamma}) = (\gamma - 1) \frac{k}{\sigma^2_{\mu} / \sigma^2_{u} + 1}
+\end{equation}
+
+
+where $k = \frac{(1-\gamma)^2}{1-\gamma^2}$. Hence, $plim(\hat{\gamma}) \to 0$ if $\gamma\to 1$ and/or $\sigma^2_{\mu} / \sigma^2_{u} \to\infty$.
+
+
+
+
+\long\def\comment#1{}
+\comment{
+
+In order to eliminate this bias, \citet{blundell1998initial} proposed the inclusion of additional restrictions on the initial conditions of the process generating $\gamma$. To get these additional moment conditions, the authors assumed that individual effect is unrelated to the first observable first-difference of the dependent variable, i.e.: $E(u_{it}, \Delta y_{i,t-1})=0$ with $t=4,5,\dotsc, T$ and $E(u_{i3}, \Delta y_{i2})=0$. Therefore, the \citet{blundell1998initial} estimator will be constructed using the following instrumental variable matrix.
+
+
+\begin{equation} \label{eq:GMM-MatrixBB}
+W_i^+ = \left( \begin{array}{cccc}
+W_i & 0 & \cdots & 0 \\
+0 & \Delta y_{i2} & 0 & \vdots \\
+\vdots & 0 & \ddots & 0 \\
+0 & \cdots & 0 & \Delta y_{i,T-1} \\
+\end{array}\right)
+\end{equation} 
+
+
+where $W_i$ is the instrument matrix from the \citet{arellano1991some} estimator.
+
+
+
+%See formal model: http://web.sgh.waw.pl/~jmuck/EoPD/Meeting8.pdf 
+%See formal model: https://www.google.de/url?sa=t&rct=j&q=&esrc=s&source=web&cd=2&cad=rja&uact=8&ved=2ahUKEwibp9r0i9rlAhVCa1AKHREcD9AQFjABegQIARAC&url=https%3A%2F%2Fwww.cesifo-group.de%2Fdms%2Fifodoc%2Fdocs%2Fneueseitences%2FCESLECTURES%2Fces_lectures2014-pdf%2Fces-schurer-lect5%2Fces-schurer-lect3.pdf&usg=AOvVaw3qQl8SH2nWbabJ_O1Yup6W
+
+
+In order to deal with the endogeneity problem in this dynamic panel data model, I follow \citet{habimana2017flexible} and \citet{yakovlev2014state} and apply the \citet{arellano1991some} estimator (AB-Estimator), which is based on general method moments (GMM) and consists of two stages: the unobserved individual effects are eliminated via first-differencing, and then past test scores are employed as instrumental variables for the differenced lagged dependent variable.
+
+Assuming the value-added model in \eqref{eq:value-added} as an autoregressive dynamic panel where $i$ denotes the cross-section dimension and $t$ the time-series dimension, the first difference can be obtained as follows:
+
+
+\begin{multline} \label{eq:FirstDifference}
+\mathbf{Y}_{ijst} - \mathbf{Y}_{ijs,t-1} = \beta (\mathbf{X}_{ijst}^{\prime} - \mathbf{X}_{ijs,t-1}^{\prime}) + \pi (1 - \theta) (\mathbf{Y}_{ijs,t-1} - \mathbf{Y}_{ijs,t-2}) + (\epsilon_{ijst} - \epsilon_{ijs,t-1}) \\ + (DiD + \mu^{s} + \mu^{t})
+\end{multline}
+
+
+The model above eliminated the constant terms, the time-invariant variables, and the individual fixed-effects in the error terms \citep{wooldridge2016introductory}. Then, the next stage aims to construct appropriate instrumental variables for the potentially endogenous lagged dependent variable , $\mathbf{X}_{ijs,t-1}$, to be used for the estimation of $\pi$. 
+
+
+%\footnote{For the case that $T=3$ the estimates for fixed effects (the within transformation) and first difference (the first difference transformation) will provide identical estimators. For $T=2$ and no lagged dependent variable, within and first-difference will also generate the same estimators. (XX, but in \href{http://finance.wharton.upenn.edu/~mrrobert/resources/Teaching/CorpFinPhD/Linear-Panel-Data-Models-Slides.pdf}{slide 42})}
+
+
+Following \citet{habimana2017flexible} and \citet{roodman2009xtabond2} these instrument variables can be found within the dataset insofar as the past test scores are uncorrelated with the current error term. This will be the case, for example, if $\mathbf{Y}_{ijs,t-2}$ is used as instrument for $\mathbf{Y}_{ijs,t-1}$, since it is not correlated with the error term.\footnote{Proof: Assuming, for example, $t=4$ in equation \eqref{eq:FirstDifference}, we note that $\mathbf{Y}_{ijs1}$ and $\mathbf{Y}_{ijs2}$ can be used as instruments for ($\mathbf{Y}_{ijs3} - \mathbf{Y}_{ijs2}$) given that they are not correlated with the error terms ($\epsilon_{ijs4} - \epsilon_{ijs3}$). Thus, the test scores in $t=1$ and $t=2$ are valid instruments for the variation in educational achievements between $t=3$ and $t=4$.} Given that this process is continued by adding an extra valid instrument for each period $t$, the matrix of instruments $Z_i$ can be expressed as: 
+
+
+
+
+\begin{equation} \label{eq:Matrix}
+\mathbf{Z_i} = \left( \begin{array}{cccc}
+[\mathbf{Y}_{ijs1}] & 0 & \cdots & 0 \\
+0 & [\mathbf{Y}_{ijs1}, \mathbf{Y}_{ijs2}] & 0 & \vdots \\
+\vdots & 0 & \ddots & 0 \\
+0 & \cdots & 0 & [\mathbf{Y}_{ijs1}, \dotsc, \mathbf{Y}_{ijs,T-2}] \\
+\end{array}\right) 
+\end{equation}
+
+%\quad \textrm{with} \quad i=1, \dotsc,N
+
+where the rows provide the first difference for $t=2, \dotsc, T$ with $E(\mathbf{Z_i^{\prime}} \bm{\mathit{\Delta}} \epsilon_{i})=0, \enspace \forall \enspace i=1, \dotsc, N$. Given that the instrumental matrix $\mathbf{Z_i}$ provides different number of instruments for each time period, as the estimators will achieve later time periods, more additional instruments will be integrated in the model, improving in this way, the efficiency of the Arellano-Bond estimator \citep{roodman2009xtabond2, baltagi2008econometric, baum2006introduction}.
+
+%\footnote{The instruments are: $\mathbf{y}_{i,1}$ for $t=2$; $\mathbf{y}_{i,1}$ and $\mathbf{y}_{i,2}$ for $t=3$; $\mathbf{y}_{i,1}$, $\mathbf{y}_{i,2}$ and $\mathbf{y}_{i,3}$ for $t=4$; and $\mathbf{y}_{i,1}$, $\mathbf{y}_{i,2}$, $\mathbf{y}_{i,3}$ and $\mathbf{y}_{i,4}$ for $t=5$.}
+
+
+
+
+
+
+
+
+
+
+
+
+\section{2SLS Estimator} \label{2SLS}
+
+% https://docs.google.com/file/d/0BwogTI8d6EEiMjRoUG1EdGJic1k/edit
+% https://www.uio.no/studier/emner/sv/oekonomi/ECON4150/v14/undervisningsmateriale/lecture16_instrumental_variables.pdf
+% https://fmwww.bc.edu/EC-C/F2012/228/EC228.f2012.nn15.pdf
+
+Consider the standard linear regression model
+
+
+\begin{equation} \label{eq:2SLS-1}
+y_{it} = \beta_1 x_{it} + \epsilon_{it} 
+\end{equation}
+
+
+where the subscript $i$ refers to the observation unit (say a student) and $t$ to the time period. This panel model enables us to assume that $E[x_{it} \vert \epsilon_{it}] = 0$. In this case, the exogenous nature of $x_{it}$ allows the use of OLS to obtain consistent estimates in \eqref{eq:2SLS-1}. 
+
+But now, let us assume the formulation of a value-added model as
+
+
+\begin{equation} \label{eq:2SLS-2}
+y_{it} = \beta_1 x_{it} + \beta_2 y_{i,t-1} + \epsilon_{it} 
+\end{equation}
+
+The inclusion of the lagged explanatory variable $y_{i,t-1}$ in \eqref{eq:2SLS-2} violates the Gauss-Markov assumption of strict exogeneity.\footnote{The zero conditional mean assumption requires that the error term in any given period be uncorrelated with the explanatory variables in all time periods \citep{wooldridge2016introductory, wooldridge2001applications}.} Since $y_{i,t-1}$ is endogenous, the error term suffers from autocorrelation and, consequently, traditional empirical estimators for panel models generate biased and inconsistent results \citep[see e.g.][]{jessen2018important, wooldridge2016introductory, roodman2009xtabond2, baltagi2008econometric}. In order to deal with this endogeneity problem, I apply in the paper the \citet{anderson1982formulation} difference and levels estimator for dynamic panel data model. This empirical approach is also called ``2SLS" (zwo-stage least squares) and entails applying instrument variables $z_i$ to replace the endogenous lagged explanatory variable in \eqref{eq:2SLS-2} with predicted values of the dependent variable when regressed on instruments. 
+
+Then, the causal effect of $y_{i,t-1}$ on $y_{i}$ can be estimated in two steps. First, we regress $y_{i,t-1}$ on $z_i$ to find the predicted values of the lagged dependent variable, such as
+
+\begin{equation} \label{eq:2SLS-3}
+\widehat{y}_{i,t-1} = \widehat{\pi}_0 + \widehat{\pi}_1 z_i 
+\end{equation}
+
+with $E[z_i^{\prime} x_{it}] \neq 0$, $E[z_i^{\prime} \epsilon_{it}] = 0$ and $cov[y_{it},z_{it} \vert x_{it}] = 0$. Subsequently, we substitute \eqref{eq:2SLS-3} into \eqref{eq:2SLS-2} as follows
+
+\begin{equation} \label{eq:2SLS-4}
+y_{it} = \beta_1 x_{it} + \beta_2 \widehat{y}_{i,t-1} + \epsilon_{it} 
+\end{equation}
+
+
+The major challenge involved in estimating \eqref{eq:2SLS-4} is to find an instrument variable $z_i$ that meets the conditions described above. In the case of a value-added model, as used in this paper, we have a natural source of instruments, since the academic performance of students is strongly correlated over time. The one caveat that must be raised in this context relates to autocorrelated error terms, since the error term in one period is correlated with the errors in past periods \citep{wooldridge2016introductory}. 
+
+To overcome this problem, I apply first-order estimation and, as suggested by \citet{anderson1982formulation}, I instrument the second-order differencing of test scores ($\Delta^2 y_{it}$) in equation \eqref{eq:2SLS-2}.
+
+Taking second differences from \eqref{eq:2SLS-2} yields
+
+
+\begin{equation} \label{eq:2SLS-5}
+\Delta^2 y_{it} = y_{i,t-1} - y_{i,t-2} = \beta_1 (x_{i,t-1} - x_{i,t-2}) + \beta_2 (y_{i,t-2} - y_{i,t-3}) + (\epsilon_{i,t-1} - \epsilon_{i,t-2})
+\end{equation}
+
+
+Note that $\Delta^2 y_{it}$ is correlated with the test scores in time $t$, but independent on the error term in \eqref{eq:2SLS-1}, thereby ensuring the consistency of the estimates in \eqref{eq:2SLS-4}.
+
+
+
+// Finalising ignore
+}
+
+
+
+
+
+
+
+
+
+\section{Stata Syntaxes} \label{Stata}
+
+For purposes of transparency and replicability of results, this section describes the most important Stata commands used for the empirical investigations in this paper.\footnote{For a complete overview of the commands used in this paper, please see the \href{https://drive.google.com/file/d/1xKeplrOmVOscEzwsdp6Xdv5udli-n8UV/view?usp=sharing}{Stata do-file} on the author’s homepage.}
+
+\begin{lstlisting}[language=R]
+## Merging several datasets from GERES
+Informacoes_Gerais_GERES --> General information about students.
+Questionario_alunos(o5) --> Proxies for learning motivation of students.
+Base_QuestProfessores --> Variables for characteristics of teachers. 
+Questionario_escolas --> Variables for infrastructure of schools.
+Questionario_turma --> Variables for infrastructure of classrooms.
+
+## Selecting the explanatory variables
+global individual q01 q02 o5_q09 o5_q25 o5_q26 mudou nse Renda escomaep escopaip
+global class q111 q100 q110 q108 q106 q105 q104
+global school e029 e025 e024 q027 e023 q036 q038 q037 q039 q044 q045 q046
+global controlvar $individual $class $school
+
+## Normalisation of student test scores
+egen float Zprofic_mat1 = std(profic_mat1), mean(0) std(1)
+egen float Zprofic_por1 = std(profic_por1), mean(0) std(1)
+
+## Creating a panel data
+reshape long IDturma s_rie IDescola rede profic_mat profic_por Zprofic_mat Zprofic_por cad_mat cad_por Onda Inf, i(IDaluno) j(wave)
+
+## Declaring the panel data structure 
+xtset IDaluno wave, yearly
+
+## Creating lagged variables
+generate ZMat_L1 = L1.Zprofic_mat
+generate ZPor_L1 = L1.Zprofic_por
+
+## Creating Difference in difference
+generate time = (wave==5) & !missing(wave) 
+generate treated = (rede==2) & !missing(rede) 
+replace treated=. if rede==4 | rede==.a
+generate DiD = time*treated 
+
+## Estimating OLS Pooled
+regress Zprofic_mat DiD time treated $controlvar, cluster(IDturma)
+regress Zprofic_por DiD time treated $controlvar, cluster(IDturma)
+
+## Estimating FE
+xtreg Zprofic_mat DiD time treated $controlvar i.wave i.IDescola, fe nonest cluster(IDturma)
+xtreg Zprofic_por DiD time treated $controlvar i.wave i.IDescola, fe nonest cluster(IDturma)
+
+## Estimating FE with value-added models
+xtreg Zprofic_mat DiD time treated ZMat_L1 $controlvar2 i.wave i.IDescola, fe nonest cluster(IDturma)
+
+## Estimating FE for the Mechanisms
+oprobit q010 DiD time treated $ControlVar i.s_rie i.ano, cluster(IDescola)
+
+
+
+ 
+
+
+
+\end{lstlisting}
+
+
+
+\long\def\comment#1{}
+\comment{
+
+\begin{lstlisting}[language=R]
+
+## Selecting the explanatory variables
+global controlvar Du_o5_q01 Du_o5_q26 Du_o5_q25 Du_o5_q09 Du_mudou o5_q02_1 o5_q02_2 o5_q02_3 o5_q02_4 o5_q02_5 escomaep_1 escomaep_2 escomaep_3 escomaep_4 escomaep_5 escopaip_1 escopaip_2 escopaip_3 escopaip_4 escopaip_5 Renda_1 Renda_2 Renda_3 Renda_4 Renda_5 Du_q111 educaTeach_1 educaTeach_2 educaTeach_3 educaTeach_4 educaTeach_5 educaTeach_6 q110_1 q110_2 q110_3 q110_4 q110_5 q110_6 q108_1 q108_2 q108_3 q108_4 q108_5 q108_6 q106_1 q106_2 q106_3 q106_4 q106_5 q105_1 q105_2 q105_3 q104_3 q104_1 q104_2 Du_e029 Du_e025 Du_e024 Du_e027 Du_e023 Du_q036 Du_q038 Du_q037 Du_q039 Du_q044 Du_q045 Du_q046
+
+########################################################################
+															 ESTIMATES
+########################################################################
+
+## OLS Pooled
+regress Zprofic_mat DiD time treated $controlvar, vce(cluster IDturma)
+
+## FE-LSDV
+reghdfe Zprofic_mat DiD time treated $controlvar, absorb(wave IDescola IDaluno) vce(cluster IDturma)
+
+## IV-2SLS
+ivreghdfe Zprofic_mat DiD time treated $controlvar (L1.Zprofic_mat=D2.Zprofic_mat), absorb(wave IDescola IDaluno) cluster (IDturma)
+
+## GMM-SYSTEM 
+xi: xtabond2 L(0/2).Zprofic_mat DiD time treated $controlvar i.wave i.IDescola, ///
+gmmstyle(L(1/2).Zprofic_mat, equation(diff) lag(1 2)) ///
+ivstyle(DiD time treated $controlvar i.wave i.IDescola, eq(level)) ///
+cluster(IDturma) twostep small
+
+
+## Estimating GMM-DIFFERENCE 
+xi: xtabond2 L(0/1).Zprofic_mat DiD time treated $controlvar i.wave i.IDescola, gmmstyle(L1.Zprofic_mat) ivstyle(DiD time treated $controlvar i.wave i.IDescola) robust twostep cluster(IDturma) noleveleq
+
+## Estimating GMM-SYSTEM 
+xi: xtabond2 L(0/1).Zprofic_mat DiD time treated $controlvar i.wave i.IDescola, gmmstyle(L1.Zprofic_mat) ivstyle(DiD time treated $controlvar i.wave i.IDescola) robust twostep cluster(IDturma)
+
+\end{lstlisting}
+
+// Finalising ignore
+} 
+
+
+\newpage
+\addcontentsline{toc}{section}{References}
+
+%\section{References}
+\bibliographystyle{apacite}
+\bibliography{References}
+
+\end{document}

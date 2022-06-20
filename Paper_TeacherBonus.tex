@@ -1,0 +1,1694 @@
+\documentclass[a4paper, 12pt]{article}
+\usepackage[top=2cm, bottom=2cm, left=2.5cm, right=2.5cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[colorlinks,citecolor=blue,urlcolor=blue,bookmarks=false, hypertexnames=true]{hyperref} 
+\usepackage{amsmath, amsfonts, amssymb}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{adjustbox}
+\usepackage{indentfirst}
+\usepackage{booktabs}
+\usepackage{tabu}
+\usepackage{scalefnt}
+\usepackage{pdflscape}
+\usepackage{draftwatermark}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{adjustbox}
+\usepackage{natbib} [options]
+\bibliographystyle{apa}
+\usepackage{fixmath}
+\usepackage[utf8]{inputenc}
+\usepackage{xparse}
+\usepackage{varwidth}
+\usepackage{breqn}
+\usepackage{mathtools}
+\usepackage{adjustbox}
+\usepackage{pdflscape,array}
+\usepackage{caption}
+\usepackage[singlelinecheck=false]{caption}
+\usepackage{lscape}
+\usepackage[titletoc]{appendix}
+\usepackage[skip=1pt]{caption}
+\usepackage{algorithm2e}
+\usepackage{float}
+\usepackage{tabularx} 
+\usepackage{threeparttable}
+\usepackage{booktabs}
+\usepackage{longtable}
+\usepackage{rotating}
+\usepackage{threeparttable}% Alternative for Notes below table
+\usepackage{bm}
+\usepackage{ltablex,array}
+\usepackage{ragged2e}
+\usepackage{stmaryrd}
+\usepackage{ltablex,array}
+\usepackage{color,soul}
+\graphicspath{ {figures/} }
+\usepackage[font=bf]{caption}
+\usepackage{blindtext}
+\usepackage{enumitem}   
+\usepackage{upgreek}
+\usepackage{lipsum} 
+
+
+
+\newcommand{\Rho}{\mathrm{P}}
+\newcommand{\Chi}{\mathrm{X}}
+
+\let\ACMmaketitle=\maketitle
+\renewcommand{\maketitle}{\begingroup\let\footnote=\thanks \ACMmaketitle\endgroup}
+
+
+
+
+% *****************************************************************
+% Estout related things
+% *****************************************************************
+\newcommand{\sym}[1]{\rlap{#1}}% Thanks to David Carlisle
+
+\let\estinput=\input% define a new input command so that we can still flatten the document
+
+\newcommand{\estwide}[3]{
+		\vspace{.75ex}{
+			\begin{tabular*}
+			{\textwidth}{@{\hskip\tabcolsep\extracolsep\fill}l*{#2}{#3}}
+			\toprule
+			\estinput{#1}
+			\bottomrule
+			\addlinespace[.75ex]
+			\end{tabular*}
+			}
+		}	
+
+\newcommand{\estauto}[3]{
+		\vspace{.75ex}{
+			\begin{tabular}{l*{#2}{#3}}
+			\toprule
+			\estinput{#1}
+			\bottomrule
+			\addlinespace[.75ex]
+			\end{tabular}
+			}
+		}
+
+% Allow line breaks with \\ in specialcells
+	\newcommand{\specialcell}[2][c]{%
+	\begin{tabular}[#1]{@{}c@{}}#2\end{tabular}}
+
+% *****************************************************************
+% Custom subcaptions
+% *****************************************************************
+% Note/Source/Text after Tables
+\newcommand{\figtext}[1]{
+	\vspace{-1.9ex}
+	\captionsetup{justification=justified,font=footnotesize}
+	\caption*{\hspace{6pt}\hangindent=1.5em #1}
+	}
+\newcommand{\fignote}[1]{\figtext{\emph{Note:~}~#1}}
+
+\newcommand{\figsource}[1]{\figtext{\emph{Source:~}~#1}}
+
+% Add significance note with \starnote
+\newcommand{\starnote}{\figtext{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}}
+
+% *****************************************************************
+% siunitx
+% *****************************************************************
+\usepackage{siunitx} % centering in tables
+	\sisetup{
+		detect-mode,
+		tight-spacing		= true,
+		group-digits		= false ,
+		input-signs		= ,
+		input-symbols		= ( ) [ ] - + *,
+		input-open-uncertainty	= ,
+		input-close-uncertainty	= ,
+		table-align-text-post	= false
+        }
+
+
+
+
+% Note/Source/Text after Tables
+\newcommand{\Figtext}[1]{%
+ \begin{tablenotes}[para,flushleft]
+ \hspace{6pt}
+ \hangindent=1.75em
+ #1
+ \end{tablenotes}
+}
+
+\newcommand{\Fignote}[1]{\Figtext{\emph{Note:~}~#1}}
+\newcommand{\Figsource}[1]{\Figtext{\emph{Source:~}~#1}}
+\newcommand{\Starnote}{\Figtext{* p < 0.1, ** p < 0.05, *** p < 0.01. Standard errors in parentheses.}}% Add significance note with \starnote
+\renewcommand\figurename{Fig.}
+\captionsetup{labelsep = period}
+
+
+  
+
+\captionsetup[table]{position=top,skip=7pt} 
+\DeclareMathOperator{\Tr}{Tr}         
+\captionsetup[figure]{
+    position=above,
+}
+
+
+
+\newcommand*{\thisdraft}{This version: November 23, 2020} % define command
+\newcommand*{\firstdraft}{First version: September 18, 2021}  % define command
+\newcommand*{\thirddraft}{This draft will be updated regularly. Click \href{http://tiny.cc/11b5tz}{here} for the last version.}  % define command
+
+
+\title{Does a productivity bonus pay off? \\ \normalsize The effects of teacher-incentive pay on student achievement in Brazilian schools}
+
+%\thanks{Acknowledgments: The author is grateful to Alicia Bonamino from \href{https://laedpucrio.wordpress.com/}{LAEd/PUC-Rio} for providing me with the GERES database, and to the Friedrich Ebert Foundation for the financial support.}}
+
+%\begin{document}
+%\maketitle
+
+%\long\def\comment#1{}
+%\comment{
+
+
+\author{Tharcisio Leone\thanks{German Institute for Global and Area Studies (GIGA). Neuer
+Jungfernstieg 21, 20354 Hamburg. Email: \url{tharcisio.leone@giga-hamburg.de}. Website: \url{https://tharcisio-leone.com/}.} \\ \normalsize German Institute for Global and Area Studies \vspace{-6pt}\\ \normalsize $\&$ Free University of Berlin} 
+
+\date{\firstdraft \\ \thisdraft \\ \vspace{20pt} \thirddraft}
+%\date{\today\footnote{This version has been created exclusively for the Brown Bag Seminar at the German Institute of Global and Area Studies. Incomplete draft, please do not quote or circulate.}} 
+\SetWatermarkText{Preprint not \\ peer reviewed}
+\SetWatermarkScale{5}
+
+
+
+
+
+\makeatletter
+\renewcommand*\l@section{\@dottedtocline{1}{1.5em}{2.3em}}
+\makeatother
+
+
+
+
+\begin{document}
+\maketitle
+
+
+
+
+
+
+
+\begin{abstract}
+This article uses a quasi-experimental design and longitudinal data on academic achievement to evaluate ex-post the (short-term) impact of an incentive-pay program for school staff on student and teacher performance in Brazil. I apply a difference-in-difference approach comparing students and teachers in state schools that are subject to the teacher bonus with their peers from municipal schools without the bonus. The results indicate that the implementation of the performance-based bonuses in the state schools of São Paulo improved some teaching practices in classroom, but it had no statistically significant impact on the performance of students by Math and Portuguese. In the first year of the bonus program, the test scores in treatment schools were slightly higher than those in comparison schools. But none of this variation was statistically significant. 
+
+%The results from alternative specifications and placebo tests have supported this finding. 
+
+%(122 words) 
+
+\end{abstract}
+
+
+
+\hfill \break 
+\thispagestyle{empty}
+Keywords: Evaluation, teacher bonus, pay-for-performance incentives, student achievement, value-added models, panel data. 
+
+\hfill \break 
+JEL classification: D04, I28, M52, J33.
+
+
+
+
+
+\long\def\comment#1{}
+\comment{
+
+\newpage
+\renewcommand*\listfigurename{Figures}
+\renewcommand*\listtablename{Tables}
+
+{
+  \hypersetup{linkcolor=black}
+  \tableofcontents
+  \listoftables
+  \listoffigures
+}
+
+// Finalising ignore
+} 
+
+
+
+\newpage
+
+
+\section{Introduction} \label{Paper3-Introduction}
+
+Currently, there is a broad consensus among the scientific community that teacher quality plays a critical role in promoting student academic achievement \citep[see e.g.][]{canales2018teacher, dee2015incentives, harris2011teacher}. For this reason, reforms meant to change the ways teacher are compensated have flourished around the world \citep{yuan2013incentive}. In this context, the productivity bonus has often been suggested as a possible mechanism to improve professional engagement in schools and, consequently, the performance of students \citep{loyalka2019pay, barrera2017teacher, muralidharan2011teacher}. 
+
+But, the rapid expansion of these pay for performance (PFP) programs for teachers remains extremely controversial in part because of mixed evidence on their impact on academic achievement, which can be found in both developing and industrialized countries \citep{britton2016teacher}.\footnote{Making a review of the US and international evidence on the effectiveness of teacher pay on student academic achieviements, \citet{hanushek2003failure} for example, reports that only 20 percent of 119 estimates found a positive effect of teacher wages on school performance.} This paper contributes to this increasing academic debate, providing empirical evidence from Brazil on the effectiveness of teacher bonuses. Its goal is to examine whether the PFP program implemented in the state of São Paulo in 2008 has led to improved of student and teacher performance. This bonus is a group-based incentive, rewarding school staffs for the achievement of pre-defined targets related to the improvement of education quality, measured by student performance and passing rate by school level.
+
+
+
+
+Until 15 years ago, teachers in Brazil were compensated exclusively based on tightly structured rules based only their own educational level and professional experience, instead of job productivity. However, since the turn of the 21st century there has been a growing interest in flexible payment systems linking remuneration and performance. Almost half of the 27 Brazilian states have already implemented PFP systems for educational employees \citep{scorzafave2016efeito}.\footnote{The Brazilian states with bonus programs for educational employees are: Acre, Amazonas, Ceará, Espírito Santo, Goiás, Minas Gerais, Paraíba, Pernambuco, Rio de Janeiro, Roraima, São Paulo, Sergipe and Tocantins \citep{scorzafave2016efeito}.} 
+
+
+In spite of this fast growth, rigorous empirical evaluations of the impact of the Brazilian bonus programs on students’ performance remain extremely limited.\footnote{To the best of my knowledge, only \citet{lepine2016teacher, oshiro2015impacto} presented empirical evidence of PFP programs on student achievements for Brazil (see section \ref{Paper3-Literature}).} This reduced number of empirical evaluations of the teacher bonus in Brazil has a great deal to do with the data limitation, since that no assessment process was implemented together with the bonus programs \citep{bresolin2014analise}. To address this data restriction, this paper will conduct an ex-post impact evaluation based on a quasi-experimental design. To that end, the analysis focuses on schools within a single city in Brazil to create, as far as possible, similar treatment and comparison groups in terms of baseline (pre-intervention) characteristics.
+
+
+In comparison to the existing literature of bonus impact in Brazil \citep[see][]{lepine2016teacher, oshiro2015impacto}, this paper presents two main contributions: First, it uses data from nongovernmental performance tests to address the problem of “teaching to the test” (see discussion in section \ref{Paper3-Literature}); and second, it applies panel data at student level to control the investigation for individual fixed effects. The panel data stems from the Longitudinal Study of Quality and Equity in Brazilian Elementary Education (GERES), which was the first, and at the moment the only, longitudinal data study in education concluded with success in Brazil \citep{brooke2011geres}. The GERES project tracked academic outcomes of 21,529 students enrolled in more than 300 schools during their first four years of primary education, recording the performance of these pupils in five different waves in the subjects Portuguese language (reading) and Math. 
+
+
+
+The GERES was a project conducted independently of the government by a group of Brazilian universities, and its proficiency tests were not used to calculate the teacher bonus.\footnote{The calculation of the teacher bonus in the state of São Paulo is based on the student test scores on the government standardized exam known as SARESP (Evaluation System of Learning Achievement in the State of São Paulo). See appendix for more information on SARESP.} Since GERES collected data both in schools where a teacher-bonus program had been implemented (state education network) and in schools outside the program (municipal and private network), this paper utilizes a quasi-experimental setting in which the introduction of the incentive pay was treated for a sub-group of (state) schools.
+
+%\footnote{The calculation of the teacher bonus in the state of São Paulo is based on the student test scores on the government standardized exam known as SARESP. See appendix for more information on SARESP, and section \ref{Paper3-Literature} of this paper for a discussion of how teachers’ manipulations can bias the empirical investigation of teacher bonuses when the same standardized tests are used to calculate bonuses and  to evaluate their impact.}
+
+%In addition, the GERES panel data structure - with test scores before and after the implementation of the teacher bonus - permitted me to take in consideration the previous knowledge or ability of students for the accounting of their current performance.
+
+
+%Around the world, the scientific community has encountered substantial difficulty in gathering reliable data to assess the impact of incentive-pay programs for teachers, since the most of these programs have been implemented in ways that hinder the creation of statistically valid comparison groups \citep{muralidharan2011teacher}. 
+
+
+%For the case of Brazil, this limitation is particularly perceptible since no empirical evaluation began in advance of the implementation of the teacher-bonus programs, thus rendering impossible the use of randomized control trials (RCTs) to investigate their impact. To address this issue, this paper will conduct an ex-post impact evaluation based on a quasi-experimental design. To that end, the analysis focuses on schools within a single city in Brazil in order to create, as far as possible, similar treatment and comparison groups in terms of baseline (pre-intervention) characteristics.
+
+
+This paper will evaluate the short-term impact of teacher bonuses on students from the city of Campinas in the state of São Paulo. In October 2007, São Paulo has launched the cornerstone for a merit pay program in which all employees in the (state) educational system are eligible for bonuses of up to 20 percent of their annual salary. The determining factor for the calculation of the additional pay is the performance improvement of students in the given school. Given that Brazilian law allows state, municipal and private schools to operate in the same city, the implementation of teacher bonuses exclusively within the state education network created a perfect scenario for investigation. In this paper, the impact evaluation of the teacher bonus will be carried out using the students enrolled in state schools as treatment group, whereby the pupils from municipal schools are used as a reference point.\footnote{As Table \ref{table:DescStat} shows, the (treatment and comparison) groups present very similar indicators concerning student performance, school infrastructure and staff characteristics.}
+
+
+The main empirical findings of this study indicated that the implementation of the performance based bonuses to teachers in state schools of São Paulo had no statistically significant (short-term) impact on the performance of students by Math and Portuguese. In the first year of the bonus, the test scores in treatment (state) schools were slightly higher than those in comparison (municipal) schools ($0.011$ standard deviation for Portuguese and $0.074$ SD for Math). But none of this variation was statistically significant. %The results from alternative specifications and placebo tests have also supported these main findings.  
+
+%The results from alternative specifications, placebo tests and robustness checks have also supported these main findings.  
+
+
+%The main empirical findings of this study have confirmed the importance of the control for the prior student achievement when trying to assess the degree to which teacher bonuses affect pupils’ academic outcomes. While fixed-effects models have indicated that the implementation of teacher bonuses has led to a statistically significant positive impact on student performance, dynamic models have not corroborated that. By controlling the model for the prior achievement of students, the impact of teacher bonuses decreases and becomes statistically insignificant for both subjects under review (Math and Portuguese). The results of robustness checks and placebo tests have also supported these main findings.
+
+
+
+Besides the impact on student test scores, this paper also examines the effects of bonus on the teaching activities in classroom. Using data from the teacher questionnaire \textemdash which collected the characteristics of the educators involved into the schooling of GERES students over time \textemdash the current study investigated whether the bonus program changed the teaching practices related to team work, use of supporting material, and learning activities by Portuguese and Math. From a total of the 37 teaching practices investigated in this paper, I found a statistically significant (positive) impact of bonus on 8 learning activities. After the implementation of the bonus program, the teachers in states schools of São Paulo require more frequently from their students activities related to (i) reading aloud of stories, (ii) silent reading of texts from textbook, (iii) dictation, (iv) writing of texts, (v) memorization of Math concepts found in newspapers and magazines, (vi) situations to improve the calculation speed, (vii) problem-solving activities for calculation and algorithms, and (viii) Math situations related to day-to-day life.
+
+
+The remainder of the paper is structured as follows. Section \ref{Paper3-Literature} reviews the literature on teacher bonus. The next section provides background information on the teacher bonus program of the state of São Paulo. Section \ref{Paper3-Data} outlines the data and research design used for the estimates, and section \ref{Paper3-Methodology} describes the estimation strategy. The subsequent two sections report the impact of bonus on student performance, presenting the baseline results (section \ref{Paper3-Results}) and alternative specifications (section \ref{Paper3-Alternative}). Finally, section \ref{Paper3-Mechanisms} reports the effects of bonus on teaching practices, and section \ref{Paper3-Conclusion} concludes.\footnote{This paper is supplemented by an \hyperref[SuppMaterial]{supplemental file} with further valuable data related to the education system of São Paulo state, GERES database, additional tables and figures.}
+
+%formal description of the GMM estimators
+%\footnote{This paper is supplemented by an \href{http://tiny.cc/p8heoz}{online supplemental file} with further valuable data (see \hyperref[SuppMaterial]{list} in section \ref{SuppMaterial}).}
+
+
+%\textcolor{red}{\footnotesize The most closely related study to our own is Goodman and Turner (2013). They use variation in the number of math and English teachers in each school in a school-level randomized teacher incentive pay experiment in New York City to examine whether the effect of the incentives vary with group size.\citep{imberman2015incentive}}
+
+%See \citet{glewwe2006schools} (pg.999) for examples:
+
+%Second, and most importantly, this paper proofs alternative methods of measuring the bonus impact as a function of student achievement. To this end, I use the theoretical framework proposed by \citet{andrabi2009value} to develop an innovative approach that allows for the integration of lagged student achievements into the research on the teacher-bonus program. While some authors, such as \citet{britton2016teacher, imberman2015incentive, muralidharan2011teacher}, applied fixed-effect models for similar estimates, I explore the panel nature of the GERES database and suggest the use of a dynamic panel structure for the investigation of the bonus impact. Then, with the inclusion of lagged achievement into the educational production function, I will control the empirical model for the students’ previous knowledge and ability, thereby increasing the reliability of the findings \citep{andrabi2009value, goldhader1999three}.\footnote{The use of lagged value-added models and instrument variables has gained increasing importance for the estimation of dynamic panel structures relating to education function in order to address key empirical challenges of this analysis \citep[see e.g.][]{andrabi2009value, roodman2009xtabond2}. However, to the best of my knowledge, this empirical strategy has not yet been applied to the investigation of performance-pay systems for teachers.}
+
+
+
+\section{Literature Review} \label{Paper3-Literature}
+
+
+
+
+
+The impact of teacher merit pay programs on the student performance remains a central concern for the public sector worldwide, since the existing literature on this topic presents mixed empirical evidence. While some studies suggest that the implementation of teacher bonuses had a positive impact on the performance of students \citep[see e.g.][]{loyalka2019pay, britton2016teacher, dee2015incentives, imberman2015incentive, duflo2012incentives, lavy2009performance, muralidharan2011teacher}, other papers could not confirm this association \citep[see e.g.][]{barrera2017teacher, behrman2015aligning, yuan2013incentive, springer2012team, glewwe2010teacher}.
+
+
+Despite the increasing interest in the last years, available rigorous evidence on the impact of teacher merit programs in developing countries continue to be underrepresented in the literature. Exceptions to this limitation are the works of \citet{loyalka2019pay} for China, \citet{barrera2017teacher} for Pakistan, \citet{behrman2015aligning} for Mexico, \citet{duflo2012incentives} and \citet{muralidharan2011teacher} for India and \citet{glewwe2010teacher} for Kenya. The evidence for Brazil are also rarely reported. To the best of my knowledge, all the empirical investigations relating to this topic are limited to the studies of \citet{lepine2016teacher} and \citet{oshiro2015impacto}, which have examined the teachers bonus program of the state of São Paulo using data from the (federal-run) standardized performance test called Brazil Exam (\textit{Prova Brasil}). %which is not directly related to the incentive scheme.
+
+Applying databases from 2007, 2009, 2011, 2013, and 2015; and a difference-in-difference (DiD) approach in which the students from municipal schools of São Paulo (and from state schools of other states) were the comparison group, \citet{lepine2016teacher} finds that the bonus program had positive effects on the performance of 5th grade students up to 7 years after its implementation. The estimated coefficients report an improvement in math scores ranging between 0.13 and 0.29 standard deviation depending on the counter-factual considered. For Portuguese the gain are more modest, ranging from 0.06 to 0.18 standard deviation. By contrast, for the 9th-grade students the coefficients are close to zero and often statistically insignificant for both Math and Portuguese. A similar study by \citet{oshiro2015impacto} also show mixed results assessing the impact of teacher bonus through propensity score matching and DiD. According to the authors, the bonus had positive and significant effects on Math (0,42 standard deviation) and Portuguese (0,14 standard deviation) for the fourth grade students between 2007 and 2009, but there is a sharp decay in these effects in 2011. Like \citet{lepine2016teacher}, \citet{oshiro2015impacto} also find no (positive) impact of the bonus program on the academic achievement of students from the last grade of elementary school.\footnote{Another study worth mentioning is \citet{scorzafave2016efeito} which investigated the impact of bonus programs on the proficiency inequality of students from the elementary schools. Using data from the Brazil Exam, the paper confirmed an increased in proficiency inequality in schools that adopted the teacher bonus policies.}
+
+
+A feasible explanation for the mixed findings in the literature is the diversity of empirical strategies applied to estimate the effectiveness of merit pay programs on education achievements. While some studies \textemdash like that one \textemdash have explored the effects of bonus using independent performance tests \citep[see e.g.][]{imberman2015incentive, duflo2012incentives, glewwe2010teacher}, other have applied data from the official test linked to the program \citep[see e.g.][]{barrera2017teacher, britton2016teacher, dee2015incentives, behrman2015aligning}. By linking the bonus payment on the performance of students by government-run tests, so the critics, school staff receives an incentive to “teaching to the test.” This practice aims at narrowing the curriculum in order to artificially increase the performance of students per the government-run tests used for bonus calculations \citep{podgursky2007teacher}. In Brazil, for example, a recent study by \citet{leone2021striving} shown that the “teaching to the test” became a common practice in schools with the implementation of government-run performace tests for students (SARESP). Conducting a survey among teachers employed in state schools of São Paulo, the author found that a considerable number of respondents use the prior SARESP exercises as preparation for the test, apply mock tests for the SARESP, and give extra preparation to the students in the weeks before the test.
+
+%and focus the teaching on Portuguese and Math skills, because the official tests evaluate only these two subjects among students.
+
+%\citet{glewwe2010teacher}, for example, applies a randomized controlled trial in Kenyan primary schools to investigate the effects of teacher bonuses on the performance of students, and confirms that the program has led to an increase in test scores on the official exams associated with teacher incentives \textemdash but no performance gain was found by independent proficiency tests using different evaluation formats. A key finding of the study is that teacher attendance and homework assignment remained unaffected in bonus-program schools, but the preparation sessions for the government-run proficiency tests increased. 
+
+
+
+
+
+
+
+
+
+Another reason for the mixed evidence is the structure of the data applied for the impact evaluation. Empirical studies applying cross-sectional data \textemdash such as the Brazil Exam used by \citet{lepine2016teacher} and \citet{oshiro2015impacto} \textemdash are not above criticism because the data structure does not enable the control for student fixed effects \citep{loeb2000examining}. Although the Brazilian students undertake the (government-run) performance tests in several years of their schooling life, for data privacy reasons, the competent authorities have never provided to the research community the individual student ID number, which would allow us to track the test scores of pupils over time \citep{brooke2011geres}. 
+
+
+%In the case of Brazil, for example, all available studies investigating the impact of teacher bonus on student learning outcomes \citep[see][]{lepine2016teacher, oshiro2015impacto} applied data from the Brazil Exam in which the (average) performance of schools is investigated over time.
+
+
+
+
+Given this methodological limitation of cross-sectional data, the vast majority of articles in top-tier peer-reviewed journals uses panel data for the impact evaluation, in which the academic performance of students is collected before and after the implementation of the PFP program \citep[see e.g.][]{loyalka2019pay,barrera2017teacher, britton2016teacher, behrman2015aligning, dee2015incentives, imberman2015incentive, yuan2013incentive, lavy2009performance}.
+
+
+
+%The commonly acknowledged problem by the estimation of bonus impact lies on the lack of control for individual ability of students \citep[see][]{andrabi2009value}. for many individual-specific heterogeneity.
+
+In this context, randomized controlled trial (RCT) experiments have earned a well-respected reputation to determine the causal effect of teacher bonus programs. When students are randomly assigned to treatment and control groups, researches make sure that the possible changes in student performance by the treatment group will have nothing to do with any individual characteristics, but only reflect the impact of the bonus \citep{gertler2016impact}. Among the randomized experiments investigating the impact of performance pay for teachers, we can highlight the empirical studies of \citet{loyalka2019pay} for China, \citet{barrera2017teacher} for Pakistan, \citet{muralidharan2011teacher} for India, \citet{glewwe2010teacher} for Kenya and \citet{fryer2013teacher, goodman2013design, springer2012team} for the US.
+
+
+
+
+
+
+
+
+
+%\footnote{For the sake of transparency, it is worth mentioning that empirical studies using RCT experiments can even present estimation bias when the relevant actors involved in the learning process of children (families, teachers and principals) are not randomly assigned to schools and classrooms \citep{hanushek2012distribution}.}
+
+%However, the availability of panel data with multiple waves of student performance over time makes possible for other studies to account for this heterogeneity \citep{hanushek2012distribution}. \citet{britton2016teacher, imberman2015incentive, muralidharan2011teacher} are just some examples in which value-added models have been employed in the empirical strategy in order to capture the contributions of historical inputs for the current student ability.
+
+Despite the increasing use of RCTs for the evaluation impact of teacher bonus, it is important to underline that the application of those studies presupposes that the random assignment occurs before the public intervention \citep{petrou2011economic}, what in many situations \textemdash as in the case of the Brazilian bonus programs \textemdash is not possible, since the intervention has already happened. Then, in such cases, the use of quasi-experimental design with a difference-in-difference approach is a way of getting around the non-random assignment, since the ``common trends'' assumption assumes that in absence of treatment (the implementation of the bonus) the difference in student test scores between control and treatment groups would be constant over time \citep{deschenes2018quasi}.
+
+
+%the time evolution of the student test scores in the comparison group provides a valid counterfactual for the time evolution of test scores in the treatment group absent the treatment \citep{deschenes2018quasi}.
+
+
+Therefore, the methodology employed in this paper is closely related to the studies of \citet{britton2016teacher} for England, \citet{imberman2015incentive} for the US and \citet{lavy2009performance} for Israel, which apply a non-random sorting of students to examine the effects of teacher pay programs on school performance. As I will do in this paper, these authors also use panel data and value-added models in order to exclude the effects of the (initial) student ability from the evaluation of the bonus. Including the lagged student achievement as control variable into the investigation, the studies made sure that the empirical model will estimate the impact of bonus as a function of student test score growth and not individual ability in general \citep{hanushek2012distribution}.
+
+
+
+In addition to the investigation of the impact of teacher bonus on the academic performance of students, this paper is also interested in estimating the effects of bonus on teaching behavior. This extra investigation is motivated by the lack of evidence showing the mechanisms through which PFP programs can improve academic achievements of students \citep{nyberg2018collective, hanushek2011overview}. In theory, the change in teaching practices is a necessary condition for a causal relationship between these two outcomes \citep{jones2013teacher}. Since teacher engagement in classroom is a crucial element for students’ academic development \citep{woessmann2011cross}, the monetary incentive from merit pay programs should provide the educators with an additional motivation to put more effort into the instruction process \citep{gneezy2011and}. 
+
+%Then, the present study is conducted in response to this need of expanding the literature, and will also investigate whether the bonus program has led to changes in teacher behavior in Brazilian schools. 
+
+%There is in fact evidence suggesting that PFP programs in education system improve teacher behavior. \citet{muralidharan2011teacher}, for example, confirm that staff employed in schools with bonus programs in India increase their teaching efforts by providing extra classes after school, giving additional homework, and providing students with more practice tests. \citet{lavy2009performance} finds similar results for Israel. According to the author, the monetary incentives for teachers improved the student performance because it generated positive changes in teaching methods, enhancing after-school teaching, and increasing responsiveness to students’ needs. To the best of my knowledge, \citet{bresolin2014analise} is the only author who has investigated the changes into teachers’ pedagogic practices due to the implementation of bonus programs in Brazil. Using data from the \textit{Prova Brasil} (Brazil Test) questionnaire for the 27 Brazilian (federal) states and a difference-in-difference approach comparing staff employed in states with and without bonus, the author reports that teachers in those states with the incentive program are more likely to correct students’ homework.
+
+
+%An alternative explanation for the mixed evidence in the literature is that some empirical strategies used to identify the bonus impact miss some important features. 
+
+
+
+
+
+
+
+
+
+
+\section{The Teacher-Bonus Program} \label{Paper3-Bonus}
+
+
+Over the last few decades, the PFP programs have gained increased importance as a tool for quality improvement in the Brazilian education system. In 2007 Amazonas became the first state to implement a bonus system in order to motivate teachers to increase their efforts in teaching activities. In subsequent years, this example was followed by many other states \citep{scorzafave2016efeito}. Consequently, to date 13 of the 27 Brazilian states have a performance-pay system for school employees. However, due to the administrative autonomy guaranteed by the Constitution of 1988, each Brazilian state has full independence to implement and consolidate its educational-legal framework, which has had the effect of creating divergent legal bases for the calculation of teacher premiums.\footnote{See \hyperref[SuppMaterial]{supplemental file} of this paper for a more detailed description of the Brazilian education system.}
+
+
+The PFP program for teachers in the state of São Paulo, which will be the object of this study, started in the 2008 academic year.\footnote{The teacher-incentive system in São Paulo was introduced by \href{http://tiny.cc/4opsaz}{Law No. 1,017} of 15 October 2007, and supplemented by \href{http://tiny.cc/ympsaz}{Decree No. 52,719} of 14 February 2008 and \href{http://tiny.cc/0wpsaz}{Law No. 1,078} of 17 December 2008. See Figure \ref{fig:Cronograma-GERES} in the appendix for a chronological presentation of the most important issues relating to the implementation of the teacher bonus in the state of São Paulo} In April 2009, the state paid the bonus for the first time, distributing $590.6$ million Brazilian reais (BRL) \textemdash which was equivalent to approximately USD 260 million at that time rate \textemdash among 195,504 educational professionals, from them around $82$ percent were teachers. This merit pay program is a yearly financial bonus paid to all employees of the São Paulo State Secretariat of Education (SEE-SP) according to the achievement of targets relating to the Education Development Index of the State of São Paulo (IDESP), which establishes individual targets for each school annually \citep{bresolin2018avaliaccao}.\footnote{The SEE-SP is the government agency responsible for operating all state-run schools in the state of São Paulo, and it manages the largest education system in Brazil, with more than 5.4 thousand schools and 3.7 million students, corresponding to $36$ percent of the total student population in the country \citep{Sinopse2018}.} The IDESP is a synthetic indicator of education quality calculated per school on the basis of two components: student performance and academic passing rate. While the latter refers to the share of students who have completed all grades ``on time,'' performance is assessed using scores on the SARESP, which is an annual (compulsory) standardized test of Mathematics and Portuguese for all students in grades $3$, $5$, $7$, $9$ of primary school, as well as those in the final year of secondary education \citep{oshiro2015impacto}.\footnote{The \hyperref[SuppMaterial]{supplemental file} of this paper provides a more comprehensive description of IDESP, presenting its formal composition and calculation methodology.}
+
+
+
+%\footnote{The on-line Appendix of this paper provides a more comprehensive description of the standardized test SARESP and the quality index IDESP.}
+
+
+According to the definition of education quality used by the SSE-SP, a good school is one in which two objectives are connected: first, that the students learn the skills and competencies required for their respective classes and, second, that this learning process takes place in the expected time. For this reason, IDESP combines the student performance and academic passing rate in a balanced manner, creating an important trade-off for the schools: Schools have a strong incentive to hold back the students with low proficiency levels in order to avoid a reduction in the schools’ average SARESP scores. But at the same time, the retention of pupils in the same grade will negatively affect the academic passing rate, thereby undermining the overall IDESP index \citep{SEESP2018}.
+
+%Given that the management of the IDESP is taken at school level, all employees based in the school are remunerated by the bonus program at the same rate. Then, considering the IDESP reached in the year 2017, the targets for the 2008 school year could be established: The schools that achieved $100\%$ of the target, have received $100\%$ of the bonus, which was equivalent to an additional payment of $20\%$ of the annual salary of the employees. The schools with $50\%$ of goals' achievement, have earned $50\%$ of the bonus ($10\%$ of the annual salary), and so on. Schools that exceed their target, could receive a bonus up to $120\%$.
+
+The distribution of bonuses is linked to the IDESP improvement that takes place during the period considered (school year), and the targets for the following year are established based on IDESP reached in the current year. Since the management of IDESP is done individually per school, the teacher bonus is a group-based incentive at the school level, meaning that there is no reward calculated individually per worker, but all employees based in the school are remunerated at the same (percentage) rate. Therefore, the total value of bonus payments received by school staff members will be proportionate to the achievement of school's goals. Schools that achieve 100 percent of the target will receive 100 percent of the bonus, equivalent to an additional payment of 20 percent of the annual salary of the employees. The schools with 50 percent goal achievement will earn 50 percent of the bonus (10 percent of the annual salary), and so on. Schools that exceed their target can receive a bonus up to 120 percent, and no penalty will be applied for schools in which IDESP performance declines from the prior year or remains constant.\footnote{Besides student performance and passing rate, the SEE-SP considers two additional components for the management of the target system: teacher attendance and the socioeconomic status of the school. See \hyperref[SuppMaterial]{supplemental file} of this paper for a formal presentation of the mathematical method behind the Indicator for Realisation of Targets, the index used to calculate the teacher bonus.}
+
+%with relative weights of respectively $35\%$, $35\%$, $15\%$ and $15\%$ on the final bonus payment
+
+
+
+
+%The SARESP is an compulsory standardized test for all students in grades $1^{st}$, $2^{nd}$, $4^{th}$, $6^{th}$, $8^{th}$ of primary school, as well as in the final year of secondary education (k-12). This test is carried out annually with the object to provide a diagnostic at student learning in math and Portuguese language. 
+
+
+
+
+
+%\subsection{Campinas as Experimental Design}
+
+
+
+
+\section{Data, Sample and Research Design} \label{Paper3-Data}
+
+
+\subsection{Data and sample} \label{Sample}
+
+The empirical analyses of this paper are based on the database from GERES. Starting in 2005, this project followed a group of 21,529 students enrolled in 309 (municipal, state and private) schools throughout their first four years of primary education, creating panel data of student performance. GERES was a public-private-funded project developed and implemented by a consortium of six Brazilian universities with the goal of monitoring the proficiency of students in Math and Portuguese (reading) over time in five Brazilian municipalities: Belo Horizonte, Campinas, Campo Grande, Rio de Janeiro and Salvador.\footnote{The GERES database is not publicly accessible. Permission requests should be submitted to the members of the project via \href{https://laedpucrio.wordpress.com/projetos/o-projeto-geres/}{GERES-homepage}.}
+
+%These cities were selected to the sample, because they are the host cities of the universities involved in the GERES project.
+
+
+%Financial constraints led to the limitation of the sample to only few municipalities, whereas the choice of these five  was arbitrary and taken for reasons of simplification and logistic efficiency, given that the universities involved in the GERES project are located in these cities. 
+
+After deciding which cities should be involved in the project, sampling techniques were employed to guarantee the representativeness of the school’s selection. First, a probabilistic sample of schools was determined for each municipality using the 2003 school census as a base. Then, within the selected schools, all the students enrolled in the first year of primary education were selected to participate in the project and monitored throughout their first four years of schooling (2005–2008).
+
+
+The GERES sample covered ten percent of all schools located in the selected cities, but \textemdash in order to ensure transparency \textemdash some important caveats of the sample selection need to be acknowledged. From the complete list of schools in the cities, the GERES excluded from the sample all schools located in rural areas, schools with only multiple-grades classes in the first grade, schools with first-grade pupils attending exclusively evening classes, as well as, public schools with fewer than twenty students enrolled in the first year of compulsory education, and private schools with fewer than ten students in the first grade or with more than three classes destined to the students from the first grade.\footnote{Multiple-grades classes are classes in which the students from different grades (and ages) study together in a same classroom under the teaching of the same teacher. Evening classes are classes held in the evenings (starting from 4 p.m.), normally for adults. Please see \hyperref[SuppMaterial]{supplemental file} for more detailed information on the sample construction.}
+
+
+Figure \ref{fig:Cronograma-GERES} presents the timing of data collection for the GERES waves, the academic years and the implementation schedule for the bonus program in the state of São Paulo. Note that the (so-called) GERES students were evaluated five times in terms of Portuguese and Math standardized academic tests.\footnote{External students who migrated to GERES classes were included into the sample and participated in the subsequent academic tests of the project, while GERES students who left the participating schools became missing values for the subsequent tests. Students who repeated one or more school years continued to participate in the tests regardless of their achievement.} Because the school calendar in Brazil starts in late February and ends in November, the first GERES wave was conducted in March 2005 in order to measure the skills and abilities of children at the beginning of schooling; thereafter, the tests were carried out at the end of the academic years \textemdash respectively in November 2005, 2006, 2007 and 2008 \textemdash in order to calculate the level of learning achieved in the respective period.
+
+
+%\footnote{In this paper, $T=5$, given that in 2005 the students taken the test two times: at the start of the academic year in order to measure the level of skills and abilities at the beginning of schooling, and at the end of the year for the measure of the learning achievements.} 
+
+%Table \ref{tab:SampleSize} displays the the sample size of each GERES stratum.
+
+
+Aside from taking the standardized academic tests, the students were asked to provide comprehensive information on themselves (gender, race, learning motivation, family structure) and their families. A second version of the questionnaire on family background was filled in by the parents of the children focused on the socioeconomic status of the family, presenting data on income, educational level and professional activity of parents, as well as the existence of durable goods in the household, such as car, refrigerator, TV, computer, and so on.
+
+In addition, GERES collected extensive data from the school principals and teachers. The last dataset covered all teachers involved in the project and included items on their professional qualifications, teaching methods, personal behavior, and expectations of student performance. In the same way, the school principals were invited to answer questions regarding to their education and work experience, but also items that may moderate the performance of students, such as, infrastructure of the schools, the selective process for staff, and the professional culture at the school.\footnote{See \hyperref[SuppMaterial]{supplemental file} of this paper for more information about the GERES database, or \citet{brooke2011geres} for the complete description of the methodology applied in GERES, or \citet{franco2008estudo} for a summarized overview.}
+
+
+Because Campinas is the only city from the GERES sample located in the state of São Paulo, where the teacher-bonus program was introduced, I restrict the following empirical analyses in this paper to the schools situated in Campinas. For Campinas the GERES has tracked the performance of 4,881 students from 189 different classes in 60 schools (see Table \ref{table:DescStat}). Figures \ref{fig:Boxplot-MathPor}, \ref{fig:Math-RegStud} and \ref{fig:Por-RegStud} present the distribution of test scores by GERES in Math and Portuguese, allowing for a detailed analysis of the common trends’ assumption. Note that in both subjects, pupils enrolled in state and municipal schools achieved similar test scores over time, but their performance was lower than those from private schools.\footnote{By constructing the scales of proficiency, GERES used the Item Response Theory (IRT) to equalize the scales for the different years of schooling. See \hyperref[SuppMaterial]{supplemental file} for further information on IRT.} This difference had already appeared at the beginning of schooling and persisted over time, however with different trends: for Portuguese the gap in performance between public and private schools remained constant over time, while for Math it increased considerably.\footnote{For Math, the score gap between state and private school rose from $26$ points in wave 1 to $69$ points in wave 5, while for Portuguese it stayed constant over time at around $25$ points.}
+
+
+
+%Although this difference already appears at the beginning of the schooling, it is possible to observe, that the gap between public and private schools increases considerably in the subsequent years.
+
+
+
+
+
+
+%The descriptive statistics for the Campinas dataset are shown in Table \ref{tab:DescStat}.
+
+Table \ref{table:DescStat} reports the descriptive statistics and independent \textit{t}-tests for all the variables used for the estimates in section \ref{Paper3-Results}. To ease viewing, I display the data individually by state, municipal and private schools, and estimate \textit{t}-tests to compare the means between the groups. Note that public schools have similar statistics regarding the characteristics of their students, teachers and infrastructure. While the data from private schools differs widely from those of state and municipal ones, since the private schools presenting on average, better infrastructure and students with a higher socioeconomic status.\footnote{Despite the similarities by the means between state and municipal schools, the balance tests in Table \ref{table:DescStat} show that the mean values of the covariates are at baseline statistically different for both groups. From the 64 covariates across state and municipal schools, 57 of them (89 percent) have $p < 0.1$. To minimize bias, I control for baseline covariates when estimating treatment effects in equation \eqref{eq:DiD-Treat}.}
+
+
+%\footnote{The variable socio-economic status by GERES ranges between -1.661 and +1.661; and it was calculated based on the level of education, professional ocupation, and income of the parents. Whereby the income of the family was indirectly measured using the number of consumable goods in the household. See on-line appendix of this paper for a description of the empirical methodology to quantify it.}
+
+
+
+
+
+
+%See \citet{goldhader1999three, weinhardt2014social} for data description.
+
+
+
+
+
+%\textcolor{red}{$\Longrightarrow$} PS: Please check the reason for 21 municipal schools. Compare with table \ref{tab:SampleSize}.
+
+
+
+%\textcolor{red}{$\Longrightarrow$} See \citet{muralidharan2011teacher} for a good description of the sampling process.
+
+
+
+\subsection{Quasi-Experimental design} \label{Design}
+
+The ex-post impact evaluation carried out in this paper is based on a quasi-experimental design using schools from the city of Campinas, which is located in the state of São Paulo and situated approximately 62 miles from state’s capital. According to the latest data from the Brazilian Institute of Geography and Statistics (IBGE), Campinas has a population of 1,204,073 inhabitants, making it the third most populous municipality in São Paulo state and the fourteenth in Brazil. 
+
+In agreement with the last school census \citep[see][]{Sinopse2018}, the Campinas school district with its approximately $238$ thousand students is the third-largest district in the state of São Paulo.\footnote{Of the 238,314 children enrolled in the Campinas school system in 2018, $46$ percent of them were enrolled in state schools, $24$ percent in municipal, $1$ percent in federal, and $29$ percent in private schools \citep{Sinopse2018}.} In 2018 the system was composed of $658$ schools, whereby around half of them were primary schools (grades 1–9) with $6,720$ assigned teachers ($61$ percent of the total) and $123,678$ students ($52$ percent of the total). Empirical evidence from large-scale evaluations of educational achievement showed that the quality of public schooling in Campinas \textemdash measured by academic achievement and pass rate \textemdash is very similar to the average value in the state of São Paulo, but higher than the mean for Brazil.\footnote{The \textit{``Índice de Desenvolvimento da Educação Básica''} (IDEB) is the most important assessment system for educational quality in Brazil, sorting the Brazilian schools according to a scale ranging from 0 (bad) to 10 (excellent). In 2017 the IDEB value of public schools in Campinas was $6.57$, compared with $6.60$ for the state of São Paulo and $5.94$ for the whole country \citep[see][]{IDEB2019}.} The same indicators confirm the trend already shown by the GERES: the performance of students enrolled in public schools is lower than those from private schools \citep[see][]{IDEB2019}.
+
+
+Due to the strong differences in the characteristics of public and private schools described above, this paper excludes the students from private schools from the following empirical investigations in order to create, as far as possible, very similar treatment and comparison groups. Therefore, I apply a difference-in-difference approach in which the $2,158$ students from state schools are the treatment and the $1,919$ pupils from municipal schools the comparison group. Since the GERES collected the academic performance of the participants between the years of 2005 and 2008, I integrate into the DiD the test scores of four waves before and one wave after the implementation of the teacher bonus.
+
+%Therefore, I apply a difference in difference approach (DiD) in which the $2,158$ students from state schools are the treatment, and the $1,919$ pupils from municipal schools the comparison group. 
+
+%For each group, the data contains information from $20$ different schools, which corresponds to a sample of $21$ ($51$) percent of the total number of state (municipal) schools in Campinas.\footnote{See GERES sample size in \href{http://tiny.cc/yb99hz}{online appendix}.}
+%\textcolor{red}{See \citet{duflo2015school}}
+%See \citet{barrera2017teacher} section 2 for information about Campinas.
+
+
+
+\section{Estimation Strategy} \label{Paper3-Methodology}
+
+
+The evaluation of the impact of teacher bonus in this paper is based on the educational production function, which is widely used in the literature as the empirical framework to investigate student achievement \citep{hanushek2012distribution}.\footnote{The crucial theoretical foundations for the educational production function were developed by \citet{hanushek1971teacher, hanushek1979conceptual, summers1977schools, boardman1979using, margo1986educational}. See \citet{hanushek2008education, todd2003specification, hanushek2002publicly, pritchett1999education} for a more detailed analysis of the educational production function.} 
+
+
+
+\begin{equation} \label{eq:ProdFunction}
+\mathbf{P}_{ijst} = \:f\:( \: \mathbf{B}_i, \mathbf{S}_i, \mathbf{C}_i, \mathbf{A}_{i} \:)
+\end{equation}
+
+
+where $\mathbf{P}_{ijst}$ denotes the academic performance of student $i$ with teacher $j$ on subject $s$ at time $t$ and is defined as a function of $\mathbf{B}_i$ representing student background characteristics, $\mathbf{S}_i$ school inputs, $\mathbf{C}_i$ teacher and class inputs, and $\mathbf{A}_{i}$ the initial ability of student $i$. For brevity's sake, I aggregate all variables presenting in $\mathbf{B}_i$, $\mathbf{S}_i$ and $\mathbf{C}_i$ into a single vector $\mathbf{X}_{ijst}^{\prime}$.\footnote{Table \ref{table:DescStat} lists the explanatory variables used in the model and their descriptive statistics.} Then, the reduced form for the linear model with the panel structure is
+
+
+\begin{equation} \label{eq:BaseEPF}
+\mathbf{Y}_{ijst} = \alpha + \beta\mathbf{X}_{ijst}^{\prime} + \varphi A_{i} + \epsilon_{ijst}  
+\end{equation}
+
+
+with $\mathbf{Y}_{ijst}$ denoting the score achieved on the GERES proficiency tests, and $\epsilon_{ijst}$ being the stochastic term adding to the model all the unobservable inputs affecting student performance. 
+
+
+
+%In order to control for the average differences across individuals in any observable or unobservable predictors, I include in equation \eqref{eq:BaseEPF} fixed effects at the student level. 
+
+The estimation of model \eqref{eq:BaseEPF} will generate biased results if the error term $\epsilon_{ijst}$ is correlated with the explanatory variables in $\mathbf{X}_{ijst}^{\prime}$. Endogeneity problems will occur, for example, if the locality of a student’s residence affects school choice, or if schools are able to select students based on their academic achievement or socioeconomic status. Given that empirical evidence has already indicated the existence of these links in Brazil \citep[see e.g.][]{alves2015seleccao, bartholo2013measuring}, this paper follows \citet{imberman2015incentive, schwerdt2011traditional, wossmann2006class} and use school-fixed effects to account the empirical model for the non-random sorting of students into classrooms. In addition, I include time-fixed effects to control the estimations for variables that changed over time, but not across schools, such as public policies or regulations \citep{deschenes2018quasi}. Therefore, I set out a Three-way error component for the stochastic term 
+
+
+\begin{equation} \label{eq:ErrorTerm}
+\epsilon_{ijst} = \mu^j + \mu^t +  \nu_{ijst} \\
+\end{equation}
+
+
+
+with $\nu_{ijst} \sim IID(0, \sigma^2_{\epsilon})$, and $\mu^{j}$ and $\mu^{t}$ representing a set of school and time fixed effects respectively. 
+
+
+
+
+One important peculiarity of the educational production function is its cumulative character over time \citep[see e.g.][]{britton2016teacher, andrabi2009value, hanushek2002publicly}. The student achievement at time $t$ depends not only on the educational inputs applied during $t$, but also the sum of all inputs that have already been integrated into the student learning process plus the initial ability $A_i$ \citep{rothstein2010teacher, todd2003specification}. Then, from a policy point of view, it is important to isolate the gain in student performance over the time periods and relate them to their respective inputs \citep{hanushek2012distribution, andrabi2009value}. Assuming that the educational achievements accumulate over $T$, and the importance of the prior inputs for current student performance depreciates over time at a constant rate $\theta$, the equation \eqref{eq:BaseEPF} can be rewritten as
+
+
+
+\begin{equation} \label{eq:LinearCumulative}
+\mathbf{Y}_{ijst} = \sum_{t=0}^T \alpha (1 - \theta)^{T-t} + \sum_{t=0}^T \beta \mathbf{X}_{ijst}^{\prime} (1 - \theta)^{T-t} + \sum_{t=0}^T \varphi A_{i} (1 - \theta)^{T-t} + \sum_{t=0}^T \epsilon_{ijst} (1 - \theta)^{T-t}
+\end{equation} 
+
+
+Following \citet{hanushek2012distribution}, the equation \eqref{eq:LinearCumulative} can be decomposed into current ($t=T$) and previous factors ($t=T-1$), such as
+
+
+\begin{multline} \label{eq:LinearDecomp}
+\mathbf{Y}_{ijst} = \underbrace{\alpha + \beta\mathbf{X}_{ijst}^{\prime} + \varphi A_{i} + \epsilon_{ijst}}_{\text{current}} \\
++ \underbrace{\sum_{t=0}^{T-1} \alpha (1 - \theta)^{T-t} + \sum_{t=0}^{T-1} \beta \mathbf{X}_{ijst}^{\prime} (1 - \theta)^{T-t} + \sum_{t=0}^{T-1} \varphi A_{i} (1 - \theta)^{T-t}  + \sum_{t=0}^{T-1} \epsilon_{ijst} (1 - \theta)^{T-t}}_{\text{previous}}
+\end{multline}
+
+
+The empirical estimation of \eqref{eq:LinearDecomp} is faced with two main challenges: the integration of longitudinal data tracking the independent variables for all time periods before $t$, and the need to quantify the initial ability of children before school enrollment. Due to the difficulty of dealing with these conditions, empirical works make use of the value-added strategy. Given that the relationship in \eqref{eq:LinearDecomp} holds true over time, the previous determinants of performance can be reduced to $(1 - \theta) \mathbf{Y}_{ijs,t-1}$, indicating that the student's achievement in time $t-1$ is a reliable proxy for the prior inputs and initial ability involved in the learning process of pupils \citep{hanushek2012distribution, rothstein2010teacher, andrabi2009value}.
+
+By assuming that the current academic performance of students can be determined as a function of the (depreciated) lagged test scores and the current factors affecting their performance in period $t$, the lagged value-added model is
+
+
+\begin{equation} \label{eq:value-added}
+\mathbf{Y}_{ijst} = \alpha + \pi (1 - \theta) \mathbf{Y}_{ijs,t-1} + \sum_{t=0}^T \beta \mathbf{X}_{ijst}^{\prime} + \epsilon_{ijst} 
+\end{equation}
+
+
+Therefore, the difference-in-difference approach to estimate the average treatment effect on the treated (ATT) of the teacher bonus program is:
+
+% ATT in Lepine (2021)
+
+\begin{equation} \label{eq:DiD-Treat}
+\mathbf{Y}_{ijst} = \alpha + \phi Treated_{} + \gamma Post_{} + \delta (Treated \times Post)_{} + \pi (1 - \theta) \mathbf{Y}_{ijs,t-1} + \sum_{t=0}^T \beta \mathbf{X}_{ijst}^{\prime} + \epsilon_{ijst} 
+\end{equation}
+
+
+
+where $Treated_{}$ is a dummy variable indicating the treatment group (1 if state schools) and $Post_{}$ a time dummy equal to 1 if the incentive pay is implemented (2008). Consequently, the parameter of interest, $\delta$, is the interaction term between the dummies for treatment group and post-exposure period, indicating the variation in student achievement that has resulted from the implementation of the teacher bonus. In this case, the value-added model ensures that the impact of the bonus in \eqref{eq:DiD-Treat} is estimated as a function of student test score growth \textemdash occurred between the periods pre and post bonus implementation \textemdash and not student achievement levels.
+
+
+
+
+
+
+
+
+
+\section{Baseline Results} \label{Paper3-Results}
+
+
+In this section, the results are estimated separately for Math and Portuguese. Students are indexed $i=1, \dotsc, N$ and observed once per period $t=1, \dotsc, T$. The data are strongly balanced with $N^*=\sum_{i=1}^N T_i$ observations (student periods) in total, and for each observation, the set of explanatory variables presented in Table \ref{table:DescStat} is available. Since the teacher bonus was implemented only within the state education network, I use the $2,158$ students enrolled in state schools as the treatment group, and the $1,919$ pupils from municipal schools as a comparison. Post-treatment are the test scores achieved in November 2008, pre-treatment are the scores from 2005 to 2007.
+
+Because the performance of students on GERES presents an increasing scale of scores over time (see Figure \ref{fig:Boxplot-MathPor}), I standardize the test scores within year and subject to have a unit variance with mean 0 and standard deviation 1, therefore the estimated coefficients need to be interpreted as a unit of a standard deviation. The estimates are based on two different models: First, I report the estimation from ordinary least squares (OLS), used as “starting” comparison (or naive model), and then the results based on fixed effects are presented. While the OLS ignores the panel structure of the data, the FE models identify the longitudinal nature of the GERES and control for school and time fixed effects.\footnote{This paper follows the standard approach used in the literature \citep[see e.g.][]{loyalka2019pay,barrera2017teacher, britton2016teacher, imberman2015incentive} and does not include individual fixed effects in the investigation. The introduction of individual fixed effects in a value-added model causes a series of econometric concerns in relation to endogeneity, given that the lagged test score is correlated with the error term. This occurs because the demeaning process for the estimation of the individual fixed effect creates a correlation between regressor and error term, biasing the coefficients downward \citep{nickell1981biases}.} Finally, standard errors are robust and clustered at the class level, given the correlation in student performance within classes. 
+
+%\footnote{All the empirical evidence presented in this paper was estimated using the statistic program Stata (version 12.0). See \href{http://tiny.cc/p8heoz}{online supplemental file} for a full description of the Stata syntaxes.}
+
+%The following tables present respectively two specifications for each model: the first one with no control for the explanatory variables, and the second with the full set presented in table \ref{table:DescStat}.
+
+
+
+
+
+
+%\subsection{Main Results} \label{Value-added}
+
+
+Table \ref{table:MainResults} presents the coefficient for the ATT, which refers to the parameter of interest, $\delta$, in equation \eqref{eq:DiD-Treat} and tell us whether the teacher-bonus program has generated any effect on the performance of students. I first omit the dynamic structure of the educational production function and estimate in columns (1) and (2) the empirical model with no lagged dependent variable. Then, column (3) reports the results of the full lagged value-added model, thereby controlling the model for the individual academic ability of students.\footnote{The difference in the number of observations between columns (2) and (3) refers to the missing values regarding the lagged dependent variable included in the dynamic specification.}
+
+  
+In its first year of implementation, the pay-for-performance program in the state of São Paulo generated no statistically significant impact on the performance of students for both Math and Portuguese. The value-added models with control variables indicate that with the bonus the students from state schools achieved a $0.011$ SD higher performance in Portuguese and a $0.074$ SD in Math when compared with their peers from municipal schools. But none of this variation was statistically significant.
+
+The OLS estimates even present statistically significant values for the ATT; however, they are caused by a lack of control for the unobserved heterogeneity. Therefore, the panel structure of the GERES database and the consequently controlling for fixed effects is crucial for the identification strategy. Likewise, the control for confounding plays an important role for the empirical analysis. Since the mean values of the covariates involved into the DiD are statistically different for treated and control groups (see Table \ref{table:DescStat}), the inclusion of the control variables becomes essential to address selection bias.
+
+
+%test scores in treatment (state) schools were slightly higher than those in comparison (municipal) schools ($0.011$ and $0.074$ standard deviation for Portuguese and Mathematics, respectively),
+
+%With a S-square of $0.11$, the value-added models with control variables indicate that the gain no statistically significant coefficients for the ATT ($0.011$ and $0.074$ standard deviation for Portuguese and Mathematics, respectively), confirming that after the bonus scheme’s implementation students from state schools in Campinas achieved no different performance in proficiency tests than their peers from municipal schools. 
+
+%This result is relatively robust for the model specifications with and without the covariates reported in Table \ref{table:DescStat}.
+ 
+%The analysis of results reveals an increase in the goodness of fit between the OLS and FE, confirming that the
+ 
+%The control for prior student achievement in column (3) helps even more with regard to the explanation of the variance in student performance, increasing considerably the model’s fit. 
+
+
+
+
+
+\addcontentsline{lot}{table}{\ref{table:MainResults} \hspace{7pt} Impact of Teacher Bonus on Student Performance} 
+             \begin{table}[H]            \refstepcounter{table}                        \label{table:MainResults}                        \centering            \textbf{Table \ref{table:MainResults}. Impact of Teacher Bonus on Student Performance} \\ 
+\vspace{5pt}           
+\caption*{Panel A: Portuguese}                     
+\vspace{-8pt}
+\begin{subtable}[t]{\linewidth}
+    \centering
+    \vspace{0pt}            
+\begin{adjustbox}{max width=\textwidth} 
+\begin{tabular}{@{\extracolsep{4pt}}l*{6}{c}@{}}             \toprule                    & \multicolumn{3}{c}{No Control Variables} &            \multicolumn{3}{c}{With Control Variables} \\            \cline{2-4}              \cline{5-7}                    & \multicolumn{1}{c}{OLS} &                    \multicolumn{1}{c}{FE} &                    \multicolumn{1}{c}{FE} &            \multicolumn{1}{c}{OLS} &                    \multicolumn{1}{c}{FE} &            \multicolumn{1}{c}{FE} \\            \cline{2-2}                    \cline{3-3}                    \cline{4-4}            \cline{5-5}                    \cline{6-6}                    \cline{7-7}                    
+                    &         (1)   &         (2)   &         (3)   &         (1)   &         (2)   &         (3)   \\
+\hline
+ATT                 &      -0.286**&      0.073**   &      0.051*   &       -0.105   &       0.023   &      0.011   \\
+                    &     (0.101)   &     (0.028)   &     (0.025)   &     (0.078)   &     (0.035)   &     (0.034)   \\
+time                  &      0.178**&        0.208*** &      0.191***   &      0.283***   &      0.444***   &      0.000   \\
+                    &     (0.056)   &     (0.027)   &     (0.023)   &     (0.058)   &     (0.038)   &     (.)   \\
+treated                  &      0.417***&       0.138 &      -1.069   &      -0.014   &      -1.063***   &      0.357*   \\
+                    &     (0.059)   &     (0.546)   &     (0.603)   &     (0.077)   &     (0.079)   &     (0.416)   \\
+$\mathbf{Y}_{t-1}$              &      -         &      -         &       0.039**&      -         &     -          &       0.049*\\
+                    &               &               &     (0.014)   &               &               &     (0.021) \\
+\hline
+No. Observations        &       19,611   &       19,611   &       12,244   &        5,820   &        5,820   &        4,209   \\
+%No. Clusters          &       746        &     746          &              687 &       363        &        363       &       357        \\
+R-square            &       0.039   &       0.037   &       0.043   &       0.200   &       0.113   &        0.111   \\
+\hline Control variables&          No   &          No   &          No   &          Yes   &          Yes   &          Yes   \\
+Fixed effects       &          No   &         Yes   &          Yes   &          No   &         Yes   &          Yes   \\
+Lagged values        &          No   &          No   &         Yes   &          No   &          No   &         Yes   \\           
+\vspace{-18pt} \\
+\noalign{\smallskip} \hline           
+\end{tabular}            \medskip
+\end{adjustbox}            
+\end{subtable}
+\vspace{4pt}            
+\caption*{Panel B: Mathematics}
+  \begin{subtable}[t]{\linewidth}
+    \centering
+\vspace{-8pt}
+\addtocounter{table}{-1}
+\begin{adjustbox}{max width=\textwidth}  
+\begin{tabular}{@{\extracolsep{4pt}}l*{6}{c}@{}}             \toprule                    & \multicolumn{3}{c}{No Control Variables} &            \multicolumn{3}{c}{With Control Variables} \\            \cline{2-4}              \cline{5-7}                    & \multicolumn{1}{c}{OLS} &                    \multicolumn{1}{c}{FE} &                    \multicolumn{1}{c}{FE} &            \multicolumn{1}{c}{OLS} &                    \multicolumn{1}{c}{FE} &            \multicolumn{1}{c}{FE} \\            \cline{2-2}                    \cline{3-3}                    \cline{4-4}            \cline{5-5}                    \cline{6-6}                    \cline{7-7}                    
+                    &         (1)   &         (2)   &         (3)   &         (1)   &         (2)   &         (3)   \\
+\hline
+ATT                 &      -0.255**&       0.087** &      0.081*   &      -0.076   &      0.067   &      0.074 \\
+                    &     (0.098)   &     (0.032)   &     (0.033)   &     (0.079)   &     (0.042)   &     (0.045)  \\
+time                  &      0.148**&       0.143*** &      0.169***   &      0.262***   &     0.331***   &      0.339***   \\
+                    &     (0.053)   &     (0.025)   &     (0.028)   &     (0.056)   &     (0.045)    &     (0.049)   \\
+treated                 &      0.381***&       0.910* &      -1.730**   &      -0.102   &      0.474*   &      0.571 \\
+                    &     (0.055)   &     (0.409)   &     (0.607)   &     (0.082)   &     (0.184)   &    (0.456) \\
+$\mathbf{Y}_{t-1}$              &       -        &        -       &       -0.044**&         -      &        -       &       -0.030\\
+                    &               &               &     (0.015)   &               &               &     (0.022) \\
+\hline
+No. Observations        &       19,520   &       19,520   &       12,103   &        5,794   &        5,794   &        4,150   \\
+%No. Clusters          &    746           &       746        &              691 &         363      &       363        &        359       \\
+R-square            &       0.034   &       0.023   &       0.033   &       0.178   &       0.086   &       0.111   \\
+\hline Control variables&          No   &          No   &          No   &          Yes   &          Yes   &          Yes   \\
+Fixed effects       &          No   &         Yes   &          Yes   &          No   &         Yes   &          Yes   \\
+Lagged values        &          No   &          No   &         Yes   &          No   &          No   &         Yes   \vspace{-7pt} \\
+             \noalign{\smallskip} \bottomrule            \end{tabular}            \medskip           
+\end{adjustbox}
+\end{subtable}           
+\begin{minipage}{1\textwidth}            \scriptsize Notes: Dependent variable is student performance (test scores), which are normalized to mean 0 and standard deviation 1. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Treat}. Control variables include the full set of explanatory variables presented in table \ref{table:DescStat}. Fixed effects control for the average differences across schools and years. Data are not nested within schools. Standard errors are robust to heteroskedasticity and clustered at class level. t statistics in parentheses. \( * p<0.1, ** p<0.05, *** p<0.01 \). \\                    
+Source: GERES database (2005-2008), own estimates.             \end{minipage}                \end{table}
+
+
+
+
+
+
+
+
+%In Table \ref{table:StaticModel} the absence of a control for student ability inflates the estimated coefficient for the DiD by attributing predictive power to it that, in truth, should be attributed to the individual learning capacity of students. Since this academic ability is not constant over time, but variable depending on the input on the part of the given teacher and school during the academic year, the LSDV does not fit the model. By controlling for the prior student achievement, the consistent GMM estimators even show that after the program was implemented students enrolled in state schools performed better in math and Portuguese than their peers from municipal schools, but none of these findings are statistically significant.
+
+
+
+\section{Alternative Specification} \label{Paper3-Alternative}
+ 
+The primary identification strategy presented in the previous section was concentrated on the investigation of state versus municipal schools in Campinas in order to reduce the effects of unobserved heterogeneity on the results. This section will relax this restriction and expand the DiD analysis to all cities involved in the GERES project, limiting the estimations to students enrolled in state schools. Therefore the treatment group continues to be formed by pupils from state schools in Campinas, but we have as a control group students enrolled in state schools in all the other GERES cities. Table \ref{table:AlternativeSpecification} presents the results from this exercise. For reasons of brevity, it reports only the estimates for the fixed effect model based on equation \eqref{eq:DiD-Treat}. 
+
+%The first one uses the same research design \textemdash focused on the students from Campinas \textemdash as in the section before, but adds to the comparison group the $804$ students enrolled in private schools there. 
+
+%\footnote{Students from Belo Horizonte were excluded from the specification (B), because in 2008 the state of Minas Gerais, where the city is located, also implemented a teacher bonus program.}
+
+
+
+%While columns (1) and (3) refer to the model with no control variables, columns (2) and (4) integrate the full set of explanatory variables presented in Table \ref{table:DescStat}. 
+
+
+
+
+\addcontentsline{lot}{table}{\ref{table:AlternativeSpecification} \hspace{7pt} Alternative Specification of the Research Design}
+             \begin{table}[h]            \refstepcounter{table}                        \label{table:AlternativeSpecification}                        \centering            \textbf{Table \ref{table:AlternativeSpecification}. Alternative Specification of the Research Design} \\             
+\begin{adjustbox}{max width=\textwidth}          
+\begin{tabular}{@{\extracolsep{4pt}}l*{8}{c}@{}}             \toprule             & \multicolumn{4}{c}{\textbf{No Control Variables}} &            \multicolumn{4}{c}{\textbf{With Control Variables}} \\            \cline{2-5}              \cline{6-9}                    & \multicolumn{2}{c}{\textbf{Portuguese}} &                    \multicolumn{2}{c}{\textbf{Mathematics}} &                    \multicolumn{2}{c}{\textbf{Portuguese}} &            \multicolumn{2}{c}{\textbf{Mathematics}} \\            \cline{2-3}                    \cline{4-5}                    \cline{6-7}            \cline{8-9}          
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (1)   &         (2)   &         (3)   &         (4)   \\
+\hline
+ATT                 &      0.100***   &      0.058*   &      0.028   &      0.044   &      0.123***   &   0.060      &   0.040      &        0.076 \\
+                    &    (0.027)   &    (0.025)   &    (0.035)   &    (0.033)   &   (0.032)    &  (0.031)     &   (0.041)    &  (0.038)     \\
+time                 &      0.299***   &      0.190***   &      0.294***   &      0.241***   &      0.480***   &   0.303***      &   0.501***      &        0.399*** \\
+                    &    (0.026)   &    (0.022)   &    (0.032)   &    (0.027)   &   (0.038)    &  (0.032)     &   (0.048)    &  (0.039)     \\
+treated                 &      0.000   &      0.000   &      0.000   &      0.000   &      0.000   &  0.000      &   0.000      &        0.000 \\
+                    &    (.)   &    (.)   &    (.)   &    (.)   &   (.)    &  (.)     &   (.)    &  (.)     \\
+$\mathbf{Y}_{t-1}$              &       -&       0.029*&              - &      -0.043**         &  -     &   0.034    &              - &      -0.018***         \\
+                    &     &    (0.013)   &               &    (0.013)           &       &   (0.020)    &               &      (0.019)         \\
+\hline
+No. Observations    &       24,849   &        14,851   &       24,768   &       14,732   &   6,369       &     4,738      &         6,394 &    4,678       \\
+%No. Clusters        &      860         &    477           &              854 &      475         &    626           &     270          &              625 &     269          \\
+R-square            &      0.059   &       0.044   &       0.041   &       0.044   &     0.155     &   0.105       &   0.133       &         0.140 \\
+\hline Control variables&          No   &         No   &          No   &         No   &          Yes   &         Yes   &          Yes   &         Yes   \\
+Fixed effects       &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   \\
+Lagged value        &         No   &         Yes   &         No   &         Yes   &         No   &         Yes   &         No   &         Yes \vspace{-5pt}  \\
+            \noalign{\smallskip} \bottomrule             \end{tabular}
+\end{adjustbox}      \medskip      
+\begin{minipage}{1\textwidth}            \scriptsize Notes: Specification expands the DiD analysis to all GERES students enrolled in state schools, in which 1 are students from Campinas and 0 otherweise. Dependent variable is student performance (test scores), which are normalized to mean 0 and standard deviation 1. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Treat}. Control variables include the full set of explanatory variables presented in table \ref{table:DescStat}. Fixed effects control for the average differences across schools and years. Data are not nested within schools. Standard errors are robust to heteroskedasticity and clustered at class level. t statistics in parentheses. \( * p<0.1, ** p<0.05, *** p<0.01 \). \\                    
+Source: GERES database (2005-2008), own estimates.            \end{minipage}                \end{table}      
+
+
+
+\long\def\comment#1{}
+\comment{
+\addcontentsline{lot}{table}{\ref{table:AlternativeSpecification} \hspace{7pt} Alternative Specifications of the Research Design}
+             \begin{table}[h]            \refstepcounter{table}                        \label{table:AlternativeSpecification}                        \centering            \textbf{Table \ref{table:AlternativeSpecification}. Alternative Specifications of the Research Design} \\             
+\begin{adjustbox}{max width=\textwidth}          
+\begin{tabular}{@{\extracolsep{4pt}}l*{8}{c}@{}}             \toprule             & \multicolumn{4}{c}{\textbf{(A) State vs other Schools}} &            \multicolumn{4}{c}{\textbf{(B) Campinas vs other Cities}} \\            \cline{2-5}              \cline{6-9}                    & \multicolumn{2}{c}{\textbf{Portuguese}} &                    \multicolumn{2}{c}{\textbf{Mathematics}} &                    \multicolumn{2}{c}{\textbf{Portuguese}} &            \multicolumn{2}{c}{\textbf{Mathematics}} \\            \cline{2-3}                    \cline{4-5}                    \cline{6-7}            \cline{8-9}          
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (1)   &         (2)   &         (3)   &         (4)   \\
+\hline
+ATT                 &      -0.011   &      -0.003   &      -0.003   &      -0.012   &      -0.018   &   0.099      &   0.079      &        0.158 \\
+                    &    (0.030)   &    (0.034)   &    (0.038)   &    (0.044)   &   (0.047)    &  (0.072)     &   (0.056)    &  (0.092)     \\
+$\mathbf{Y}_{t-1}$              &       0.738***&       0.681***&              0.705*** &      0.658***         &  0.740***     &   0.701***    &              0.678*** &      0.671***         \\
+                    &    (0.009)   &    (0.013)   &       (0.009)        &    (0.012)           &   (0.011)    &   (0.018)    &              (0.012) &      (0.017)         \\
+\hline
+No. Observations    &       14,837   &        5,977   &       14,702   &        5,919   &   9,647       &     3,075      &         9,598 &    3,024       \\
+No. Clusters        &      860         &    477           &              854 &      475         &    626           &     270          &              625 &     269          \\
+R-square            &       0.674   &       0.671   &       0.654   &       0.663   &     0.628     &   0.612       &   0.591       &         0.601 \\
+\hline Control variables&          No   &         Yes   &          No   &         Yes   &          No   &         Yes   &          No   &         Yes   \\
+Fixed effects       &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   \\
+Lagged value        &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes \vspace{-5pt}  \\
+            \noalign{\smallskip} \bottomrule             \end{tabular}
+\end{adjustbox}      \medskip      
+\begin{minipage}{1\textwidth}            \scriptsize Notes: Specification (A) concentrates the investigation on Campinas estimating the DiD between state schools (treatment group) and municipal $\&$ private schools (control). Specification (B) expands the DiD analysis to all GERES students enrolled in state schools, in which 1 are students from Campinas and 0 otherweise. Dependent variable is student performance (test scores), which are normalized to mean 0 and standard deviation 1. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Treat}. Control variables include the full set of explanatory variables presented in table \ref{table:DescStat}. Fixed effects control for the average differences across schools and years. Data are not nested within schools. Standard errors are robust to heteroskedasticity and clustered at class level. t statistics in parentheses. \( * p<0.1, ** p<0.05, *** p<0.01 \). \\                    
+Source: GERES database (2005-2008), own estimates.            \end{minipage}                \end{table}
+// Finalising ignore
+} 
+
+
+
+
+
+The empirical findings presented in Table \ref{table:AlternativeSpecification} are very similar to those of the previous section. After the implementation of the bonus scheme, students from (state schools in) Campinas achieved a $0.060$ SD higher performance in Portuguese and a $0.076$ SD in Math than their peers from the other GERES cities. However, as in section \ref{Paper3-Results}, none of these changes were statistically significant.
+
+
+
+%The full valued-added models provide no statistically significant impact of teacher bonuses on the performance of students. 
+
+%In specification (A), the inclusion of the private schools in the comparison group practically did not change the ATT coefficients for Portuguese ($-0.011$ against $-0.007$ for the model with no control variables). For Math, the changes in test scores are even lower than those in the section before ($-0.003$ against $-0.016$). 
+
+%Comparing the students enrolled in state schools in Campinas with their peers from other GERES cities (specification B), we can note that the sign of the coefficients for Math changed \textemdash indicating that the teacher bonus had a positive impact on test scores in this subject. 
+
+
+\long\def\comment#1{}
+\comment{
+
+\section{Placebo Tests} \label{Paper3-Placebo}
+
+
+To check the reliability of the findings presented above, this section will apply falsification tests, replicating the exact same identification strategy employed in section \ref{Paper3-Results}, but using outcomes that are known to be unaffected by the implementation of the teacher bonus program. The placebo tests are based on two different specifications. For the first (``fake'' implementation date), I run the placebo test by redoing the same analysis \textemdash on state and municipal schools in Campinas \textemdash using a year in which the teacher bonus scheme had not yet been implemented (2007). In the second specification, the DiD is based on a ``fake'' treatment group that was not exposed to the bonus program. In this case, the same implementation timetable as in section \ref{Paper3-Results} was assumed, but I exclude students from Campinas from the investigation and apply the research design ``state vs municipal schools'' for all other GERES students.\footnote{Specification 1 (``fake'' date) excludes the test scores from the year 2008 from the investigation, while specification 2 excludes students from Belo Horizonte, because the state of Minas Gerais also implemented a PFP program for officials employed in state schools from 2008 onward.}
+
+
+
+
+
+\addcontentsline{lot}{table}{\ref{table:PlaceboTest} \hspace{7pt} Placebo tests}
+             \begin{table}[h]            \refstepcounter{table}                        \label{table:PlaceboTest}                        \centering            \textbf{Table \ref{table:PlaceboTest}. Placebo Tests} \\
+\vspace{5pt}                    
+\begin{adjustbox}{max width=\textwidth}             
+\begin{tabular}{@{\extracolsep{4pt}}l*{8}{c}@{}}             \toprule                    & \multicolumn{4}{c}{\textbf{Fake Implementation Date}} &            \multicolumn{4}{c}{\textbf{Fake Treatment Group}} \\            \cline{2-5}              \cline{6-9}                    & \multicolumn{2}{c}{Portuguese} &                    \multicolumn{2}{c}{Mathematics} &                    \multicolumn{2}{c}{Portuguese} &            \multicolumn{2}{c}{Mathematics} \\            \cline{2-3}                    \cline{4-5}                    \cline{6-7}            \cline{8-9}                    
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (1)   &         (2)   &         (3)   &         (4)   \\
+\hline
+ATT                 &      -0.037   &      -0.062   &       0.053   &      -0.028   &   -0.012      &   -0.073      &    0.031      &        -0.055 \\
+                    &     (0.038)   &     (0.059)   &     (0.044)   &     (0.060)   &   (0.045)     &   (0.076)     &   (0.052)     &       (0.090) \\
+$\mathbf{Y}_{t-1}$              &       0.721***&       0.664***&              0.675*** &       0.620***        &  0.719***     &  0.686***     &     0.670***          &    0.662***           \\
+                    &     (0.012)   &     (0.019)   &              (0.012) &        (0.019)       &  (0.008)      &   (0.014)     &    (0.008)           &       (0.016)        \\
+\hline
+No. Observations        &       9,133   &        3,019   &       9,004   &        2,952   &    22,437      &    4,268       &         22,284 &    4,236       \\
+No. Clusters          &     498          &    265           &              494 &      263         &    1,745           &       530        &              1,747 &      530         \\
+R-square            &       0.608   &       0.565   &       0.583   &       0.553   &     0.539     &   0.573       &   0.483       &         0.510 \\
+\hline Control variables&          No   &         Yes   &          No   &         Yes   &          No   &         Yes   &          No   &         Yes   \\
+Fixed effects       &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   \\
+Lagged value        &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes  \vspace{-5pt} \\
+            \noalign{\smallskip} \bottomrule            \end{tabular}            \medskip            
+\end{adjustbox}            
+\begin{minipage}{1\textwidth}            \scriptsize Notes: The first placebo test performs the DiD analysis with a fake date for the bonus implementation (2007 instead of 2008). The second one uses a fake treatment group expanding the analysis to all GERES students with the exception of them from Campinas and Belo Horizonte, being pupils enrolled in state (municipal) schools the treated (control) group. Dependent variable is student performance (test scores), which are normalized to mean 0 and standard deviation 1. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Treat}. Control variables include the full set of explanatory variables presented in table \ref{table:DescStat}. Fixed effects control for the average differences across schools and years. Data are not nested within schools. Standard errors are robust to heteroskedasticity and clustered at class level. t statistics in parentheses. \( * p<0.1, ** p<0.05, *** p<0.01 \). \\                    Source: GERES database (2005-2008), own estimates.                        \end{minipage}                \end{table}
+
+
+            
+           
+
+As in the section before, Table \ref{table:PlaceboTest} also focuses on the coefficients of the full lagged value-added model from equation \eqref{eq:DiD-Treat}. Once again, both specifications provided no significant difference between the treatment and the comparison groups. Therefore, the placebo tests show that an impact from the teacher bonus program on student achievement does not exist when it ``should not'' exist. Note that the ATT coefficients are relatively low, and not statistically insignificant. 
+
+
+
+
+%\subsection{Alternative Specifications} \label{Alternative}
+%Test the effects of bonus using only state schools in Campinas. Similar to equation (1) in \citet{imberman2015incentive}.
+
+
+
+
+
+
+
+
+
+
+
+
+
+\section{Robustness Checks} \label{Robustness}
+
+The empirical findings presented so far have confirmed that the implementation of the teacher bonus program had no impact on the performance of students in Math and Portuguese. To confirm the robustness of this evidence, I now change the estimation procedure used for the empirical investigation of the bonus scheme’s impact in order to check whether the results remain the same. Therefore, this section estimates the equation \eqref{eq:DiD-Treat} using generalized method of moments (GMM). In contrast to the standard models used previously (OLS and FE) that do not control for individual fixed effects, the GMM models apply first-difference transformation and instrumental variables to automatically eliminate time-invariant characteristics (gender, race, parental education, etc.), and student fixed effects in the error terms \citep[see e.g.][]{kripfganz2019estimation, wooldridge2016introductory}.
+
+
+
+
+
+
+
+
+
+
+
+
+\addcontentsline{lot}{table}{\ref{table:Robustness} \hspace{7pt} Robustness Checks}
+\begin{table}[h]            \refstepcounter{table}                        \label{table:Robustness}                        \centering            \textbf{Table \ref{table:Robustness}. Robustness Checks} \\             
+\vspace{5pt}
+\begin{adjustbox}{max width=\textwidth}           
+\begin{tabular}{@{\extracolsep{4pt}}l*{8}{c}@{}}             \toprule             & \multicolumn{4}{c}{\textbf{Difference GMM}} &            \multicolumn{4}{c}{\textbf{System GMM}}  \\            \cline{2-5}              \cline{6-9}                   & \multicolumn{2}{c}{Portuguese} &                    \multicolumn{2}{c}{Mathematics} &                    \multicolumn{2}{c}{Portuguese} &            \multicolumn{2}{c}{Mathematics}  \\            \cline{2-3}                    \cline{4-5}                    \cline{6-7}            \cline{8-9}        
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (1)   &         (2)   &         (3)   &         (4)   \\
+\hline
+ATT                 &    0.025     &   0.027      &   0.012     &       -0.008 &   0.018     &    -0.005     &   -0.030      &  -0.073       \\
+                    &  (0.028)      &   (0.039)     &   (0.039)     &    (0.056)    & (0.035)   &   (0.042)    &   (0.056)     &      (0.070) \\
+$\mathbf{Y}_{t-1}$              &  0.240***    &  0.295***     &              0.135*** &       0.203***        &  0.671***     & 0.713***      &              0.586*** &     0.603***       \\
+                    &  (0.046)      &   (0.056)     &    (0.038)        & (0.060)  &   (0.041)     &   (0.050)     &    (0.045)         &            (0.068) \\
+\hline 
+AB for AR(1)  &        0.000       &      0.000         &              0.000 & 0.000    &             0.000 &        0.000       &             0.000 &             0.000           \\
+AB for AR(2) &      0.151         &    0.204         &              0.058 & 0.177   &  0.002   &   0.084           &       0.002        &       0.096        \\
+Sargan              &     0.152          &       0.050        &             0.423  &      0.571         &       0.590        &       0.442        &     0.597          &    0.789           \\                    
+\hline
+No. Observations        &    7,180      &   3,504        &         7,040 &     3,438      &    12,244      &    8,264       &   12,103 &   8,181        \\
+No. Clusters          &    539           &    280           &              534 &      280        &      691         &     400          &              687 &      398       \\
+%R-square            &     -     &      -    &     -     &         - &         - &   -       &    -      &    -      \\
+\hline Control variables&          No   &         Yes   &          No   &         Yes   &          No   &         Yes   &          No   &         Yes   \\
+Fixed effects       &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   \\
+Lagged value        &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes   &         Yes  \vspace{-5pt} \\
+            \noalign{\smallskip} \bottomrule             \end{tabular}            \medskip           
+\end{adjustbox}            
+             \begin{minipage}{1\textwidth}            \scriptsize Notes: Dependent variable is student performance (test scores), which are normalized to mean 0 and standard deviation 1. Control variables include the full set of explanatory variables presented in table \ref{table:DescStat}. Data are not nested within schools. Standard errors are robust to heteroskedasticity and clustered at class level. t statistics in parentheses. Estimations based on two-step GMM with \citet{windmeijer2005finite} corrected standard errors. The zero hypothesis of the Sargan test is H0: overidentifying restrictions are valid. For the Arellano-Bond test, AR(1) and AR(2), are respectively, tests for first-order and second-order correlation in the first-differenced residuals under the null hypothesis of H0: no autocorrelation. For the Arellano-Bond and Sargan tests are reported the $\text{\emph{p}}$-values. \( * p<0.1, ** p<0.05, *** p<0.01 \).\\                    Source: GERES database (2005-2008), own estimates.            \end{minipage}                \end{table}
+
+
+
+
+Table \ref{table:Robustness} reports the empirical results from equation \eqref{eq:DiD-Treat} using the classic  \citet{arellano1991some} difference GMM estimator, where the instruments are used as moment conditions. However given that the educational achievements by GERES schools strongly persist over time, the table presents also the findings from the \citet{blundell1998initial} system GMM estimator in order to increase the precision of the estimates.\footnote{\citet{blundell1998initial} and \citet{arellano1995another} show that regarding panel data with high persistence the classic Difference-GMM estimator can provide poor finite-sample properties (bias), because the past lagged values convey little information about the future changes. The System-GMM is then an expanded version of the Difference-GMM in which instead of transforming the regression to eliminate the individual fixed effects, it transforms the instrument variables to make them exogenous to the fixed effects. Therefore, with the inclusion of additional moment restriction, the use of lagged first differences as instruments in the level of the equation addresses the bias arising from the standard GMM estimator \citep{jessen2018important, roodman2009xtabond2, baltagi2008econometric}. See the appendix for a more comprehensive formal description of the GMM estimators.} Both estimators have been generated on the basis of two-step GMMs in order to improve the robustness of the coefficients in relation to heteroscedasticity and autocorrelation. Finally, because the GERES panel data contain large $N$, but small $T$, I use the finite-sample correction described in \citet{windmeijer2005finite} to address the bias in the two-step standard errors.\footnote{Both GMM estimators were implemented in this paper with the Stata command $xtabond2$. In the model specification, all the explanatory variables were treated as strictly exogenous, and the lagged student score was listed as an endogenous variable, being included as an internal instrument.} 
+
+%\footnote{The \citet{arellano1991some} and \citet{blundell1998initial} estimators were implemented in this paper with the Stata command $xtabond2$ (see \href{http://tiny.cc/p8heoz}{online supplemental file} for the Stata syntaxes).}
+
+Since the GMM estimates are based on instrumental variables, the results from the Sargan and Arellano-Bond tests assume a crucial role for the validity of the models \citep{baum2007enhanced}. The Sargan test for joint validity of the instruments with p-values higher than $0.01$ indicates that the instruments are all orthogonal to the model error term and, consequently, the model presents no overidentification problem. The Arellano-Bond test for serial correlation of the residuals rejected the null hypothesis (no autocorrelation) of first order, and confirmed the absence of second-order serial correlation in the disturbances of the first-difference equations, confirming that the \citet{arellano1991some} assumptions are satisfied \citep[see e.g.][]{baltagi2008econometric}.     
+ 
+The results presented in Table \ref{table:Robustness} are in line with the findings from the earlier sections: the implementation of the teacher bonus program had no statistically significant impact on the performance of students in Math and Portuguese. Both the Difference- and System-GMM estimators provide consistence estimates for the dynamic panel model in \eqref{eq:DiD-Treat}. However, as noted by \citet{roodman2009xtabond2}, the System-GMM improves the accuracy of the estimators because it addresses the problem of missing values from unbalanced panels. Given these unbalanced panels, as is the case with the GERES dataset, if some values of $Y_{i,t-1}$ are missing then the first-differenced transformation by the Difference-GMM will present missing values for $\Updelta Y_{i,t-1}$. Meanwhile, the \citet{blundell1998initial} System-GMM estimator will circumvent the existence of these missing in the data due to the orthogonal-deviations transformation. 
+
+
+
+
+// Finalising ignore
+} 
+ 
+ 
+
+
+
+%\newpage
+
+\section{Mechanisms} \label{Paper3-Mechanisms}
+
+
+The most important finding of this study until now is that the teacher bonus program of the state of São Paulo did not achieve its main objective in the first year of implementation \textemdash namely, the increase of student performance. However, this finding does not invalidate the program as a whole. As discussed in section \ref{Paper3-Literature}, merit pay programs in education system might be viewed as a mechanism to increase the professional engagement in classrooms as well. Therefore, this section will examine whether the bonus generated any change into the teaching practices in state schools.
+
+
+As described before, the GERES collected by means of the ``teacher questionnaire'' detailed information on the educators involved into the teaching of the 21,529 GERES students.\footnote{The project applied the teacher questionnaire only for those teachers responsible for the teaching of the GERES students. Therefore, the data is strongly unbalanced at teacher level. For Campinas, for example, 475 teachers answered the teacher questionnaire only once, 87 teachers twice, and 10 teachers tree times over the four years (2005-2008).} Table \ref{table:DependentTeacher} reports the descriptive statistics for the 37 teaching practices which will be investigated in this section. For clarity, the table summaries the dependent variables divided by four groups (team work, use of supporting material, and learning practices by Portuguese and Math), and reports the percentage of responses for each of the existing alternatives. Note that the variables present an ordinal scale ranging from 1 up to 6, so that the higher the value, the more frequent is the activity with the students.\footnote{The questions related to team work asked teachers about their level of agreement with the respectively statements, and were measured on a five-point Likert scale ranging from strongly disagree (1) to completely agree (5).}
+
+
+The evaluation is based on a difference-in-difference approach in which the practices of teachers from state and municipal schools are compared over time. Then, the following model will be estimated at teacher ID level:
+
+
+\begin{equation} \label{eq:DiD-Teacher}
+\mathbf{Y}_{jt} = \alpha + \phi Treated + \gamma Post + \delta (Treated \times Post)_{} + \beta \mathbf{X}_{jt}^{\prime} + \mu^g + \mu^t +  \nu_{jt} 
+\end{equation}
+
+
+
+
+
+where $\mathbf{Y}_{jt}$ is a set of the (37) outcomes of interest reported in Table \ref{table:DependentTeacher} for teacher $j$ in time $t$. The vector $\mathbf{X}_{jt}^{\prime}$ illustrates the explanatory variables related to teacher and school features presented in Table \ref{table:DescStat}. In addition, equation \eqref{eq:DiD-Teacher} contains grade ($\mu^{g}$) and year ($\mu^t$) fixed effects. The DiD approach is the same as in equation \eqref{eq:DiD-Treat}, reporting $Treated_{}$ equal 1 for state schools (0 for municipal) and $Post_{}$ equal 1 for 2008 (0 for 2005-2007).
+
+
+Table \ref{table:Practices} presents estimates of the impact of bonus program on the performance of teachers. The models were ran separately for each of the 37 investigated dependent variables.\footnote{Estimators were implemented using the Stata command $oprobit$ to fit the ordered categorical dependent variables.}  Standard errors are robust to heteroskedasticity and clustered at school level. For a better overview, the results are transposed and each line reports the estimates for a single dependent variable. The first five columns present the results from equation \eqref{eq:DiD-Teacher} comparing the performance of the (231) teachers from state schools with their (231) peers from municipal schools. Columns 6 to 8 reports the results for an alternative specification in which the investigation is limited to the teachers from state schools, comparing the performance pre- and post-intervention.
+
+
+
+
+
+
+\vspace{15pt}
+
+%\lipsum[2-4]
+
+
+\addcontentsline{lot}{table}{\ref{table:Robustness} \hspace{7pt} Impact of Teacher Bonus on Teaching Practices}
+\refstepcounter{table}                        \label{table:Practices}                        \centering            \textbf{Table \ref{table:Practices}. Impact of Teacher Bonus on Teaching Practices} \\             
+\vspace{-5pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{8}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{max width=\textwidth}           
+\begin{tabular}{l*{8}{c}}
+\toprule
+&\multicolumn{5}{c}{\textbf{State vs Municipal Schools}}  &            \multicolumn{3}{c}{\textbf{State Schools}} \\ \cline{2-6}              \cline{7-9} 
+&\multicolumn{1}{c}{ATT}&\multicolumn{1}{c}{Post}&\multicolumn{1}{c}{Treated}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$} &\multicolumn{1}{c}{Post}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$} \\
+\cline{2-2}                    \cline{3-3}                    \cline{4-4}            \cline{5-5}                    \cline{6-6}                    \cline{7-7}                    \cline{8-8}                    \cline{9-9}                    
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (5)   &         (6)  &         (7)  &         (8)   \\
+\midrule
+\textbf{\emph{TEAM WORK}}&            &            &            &                     &               \\          
+I participate in the decisions related to my work      &      -0.170         &      -0.564         &       0.104         &       393        &        0.055  &       -0.886 &       213        &        0.080     \\
+            &     (-0.508)         &     (-0.883)         &     (0.373)         &              &   &     (-0.992)           \\
+I take into consideration the ideas of my work colleagues      &       0.515         &       0.357         &     -0.099         &       398        &       0.046  &       1.428\sym{*}         &       218        &        0.063      \\
+            &     (1.804)         &     (0.564)         &     (-0.397)         &              &         &     (2.011)               \\
+Teaching is influenced by exchange of ideas among peers      &      0.038         &       0.471         &       0.217         &      397         &      0.036 &       1.727         &       218        &        0.037 \\
+            &     (0.132)         &     (0.614)         &     (0.752)         &              &        &     (1.736)               \\
+Teachers endeavor to coordinate the curricular content      &       0.152         &       0.439         &       0.321         &      399         &      0.055   &       1.798\sym{***}         &       219        &        0.063      \\
+            &     (0.542)         &     (0.629)         &     (1.139)         &              &      &     (3.354)                  \\
+The school staff engages in making this school work well      &      -0.188         &       0.512         &       0.472         &     401         &      0.079 &       0.849         &       219        &        0.099 \\
+            &     (-0.519)         &     (0.841)         &     (1.747)         &              &     &     (0.897)                   \\
+The principal motivates me for the work      &      -0.163         &       1.158         &       0.291         &    398         &   0.077  &       1.578         &       218        &        0.104 \\
+            &     (-0.501)         &     (1.382)         &     (1.041)         &              &      &     (1.614)                  \\
+The principal makes teachers to engage with the school    &      -0.171         &       0.942         &       0.331         &     399         &  0.058   &       0.812         &       219        &        0.073 \\
+            &     (-0.442)         &     (1.357)         &     (1.374)         &              &        &     (0.795)                \\
+The principal stimulates innovative activities      &      -0.400         &       1.090         &       0.135         &     399         &  0.058  &        0.820         &       220        &        0.084  \\
+            &     (-1.073)         &     (1.688)         &     (0.632)         &             &      &     (0.839)                         \\
+The principal focuses on aspects related to learning      &      -0.110         &       0.377         &       0.182         &      394         &  0.073   &       0.655         &       216        &        0.094 \\
+            &     (-0.274)         &     (0.565)         &     (0.590)         &              &      &     (0.738)                 \\
+The principal focuses on aspects related to existing rules     &       0.169         &       0.141         &      0.045         &     391         &  0.080  &       1.298         &       217        &        0.088 \\
+            &     (0.512)         &     (0.207)         &     (0.208)         &              &       &     (1.796)                 \\
+The principal focuses on aspects related to maintenance     &       0.410         &      -0.125         &       0.102         &     393         &      0.070        &       0.839         &       214        &        0.079 \\
+            &     (1.120)         &     (-0.165)         &     (0.457)         &             &        &     (0.786)                \\
+\bottomrule
+\multicolumn{9}{r}{\textit{Continued on next page.}} \\
+\end{tabular}
+\end{adjustbox}
+\end{longtable}            
+            
+
+
+
+
+\vspace{70pt}
+\tablename\ \addtocounter{table}{-1} \thetable\ -- \textit{Continued from previous page.}
+\vspace{-10pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{7}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{max width=\textwidth}           
+\begin{tabular}{l*{8}{c}}
+\toprule
+&\multicolumn{5}{c}{\textbf{State vs Municipal Schools}}  &            \multicolumn{3}{c}{\textbf{State Schools}} \\ \cline{2-6}              \cline{7-9} 
+&\multicolumn{1}{c}{ATT}&\multicolumn{1}{c}{Post}&\multicolumn{1}{c}{Treated}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$} &\multicolumn{1}{c}{Post}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$} \\
+\cline{2-2}                    \cline{3-3}                    \cline{4-4}            \cline{5-5}                    \cline{6-6}                    \cline{7-7}                    \cline{8-8}                    \cline{9-9}                    
+                    &         (1)   &         (2)   &         (3)   &         (4)   &         (5)   &         (6)  &         (7)  &         (8)   \\
+\midrule
+\textbf{\emph{LEARNING PRACTICES BY PORTUGUESE}}&            &            &            &                     &               \\
+Students deal with reading (aloud) of stories or texts    &       1.389\sym{**} &       14.08\sym{***}&      -0.121         &       395  &     0.634      &       26.289\sym{***}         &       218        &        0.750   \\
+            &     (3.234)         &     (13.070)         &     (-0.465)         &              &       &     (11.965)                 \\
+Students deal with (silent) reading of texts from textbook      &       0.620\sym{*}  &       2.389\sym{***}&    -0.002         &  391    &    0.129 &       2.337\sym{**}         &       216        &    0.165    \\
+            &     (2.363)         &     (3.973)         &     (-0.012)         &             &     &     (2.583)                   \\
+Students deal with collective reading (aloud) of stories     &       0.637         &       1.758\sym{**} &       0.431\sym{*}  &     394         &     0.245      &       2.576\sym{***}         &       217        &        0.306   \\
+            &     (1.913)         &     (2.938)         &     (2.261)         &              &        &     (3.784)                \\
+Students deal with dictation     &       0.854\sym{**} &       1.062\sym{*}  &     -0.068         &       394 &   0.094 &       2.060\sym{***}         &       216        &    0.123     \\
+            &     (2.990)         &     (2.217)         &     (-0.408)         &             &     &     (3.547)                  \\
+Students deal with the copying of texts     &       0.418         &       0.383         &     -0.048         &      392 &     0.030      &       1.430\sym{**}         &       217        &        0.046   \\
+            &     (1.238)         &     (0.429)         &     (-0.275)         &              &        &     (3.234)                \\
+Students deal with the writing of texts     &       0.690\sym{**} &       0.756\sym{*}  &      -0.253         &       391         &       0.132        &       1.901\sym{***}         &       215        &    0.159     \\
+            &     (2.921)         &     (2.203)         &     (-1.866)         &              &        &     (4.240)                \\
+Students write the questions made after storytelling     &       0.254         &       1.961\sym{***}&      0.048         &     387         &       0.142     &       2.454\sym{***} &       213        &        0.183    \\
+            &     (1.108)         &     (4.488)         &     (0.262)         &              &        &     (3.446)                \\
+\midrule
+\textbf{\emph{LEARNING PRACTICES BY MATH}}&            &            &            &                     &               \\           
+Students work with games and puzzles     &       0.705         &      -0.759         &      -0.550         &   184    &     0.056     &       0.077         &       105       &        0.060    \\
+            &     (1.785)         &     (-1.715)         &     (-1.328)         &              &       &     (0.151)                 \\
+Students deal with memorization of concepts and rules     &       0.590         &      -0.178         &      -0.374         &       182  &     0.067     &       -0.050         &       103        &        0.115    \\
+            &     (1.652)         &     (-0.572)         &     (-1.128)         &             &        &     (-0.279)                \\
+Students deal with Math found in newspapers / magazines     &       0.976\sym{**} &      -0.532         &      -0.395         &      185         &    0.080 &       0.820\sym{*}         &       105        &   0.114     \\
+            &     (2.843)         &     (-1.604)         &     (-1.123)         &              &       &     (2.237)                 \\
+Students deal with situations to improve calculation speed     &       0.937\sym{**} &      -0.266         &      -0.418         &   185      &      0.053      &       0.727\sym{*}         &       104        &    0.094       \\
+            &     (2.976)         &     (-0.691)         &     (-1.335)         &             &      &     (2.404)                  \\
+Students deal with problems of calculations and algorithms     &       0.794\sym{*}  &    -0.010         &      -0.426         &     183         &       0.050        &       0.940\sym{**}         &       104        &        0.108 \\
+            &     (2.248)         &     (-0.028)         &     (-1.544)         &              &       &     (2.873)                 \\
+Students deal with representations in Math language     &       0.390         &       0.330         &       0.121         &       182         &   0.104        &       0.947\sym{*} &       103        &    0.227     \\
+            &     (0.914)         &     (0.662)         &     (0.379)         &              &        &     (2.342)                \\
+Students deal with situations related to the day-to-day life     &       1.197\sym{**} &      -1.125\sym{*}  &      -0.497         &     185         &      0.151     &       -0.021         &       104        &        0.337    \\
+            &     (2.996)         &     (-2.000)         &     (-1.427)         &             &       &     (-0.030)                 \\
+\midrule
+\textbf{\emph{USE OF SUPPORTING MATERIAL}}&            &            &            &                     &               \\
+Material specific for Math (Golden Beads, Tangram, etc)     &       0.557         &       1.425\sym{**} &     -0.025         &     397         &      0.104    &       2.317\sym{**}         &       219        &     0.152       \\
+            &     (1.944)         &     (3.132)         &     (-0.101)         &              &        &     (2.866)                \\
+Geographical maps and globes     &       0.140         &       0.710         &      -0.440\sym{**} &    393         &      0.057     &       1.433         &       214        &        0.054    \\
+            &     (0.553)         &     (0.843)         &     (-3.169)         &             &        &     (1.268)                \\
+Terrarium and aquarium     &      -0.166         &      -1.146\sym{*}  &       0.175         &   383     &   0.051       &       -1.698\sym{**}         &       207        &        0.084     \\
+            &     (-0.569)         &     (-2.308)         &     (1.138)         &              &       &     (-2.697)                 \\
+Human body diagram and anatomical models     &      0.085         &      -0.724         &     -0.080         &     385         &     0.027     &      -0.426         &       210        &        0.052    \\
+            &     (0.314)         &     (-1.035)         &     (-0.450)         &             &         &     (-0.868)               \\
+Educational multimedia (video tapes and DVDs)     &      -0.320         &       0.724         &      -0.460\sym{*}  &     397         &     0.056    &       0.592         &       217        &        0.068     \\
+            &     (-0.968)         &     (1.348)         &     (-2.399)         &              &       &     (0.701)                 \\
+Television     &      0.049         &      -0.500         &      0.015         &     399         &      0.098        &       0.066         &       218        &   0.113      \\
+            &     (0.150)         &     (-0.957)         &     (0.056)         &              &      &     (0.074)                  \\
+Multimedia projector / datashow     &      -0.101         &      -1.883\sym{*}  &      -0.923\sym{***}&       395         &      0.168     &       -2.802\sym{**}         &       218        &        0.099    \\
+            &     (-0.327)         &     (-2.326)         &     (-3.490)         &             &       &     (-3.220)                 \\
+Computer     &      -0.148         &      -1.204\sym{*}  &      -0.619\sym{**} &   393     &     0.096     &       -1.460         &       214        &        0.094   \\
+            &     (-0.737)         &     (-2.299)         &     (-2.831)         &             &       &     (-1.388)                 \\
+Assign homework for the students     &       0.226         &       2.606\sym{**} &      -0.123         &       402         &      0.218    &       2.638         &       219        &       0.222    \\
+            &     (0.725)         &     (3.012)         &     (-0.660)         &             &        &     (1.795)                \\
+Correction of texts outside the classroom      &     -0.057         &       0.391         &     -0.039         &     394         &  0.100   &       2.466         &       214        &    0.138      \\
+            &     (-0.121)         &     (0.331)         &     (-0.124)         &              &     &     (1.469)                   \\
+Use of textbook for Portuguese     &      -0.175         &       0.910         &      -0.131         &     383         &     0.156     &       0.619         &       214        &     0.197      \\
+            &     (-0.600)         &     (0.968)         &     (-0.490)         &             &        &     (0.652)                \\
+Use of textbook for Math     &       0.226         &      -0.162         &      -0.255         &      166         &     0.053      &       -0.263         &       94        &        0.138   \\
+            &     (0.644)         &     (-0.354)         &     (-0.493)         &              &        &     (-0.818)                \\
+\bottomrule     
+\end{tabular}                      
+\end{adjustbox}   \medskip           
+\end{longtable}
+\vspace{-17pt}
+\begin{minipage}{1\textwidth}            \scriptsize Notes: Table is transposed for better readability. Each line corresponds to one dependent variable reported in table \ref{table:DependentTeacher}. Dependent variables present an ordinal scale ranging between 1 and 6. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Teacher}. Control variables include the explanatory variables for teacher and school features presented in table \ref{table:DescStat}. Standard errors are robust to heteroskedasticity and clustered at school level. t statistics in parentheses. \( * p<0.05, ** p<0.01, *** p<0.001 \).\\                    
+Source: GERES database (2005-2008), own estimates.            
+\end{minipage}                         
+
+
+
+
+
+
+\long\def\comment#1{}
+\comment{
+
+** Tabe with only state versus municipal schools (7 columns)
+
+\newpage
+\addcontentsline{lot}{table}{\ref{table:Robustness} \hspace{7pt} Impact of Teacher Bonus on Teaching Practices}
+\refstepcounter{table}                        \label{table:Practices}                        \centering            \textbf{Table \ref{table:Practices}. Impact of Teacher Bonus on Teaching Practices} \\             
+\vspace{-5pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{7}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{max width=\textwidth}           
+\begin{tabular}{l*{5}{c}}
+\toprule
+            &\multicolumn{5}{c}{\textbf{State vs Municipal Schools}}\\
+ \cline{2-6}                    &\multicolumn{1}{c}{ATT}&\multicolumn{1}{c}{time}&\multicolumn{1}{c}{treated}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$}\\
+\midrule
+\textbf{\emph{TEAM WORK}}&            &            &            &                     &               \\
+I participate in the decisions related to my work      &      -0.170         &      -0.564         &       0.104         &       393        &        0.055       \\
+            &     (-0.508)         &     (-0.883)         &     (0.373)         &              &              \\
+I take into consideration the ideas of my work colleagues      &       0.515         &       0.357         &     -0.099         &       398        &       0.046        \\
+            &     (1.804)         &     (0.564)         &     (-0.397)         &              &              \\
+Teaching is influenced by exchange of ideas between teachers      &      0.038         &       0.471         &       0.217         &      397         &      0.036 \\
+            &     (0.132)         &     (0.614)         &     (0.752)         &              &             \\
+Teachers endeavor to coordinate the curricular content      &       0.152         &       0.439         &       0.321         &      399         &      0.055         \\
+            &     (0.542)         &     (0.629)         &     (1.139)         &              &              \\
+The school staff collaborates to make this school work well      &      -0.188         &       0.512         &       0.472         &     401         &      0.079  \\
+            &     (-0.519)         &     (0.841)         &     (1.747)         &              &              \\
+The principal motivates me for the work      &      -0.163         &       1.158         &       0.291         &    398         &   0.077   \\
+            &     (-0.501)         &     (1.382)         &     (1.041)         &              &              \\
+Principal is able to make teachers compromised with the school      &      -0.171         &       0.942         &       0.331         &     399         &  0.058    \\
+            &     (-0.442)         &     (1.357)         &     (1.374)         &              &              \\
+The principal stimulates innovative activities      &      -0.400         &       1.090         &       0.135         &     399         &  0.058    \\
+            &     (-1.073)         &     (1.688)         &     (0.632)         &             &              \\
+The principal focuses on aspects related to learning      &      -0.110         &       0.377         &       0.182         &      394         &  0.073    \\
+            &     (-0.274)         &     (0.565)         &     (0.590)         &              &             \\
+The principal focuses on aspects related to existing rules     &       0.169         &       0.141         &      0.045         &     391         &  0.080   \\
+            &     (0.512)         &     (0.207)         &     (0.208)         &              &              \\
+The principal focuses on aspects related to school maintenance     &       0.410         &      -0.125         &       0.102         &     393         &      0.070         \\
+            &     (1.120)         &     (-0.165)         &     (0.457)         &             &              \\
+\midrule
+\textbf{\emph{LEARNING PRACTICES BY PORTUGUESE}}&            &            &            &                     &               \\
+Students deal with reading (aloud) of stories or texts for the class    &       1.389\sym{**} &       14.08\sym{***}&      -0.121         &       395  &     0.634         \\
+            &     (3.234)         &     (13.070)         &     (-0.465)         &              &              \\
+Students deal with (silent) reading of texts from textbook      &       0.620\sym{*}  &       2.389\sym{***}&    -0.002         &  391    &    0.129 \\
+            &     (2.363)         &     (3.973)         &     (-0.012)         &             &              \\
+Students deal with collective reading (aloud) of stories     &       0.637         &       1.758\sym{**} &       0.431\sym{*}  &     394         &     0.245         \\
+            &     (1.913)         &     (2.938)         &     (2.261)         &              &              \\
+Students deal with dictation     &       0.854\sym{**} &       1.062\sym{*}  &     -0.068         &       394 &   0.094 \\
+            &     (2.990)         &     (2.217)         &     (-0.408)         &             &             \\
+Students deal with the copying of texts     &       0.418         &       0.383         &     -0.048         &      392 &     0.030         \\
+            &     (1.238)         &     (0.429)         &     (-0.275)         &              &              \\
+Students deal with the writing of texts chosen by the teacher     &       0.690\sym{**} &       0.756\sym{*}  &      -0.253         &       391         &       0.132         \\
+            &     (2.921)         &     (2.203)         &     (-1.866)         &              &              \\
+Students respond in writing the questions made after storytelling     &       0.254         &       1.961\sym{***}&      0.048         &     387         &       0.142         \\
+            &     (1.108)         &     (4.488)         &     (0.262)         &              &              \\
+\midrule
+\textbf{\emph{LEARNING PRACTICES BY MATH}}&            &            &            &                     &               \\           
+Students work with games and puzzles     &       0.705         &      -0.759         &      -0.550         &   184    &     0.056         \\
+            &     (1.785)         &     (-1.715)         &     (-1.328)         &              &              \\
+Students deal with memorization of concepts and rules     &       0.590         &      -0.178         &      -0.374         &       182  &     0.067         \\
+            &     (1.652)         &     (-0.572)         &     (-1.128)         &             &              \\
+Students deal with Math concepts found in newspapers and magazines     &       0.976\sym{**} &      -0.532         &      -0.395         &      185         &    0.080 \\
+            &     (2.843)         &     (-1.604)         &     (-1.123)         &              &              \\
+Students deal with situations to improve the calculation speed     &       0.937\sym{**} &      -0.266         &      -0.418         &   185      &      0.053         \\
+            &     (2.976)         &     (-0.691)         &     (-1.335)         &             &              \\
+Students deal with problems involving calculations and algorithms     &       0.794\sym{*}  &    -0.010         &      -0.426         &     183         &       0.050         \\
+            &     (2.248)         &     (-0.028)         &     (-1.544)         &              &              \\
+Students deal with the representation of situations in Math language     &       0.390         &       0.330         &       0.121         &       182         &   0.104         \\
+            &     (0.914)         &     (0.662)         &     (0.379)         &              &              \\
+Students deal with situations related to the day-to-day life     &       1.197\sym{**} &      -1.125\sym{*}  &      -0.497         &     185         &      0.151         \\
+            &     (2.996)         &     (-2.000)         &     (-1.427)         &             &              \\
+\bottomrule
+\multicolumn{6}{r}{\textit{Continued on next page.}} \\
+\end{tabular}
+\end{adjustbox}
+\end{longtable}            
+            
+
+
+
+
+\vspace{50pt}
+\tablename\ \addtocounter{table}{-1} \thetable\ -- \textit{Continued from previous page.}
+\vspace{-10pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{7}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{max width=\textwidth}           
+\begin{tabular}{l*{5}{c}}
+\toprule
+            &\multicolumn{5}{c}{\textbf{State vs Municipal Schools}}\\
+ \cline{2-6}                    &\multicolumn{1}{c}{ATT}&\multicolumn{1}{c}{time}&\multicolumn{1}{c}{treated}&\multicolumn{1}{c}{N}&\multicolumn{1}{c}{$R^2$}\\
+\midrule
+\textbf{\emph{USE OF SUPPORTING MATERIAL}}&            &            &            &                     &               \\
+Use of material specific for Math (Golden Beads, Tangram, etc)     &       0.557         &       1.425\sym{**} &     -0.025         &     397         &      0.104        \\
+            &     (1.944)         &     (3.132)         &     (-0.101)         &              &              \\
+Use of geographical maps and globes     &       0.140         &       0.710         &      -0.440\sym{**} &    393         &      0.057         \\
+            &     (0.553)         &     (0.843)         &     (-3.169)         &             &              \\
+Use of terrarium and aquarium     &      -0.166         &      -1.146\sym{*}  &       0.175         &   383     &   0.051            \\
+            &     (-0.569)         &     (-2.308)         &     (1.138)         &              &              \\
+Use of human body diagram and anatomical models     &      0.085         &      -0.724         &     -0.080         &     385         &     0.027         \\
+            &     (0.314)         &     (-1.035)         &     (-0.450)         &             &              \\
+Use of educational multimedia (video tapes and DVDs)     &      -0.320         &       0.724         &      -0.460\sym{*}  &     397         &     0.056         \\
+            &     (-0.968)         &     (1.348)         &     (-2.399)         &              &              \\
+Use of television     &      0.049         &      -0.500         &      0.015         &     399         &      0.098         \\
+            &     (0.150)         &     (-0.957)         &     (0.056)         &              &              \\
+Use of multimedia projector / datashow     &      -0.101         &      -1.883\sym{*}  &      -0.923\sym{***}&       395         &      0.168         \\
+            &     (-0.327)         &     (-2.326)         &     (-3.490)         &             &              \\
+Use of computer     &      -0.148         &      -1.204\sym{*}  &      -0.619\sym{**} &   393     &     0.096        \\
+            &     (-0.737)         &     (-2.299)         &     (-2.831)         &             &              \\
+Assign homework for the students     &       0.226         &       2.606\sym{**} &      -0.123         &       402         &      0.218        \\
+            &     (0.725)         &     (3.012)         &     (-0.660)         &             &              \\
+Correction (outside the classroom) of texts produced by the students      &     -0.057         &       0.391         &     -0.039         &     394         &  0.100     \\
+            &     (-0.121)         &     (0.331)         &     (-0.124)         &              &              \\
+Use of textbook for Portuguese     &      -0.175         &       0.910         &      -0.131         &     383         &     0.156        \\
+            &     (-0.600)         &     (0.968)         &     (-0.490)         &             &              \\
+Use of textbook for Math     &       0.226         &      -0.162         &      -0.255         &      166         &     0.053         \\
+            &     (0.644)         &     (-0.354)         &     (-0.493)         &              &              \\
+\bottomrule     
+\end{tabular}                      
+\end{adjustbox}   \medskip           
+\end{longtable}
+\vspace{-17pt}
+\begin{minipage}{1\textwidth}            \scriptsize Notes: Table is transposed for better readability. Each line corresponds to one dependent variable reported in table \ref{table:DependentTeacher}. Dependent variables present an ordinal scale ranging between 1 and 6. ATT is the parameter of interest $\delta$ in equation \eqref{eq:DiD-Teacher}. Control variables include the explanatory variables for teacher and school features presented in table \ref{table:DescStat}. Standard errors are robust to heteroskedasticity and clustered at school level. t statistics in parentheses. \( * p<0.05, ** p<0.01, *** p<0.001 \).\\                    
+Source: GERES database (2005-2008), own estimates.            
+\end{minipage}                         
+
+// Finalising ignore
+} 
+
+\justify
+
+
+The (main) results based on equation \eqref{eq:DiD-Teacher} present no statistically significant impact of bonus on the variables related to team work in schools and the use of supporting material in classroom. Teaching practices, such as the use of textbooks, use of educational multimedia, assign homework, and correction of texts outside classrooms, remained unchanged by the implementation of the bonus program. Likewise, the bonus did not affect the behavior of teacher in relation to the participation in the work decisions, the uptake of new ideas from work colleges, or the endeavour to coordinate the curricular content across classes. Last but not least, teachers reported no improvement in the working activity of the principal \textemdash which also is eligible for the bonus. With the PFP program, the principals from the state schools of São Paulo do not motivate more their teachers, stimulate more innovative activities or give more attention to aspects related to the learning process.
+
+On the other hand, the merit pay program in São Paulo has led to an improvement of (some) learning practices by Portuguese and Math. For 54 percent (8 out of 14) of the investigated outcomes, the frequency of these activities in treatment schools was (statistically significantly) higher than those in comparison schools. After the implementation of the bonus, the teachers from state schools require more often from their students activities, such as reading aloud of stories, silent reading of texts from textbook, dictation, writing of texts, memorization of Math concepts found in newspapers and magazines, situations to improve the calculation speed, problem-solving activities for calculation and algorithms, and Math situations related to day-to-day life.
+
+
+\newpage
+\begin{table}[htbp]\centering
+\caption{Descriptive Statistics}
+\begin{tabular}{l*{1}{ccccc}}
+\hline\hline
+            &\multicolumn{1}{c}{{Mean}}&\multicolumn{1}{l}{{Std.Dev.}}&            &            &            \\
+\hline
+\textbf{\emph{Student}}&            &            &            &            &            \\
+Age         &      646918&      17.467&       6.732&           6&          29\\
+race        &      646918&       2.712&       1.435&           1&           6\\
+Female      &      646918&       0.495&       0.500&           0&           1\\
+Rural       &      646918&       0.249&       0.433&           0&           1\\
+LevelEduc   &      397682&       1.542&       0.756&           1&           3\\
+Single parent &      646918&       0.291&       0.454&           0&           1\\
+Employed    &      646918&       0.243&       0.429&           0&           1\\
+Beneficiary of Bolsa Familia&      646918&       0.101&       0.302&           0&           1\\
+SocDist     &      643408&       2.804&       0.798&           1&           4\\
+Beneficiary of COVID19-Aid&      646918&       0.597&       0.490&           0&           1\\
+COVIDSym    &      646918&       0.008&       0.144&           0&           3\\
+Positive test&      646918&       0.017&       0.131&           0&           1\\
+Seek medical care&      646909&       0.009&       0.096&           0&           1\\
+Need Hospitalization&      646879&       0.000&       0.013&           0&           1\\
+\emph{Parents}&            &            &            &            &            \\
+Head is female&      646918&       0.464&       0.499&           0&           1\\
+educ\_parents&      646918&       4.313&       1.923&           1&           8\\
+EAP\_HH      &      646918&       1.562&       0.728&           0&           2\\
+Head working formal&      646918&       0.296&       0.457&           0&           1\\
+partner working formal&      646918&       0.194&       0.395&           0&           1\\
+Head in homeoffice&      646918&       0.036&       0.186&           0&           1\\
+Partner in homeoffice&      646918&       0.028&       0.164&           0&           1\\
+Head in work absenteeism&      646918&       0.044&       0.206&           0&           1\\
+Partner in work absenteeism&      646918&       0.029&       0.169&           0&           1\\
+Head in social distancing&      646918&       0.427&       0.495&           0&           1\\
+Partner in social distancing&      646918&       0.336&       0.472&           0&           1\\
+Other adult in social distancing&      646918&       0.319&       0.466&           0&           1\\
+\emph{Household}&            &            &            &            &            \\
+Symptoms of COVID19&      646918&       0.005&       0.067&           0&           1\\
+Positive test&      646918&       0.058&       0.233&           0&           1\\
+Seek medical care&      646918&       0.022&       0.145&           0&           1\\
+Need hospitalization&      646918&       0.001&       0.031&           0&           1\\
+\hline\hline
+\multicolumn{6}{l}{\footnotesize Notes: This table provides descriptive statistics for panel data structure in which each student i was accompanied during the five sample waves. }\\
+\multicolumn{6}{l}{\footnotesize Source: PNAD COVID-19.}\\
+\end{tabular}
+\end{table}
+
+
+
+
+\justify
+%\newpage
+\section{Conclusion} \label{Paper3-Conclusion}
+
+%[This section has yet to be written.]
+
+Pay-for-performance programs are the subject of many often very heated debates \textemdash both by politicians and the public at large. Currently, it is not possible to identify an international scientific consensus in this regard, given the mixed empirical evidence presented to date. In this way, this paper has contributed to the small but growing literature on the effectiveness of incentive-pay programs for teachers.
+
+%This paper contributed to a small but growing literature that used (quasi) experimental design to investigate the implementation of teacher bonus in developing countries.
+
+The present study dealt with the researching of the impact on student academic achievement of the implementation of a teacher bonus program in the state of São Paulo (Brazil) in 2008. The main findings, based on value-added models, suggested that providing further financial incentives for school staff members has not resulted in a statistically significant impact on student performance in Mathematics or Portuguese: one year after the bonus scheme’s implementation, students in incentive (state) schools scored $0.011$ and $0.074$ standard deviation higher than students in control (municipal) schools in Portuguese and Math tests respectively. But no coefficient was statistically significant. %The application of alternative empirical specifications and placebos tests supports this finding. 
+
+
+
+%The main findings, based on a DiD method and several empirical approaches, suggested that providing financial incentives for the school staff members has resulted in a statistically significant impact on student performance by mathematics: after one year of the bonus implementation, child test scores in program (state) schools were between $0.087$ and $0.378$ standard deviation - dependent on the empirical model - higher than in comparison (municipal) schools. But in contrast to this, no significant impact was found by Portuguese. 
+
+%Given the lack of supporting evidence to examine this difference empirically, the author posits a hypothesis to explain these distinct results for math and Portuguese: First, based on the existing literature \citep[see e.g.][]{ma2001stability,lee1995effects}, the effects of school and family characteristics on student achievement can be different across academic subjects. Therefore, it is to be expected that the reading knowledge of children - what was measured by the GERES Portuguese tests - is stronger associated with the intellectual capital of parents than the mathematical skills, since that the familiar routines promote much more the linguistic ability of children than their math competence. It thus stands to reason that the importance of the school in improving student academic achievements will be higher for math, specially for the younger students. Consequently, each change in education system will provoke a relatively higher impact in the math abilities of the pupils than in the reading one.
+
+
+Despite this lack of effectiveness on student academic achievement, this paper found (limited) empirical evidence supporting the implementation of the PFP program. More than half (8 out of 14) of the investigated learning practices by Portuguese and Math presented an improvement due to the bonus. When compared to the control group (teachers from municipal schools), teachers in states schools require more frequently from their students activities such as (i) reading aloud of stories, (ii) silent reading of texts from textbook, (iii) dictation, (iv) writing of texts, (v) memorization of Math concepts found in newspapers and magazines, (vi) situations to improve the calculation speed, (vii) problem-solving activities for calculation, and (viii) Math situations related to day-to-day life.
+
+
+There are three important caveats to bear in mind when drawing conclusions regarding this paper. First, the empirical evaluation was based on a quasi-experiment situated in the city of Campinas, and as in all experiments, the empirical evidence is limited to that place, only one of $645$ municipalities in the state of São Paulo. Hence, extrapolations to other populations should be treated with caution. 
+
+
+The other important limitation of this study is that the difference-in-difference approach used only one year as the post-treatment period (2008).\footnote{The limitation to a single post-treatment period is not an exclusivity of this paper. \citet{loyalka2019pay, muralidharan2011teacher, lavy2009performance} are just some examples among a long list of prestigious research projects based on the same approach.} In this way, this paper was able to estimate only the short-term impact of the bonus program. It would be of great importance to extend this time-line over several years and estimate the impact on the medium and long term. The review of the literature using a longer time period \citep[see e.g.][]{barrera2017teacher, imberman2015incentive, glewwe2010teacher} indicated that in principle two opposite effects are conceivable: the impact of the teacher bonus may be larger in subsequent years, since the credibility and results of the program have already been established by the educational staff, or the gains of student performance might decrease over time should the novelty of the program wear off and teacher engagement in the schools decrease due to the existence of free-riding in the context of group-based bonus programs. Unfortunately, the current limitation on panel data covering the performance of Brazilian student over a (longer) time period does not allow me to examine to what extent these two effects have prevailed. 
+
+%lack of financial return. 
+
+
+
+
+%Another area of uncertainty is the transferability of the results to students of higher grades. The GERES database focused on pupils enrolled in the first four years of compulsory education. The educational achievements of children in this age group tend to be strongly dependent on the abilities of their parents, since they spend a prolonged time with the children, contributing significantly to their intellectual development. However, the older the children, the lower the probability that their parents can continue to help them with increasingly more complicated schoolwork, which in turn increases the importance of teachers for student academic performance. It is therefore not surprising when the impact of teacher bonuses varies according to the grade and age of the child.
+
+Another area of uncertainty is the transferability of the results to students enrolled in higher grades. Using cross-sectional data for the evaluation of the bonus program in São Paulo, \citet{lepine2016teacher} and \citet{oshiro2015impacto} found different impacts occurring according to the grade of students. According to the authors, the leaning structure in Brazilian schools might be responsibility for this difference. While, pupils until the fourth grade of elementary school have generally only one teacher, the older students have different teachers for different subjects, making coordination more difficult in the context of a group incentive program. Given that the GERES project was limited to students enrolled in the first four years of schooling, the impact of the bonus program for students after the fourth grade could not be investigated.
+
+
+
+
+%The literature related to the importance of parental educational involvement for student academic performance suggests that children have better achievement outcomes when parents are involved in their education \citep[see e.g.][]{harris2016new}, but the strength of this association varies according to socioeconomic status \citep{benner2016parental}, ethnicity \citep{wang2014does}, and school grades \citep{assefa2019relationship, mcbride2009differential}. It is therefore not surprising when the impact of bonuses varies according to the grade and age of the child. This paper focused its investigation on pupils enrolled in the first four years of schooling, and the author supposes that for these grades parents have a higher chance of supporting effectively the school activities of their offspring. However the older the children, the lower the probability that their parents\textemdash especially those with low educational-attainment levels\textemdash can continue to help them with increasingly more complicated schoolwork, which in turn increases the importance of teachers for student performance. 
+
+
+%Despite these caveats, this paper clearly demonstrated the inefficiency of the program \textemdash at least in its first year of implementation. 
+
+
+Despite these caveats, this research provided innovative contributions to the discussion of teacher bonus programs in Brazil. Compared to the existing literature \citep[see][]{lepine2016teacher, oshiro2015impacto}, this paper was the first to apply nongovernmental performance tests to address the  “teaching to the test” problem, and the first to apply panel data at student level and valued-added models to control the investigation for individual fixed effects.
+
+
+ 
+
+As \citet{lepine2016teacher} and \citet{oshiro2015impacto}, I also found positive gains in student performance due to the bonus program, this improvement being higher for Math than for Portuguese. However, in my empirical investigation this variation was not statistically significant. My methodological contributions are the reason for the different results of this paper in relation to the existing literature. \citet{lepine2016teacher} and \citet{oshiro2015impacto} found positive effects of the bonus program in the short-term using (cross-section) data from the (2007 and 2009 waves of) \textit{Prova Brasil}. This exam is a standardized test applied every two years to 5th and 9th-grade students from public schools. Therefore, the pupils evaluated in the 2007 wave were not the same as in the 2009 wave.\footnote{Assuming no retention of students in the same grade over time, the pupils evaluated in the 2007 wave of \textit{Prova Brasil} have took this standardized test again only in 2011 when they were enrolled in the 9th-grade.}
+
+The current study is the first to apply panel data tracking the test scores of (the same) students pre- and post-intervention. This methodological approach has shown that models using cross-section data overestimate the impact of the bonus scheme on student performance, by attributing predictive power to the program \textemdash when, in truth, it should be attributed to the learning capacity of students instead.
+
+
+%The implementation of the PFP programs in Brazilian education system in the 2000's was not accompanied by experiments to determine the causal effect of these interventions. Therefore, it has been a great challenge for scientists to create ex-post impact evaluations. 
+%The current study points to the importance of using valued-added models in the investigation of teacher bonus programs. 
+
+%Since student performance has a cumulative character over time, individuals’ prior academic achievements should be taken into account in future analyses of the bonuses programs existing in Brazilian schools. The current study has shown that models using cross-section data are inappropriate for this empirical investigation, since they are not able to capture the dynamic relationship between prior and future student test scores. Empirical models with no control for students’ previous accomplishments generate overestimated results for the impact of the bonus scheme on student performance, by attributing predictive power to the program \textemdash when, in truth, it should be attributed to the learning capacity of students instead.
+
+
+
+%An important novelty of this paper in relation to the literature on teacher bonus in Brazil was the application of dynamic panel structure to the investigation of the impact of the bonus program. I have demonstrated the importance in controlling the educational production function for prior academic achievement of students. Applying valued-added models that take into consideration the cumulative character of academic performance, this paper shows that  
+
+
+%\newpage
+%\section{Open Questions}
+
+
+
+
+\newpage
+\section*{Supplementary Material} \label{SuppMaterial}
+
+
+
+%Additional supporting information may be found in the online version of this article at the publisher’s web site:
+
+Additional supporting data for this paper are available to view and download on the author’s \href{https://tharcisio-leone.com/}{homepage}. The \href{http://tiny.cc/p8heoz}{online supplemental file} provides more detailed information about the following topics:
+
+
+
+\begin{enumerate}
+\item Brazilian Educational System
+\vspace{-0.2cm} \item Education Development Index
+\vspace{-0.2cm} \item Indicator for Realization of Targets
+\vspace{-0.2cm} \item Indicator for Socioeconomic Status
+\vspace{-0.2cm} \item GERES Data
+\vspace{-0.2cm} \item Item Response Theory
+\vspace{-0.2cm} \item GMM Estimator
+%\vspace{-0.2cm} \item 2SLS Estimator
+\vspace{-0.2cm} \item Stata Syntaxes
+\end{enumerate}
+
+
+
+
+
+\section*{Conflict of interest}
+The author declares that he has no conflict of interest.
+
+
+\section*{Acknowledgements}
+The author is grateful to Alicia Bonamino from \href{https://laedpucrio.wordpress.com/}{LAEd/PUC-Rio} for providing me with the GERES database, and to the Friedrich Ebert Foundation for its financial support.
+
+
+
+
+
+\newpage
+\bibliographystyle{apacite}
+\bibliography{References}
+
+
+\newpage
+\appendix
+
+
+
+
+\setcounter{table}{0}
+\renewcommand{\thetable}{A\arabic{table}}
+
+\setcounter{figure}{0}
+\renewcommand{\thefigure}{A\arabic{figure}}
+
+
+
+
+
+\section[Appendix]{Appendix: Tables $\&$ Figures} \label{sec:Appendix}
+
+\vspace{-3pt}
+
+\addcontentsline{lot}{table}{Table \ref{table:DescStat} \hspace{0pt} Descriptive Statistics} 
+\refstepcounter{table} \label{table:DescStat} \centering \textbf{Table \ref{table:DescStat}. Descriptive statistics and results of independent \textit{t}-tests.} \\
+\vspace{-10pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{7}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{scale=0.9}
+\begin{tabular}{l*{1}{ccccccc}}
+\toprule
+            &\multicolumn{3}{c}{\textbf{Mean}}                                                                                    &\multicolumn{4}{c}{\textbf{T-Test}}                                                                                     \\ \cline{2-4} \cline{5-8}                                                                                     
+            &\multicolumn{1}{c}{(1)}                                                                                     &\multicolumn{1}{c}{(2)} &\multicolumn{1}{c}{(3)}  &\multicolumn{2}{c}{State vs Municipal} &\multicolumn{2}{c}{State vs Private}\\  
+            &       State&   Municipal&     Private&       Diff.         &      t-test&       Diff.         &      t-test\\
+\midrule
+\textbf{\emph{Student Features}}&            &            &            &                     &            &                     &            \\
+Male        &      0.5145&      0.5464&      0.5436&      -0.032\sym{***}&       -5.08&      -0.029\sym{***}&       -3.32\\
+\emph{Race} &            &            &            &                     &            &                     &            \\
+White       &      0.3958&      0.3387&      0.5823&      0.057\sym{***}&        9.46&      -0.187\sym{***}&      -21.71\\
+Mixed       &      0.4000&      0.4190&      0.2865&       -0.019\sym{***}&       -3.09&       0.113\sym{***}&       13.47\\
+Black       &      0.1245&      0.1535&      0.0276&       -0.029\sym{***}&       -6.68&       0.097\sym{***}&       18.59\\
+Asian       &      0.0289&      0.0342&      0.0587&      -0.005\sym{**} &       -2.39&      -0.030\sym{***}&       -9.10\\
+Indigenous  &      0.0432&      0.0454&      0.0437&      -0.002         &       -0.87&      -0.001         &       -0.16\\
+Socio-economic Status&     -0.0877&     -0.1684&      0.7892&      0.081\sym{***}&       14.82&      -0.877\sym{***}&     -113.13\\
+\emph{Household Income}&            &            &            &                     &            &                     &            \\
+Very Low    &      0.0866&      0.0934&      0.0020&       -0.007\sym{**} &       -1.97&       0.085\sym{***}&       21.39\\
+Low         &      0.3311&      0.3394&      0.0275&       -0.008         &       -1.47&       0.304\sym{***}&       45.10\\
+Medium      &      0.3428&      0.3552&      0.1343&       -0.012\sym{**} &       -2.15&       0.209\sym{***}&       28.79\\
+High        &      0.2060&      0.1904&      0.4098&      0.016\sym{***}&        3.25&      -0.204\sym{***}&      -29.02\\
+Very High   &      0.0335&      0.0216&      0.4265&      0.012\sym{***}&        6.06&      -0.393\sym{***}&      -80.58\\
+\emph{Education Mother}&            &            &            &                     &            &                     &            \\
+Less then 4 years&      0.1353&      0.1867&      0.0033&       -0.051\sym{***}&      -10.77&       0.132\sym{***}&       25.81\\
+4 years     &      0.2956&      0.3335&      0.0321&       -0.038\sym{***}&       -6.30&       0.263\sym{***}&       37.79\\
+8 years     &      0.2515&      0.2373&      0.0819&       0.014\sym{**} &        2.55&       0.170\sym{***}&       24.54\\
+Secondary   &      0.2691&      0.2222&      0.4137&      0.047\sym{***}&        8.42&      -0.145\sym{***}&      -18.18\\
+Tertiary    &      0.0485&      0.0204&      0.4690&      0.028\sym{***}&       12.02&      -0.421\sym{***}&      -76.12\\
+\emph{Education Father}&            &            &            &                     &            &                     &            \\
+Less then 4 years&      0.1439&      0.1734&      0.0011&       -0.030\sym{***}&       -5.91&       0.143\sym{***}&       27.01\\
+4 years     &      0.2900&      0.3386&      0.0497&       -0.049\sym{***}&       -7.67&       0.240\sym{***}&       33.72\\
+8 years     &      0.2567&      0.2473&      0.0972&       0.009         &        1.57&       0.159\sym{***}&       22.32\\
+Secondary   &      0.2643&      0.2193&      0.4011&      0.045\sym{***}&        7.71&      -0.137\sym{***}&      -16.89\\
+Tertiary    &      0.0451&      0.0213&      0.4508&      0.024\sym{***}&        9.82&      -0.406\sym{***}&      -71.64\\
+\textbf{\emph{Teacher Features}}&            &            &            &                     &            &                     &            \\
+Male        &      0.0183&      0.0276&      0.0064&       -0.009\sym{***}&       -4.56&       0.012\sym{***}&        5.26\\
+\emph{Education Level}&            &            &            &                     &            &                     &            \\
+Less than secondary&      0.0001&      0.0067&      0.0000&       -0.007\sym{***}&       -8.10&       0.000         &        0.61\\
+Secondary   &      0.0039&      0.0002&      0.0000&       0.004\sym{***}&        5.93&       0.004\sym{***}&        3.89\\
+Vocational  &      0.1819&      0.1238&      0.0451&       0.058\sym{***}&       11.68&       0.137\sym{***}&       21.01\\
+Tertiary    &      0.8077&      0.8632&      0.9132&      -0.056\sym{***}&      -10.83&      -0.106\sym{***}&      -15.30\\
+Master      &      0.0064&      0.0061&      0.0379&      0.000         &        0.30&      -0.031\sym{***}&      -13.94\\
+Doctorate   &      0.0000&      0.0000&      0.0039&      0.000         &           .&      -0.004\sym{***}&       -6.41\\
+\emph{Age}  &            &            &            &                     &            &                     &            \\
+Up to 24    &      0.0309&      0.0515&      0.1134&      0.021\sym{***}&       -7.55&      -0.082\sym{***}&      -20.08\\
+25 - 29     &      0.0319&      0.0410&      0.0984&      -0.009\sym{***}&       -3.51&      -0.066\sym{***}&      -16.61\\
+30 - 39     &      0.3127&      0.2456&      0.4096&      0.067\sym{***}&       10.94&      -0.097\sym{***}&      -11.05\\
+40 - 49     &      0.4253&      0.3230&      0.2985&       0.102\sym{***}&       15.51&       0.127\sym{***}&       14.06\\
+50 - 54     &      0.1223&      0.1463&      0.0768&       -0.024\sym{***}&       -5.12&       0.045\sym{***}&        7.82\\
+More than 55&      0.0768&      0.1927&      0.0033&       -0.116\sym{***}&      -25.00&       0.074\sym{***}&       17.19\\
+\emph{Years of Experience}&            &            &            &                     &            &                     &            \\
+Less than 1 &      0.0060&      0.0000&      0.0084&      0.006\sym{***}&        8.09&      -0.002         &       -1.62\\
+1 - 2       &      0.0031&      0.0063&      0.0205&      -0.003\sym{***}&       -3.39&      -0.017\sym{***}&      -10.65\\
+3 - 4       &      0.0254&      0.0214&      0.0845&      0.004\sym{*}  &        1.94&      -0.059\sym{***}&      -16.08\\
+5 - 10      &      0.0869&      0.1770&      0.0668&       -0.090\sym{***}&      -19.51&       0.020\sym{***}&        3.94\\
+\bottomrule
+\multicolumn{6}{r}{\textit{Continued on next page.}} \\
+\end{tabular}
+\end{adjustbox}
+\end{longtable}
+
+
+
+
+
+
+\vspace{10pt}
+\tablename\ \addtocounter{table}{-1} \thetable\ -- \textit{Continued from previous page.}
+\vspace{-10pt}
+\begin{longtable}{@{\extracolsep{1pt}}l*{7}{c}@{}} 
+\def\sym#1{\ifmmode^{#1}\else\(^{#1}\)\fi}
+\begin{adjustbox}{scale=0.9}
+\begin{tabular}{l*{1}{ccccccc}}
+\toprule
+            &\multicolumn{3}{c}{\textbf{Mean}}                                                                                    &\multicolumn{4}{c}{\textbf{T-Test}}                                                                                     \\ \cline{2-4} \cline{5-8}                                                                                     
+            &\multicolumn{1}{c}{(1)}                                                                                     &\multicolumn{1}{c}{(2)} &\multicolumn{1}{c}{(3)}  &\multicolumn{2}{c}{State vs Municipal} &\multicolumn{2}{c}{State vs Private}\\  
+            &       State&   Municipal&     Private&       Diff.         &      t-test&       Diff.         &      t-test\\
+\midrule
+11 - 15     &      0.2996&      0.1787&      0.2631&       0.121\sym{***}&       20.92&       0.037\sym{***}&        4.31\\
+More than 15&      0.5789&      0.6166&      0.5567&       -0.038\sym{***}&       -5.61&       0.022\sym{**} &        2.40\\
+\emph{Weekly teaching hours}&            &            &            &                     &            &                     &            \\
+Up to 20    &      0.1468&      0.0189&      0.2940&      0.128\sym{***}&       34.60&      -0.147\sym{***}&      -20.46\\
+21 - 25     &      0.3235&      0.0825&      0.4835&      0.241\sym{***}&       45.52&      -0.160\sym{***}&      -17.91\\
+26 - 30     &      0.3641&      0.3604&      0.0590&       0.004         &        0.55&       0.305\sym{***}&       37.96\\
+31 - 40     &      0.1366&      0.4363&      0.0708&       -0.300\sym{***}&      -50.80&       0.066\sym{***}&       10.91\\
+More than 41&      0.0290&      0.1018&      0.0928&      -0.073\sym{***}&      -21.52&      -0.064\sym{***}&      -16.36\\
+\emph{Schools that work}&            &            &            &                     &            &                     &            \\
+Only One    &      0.7072&      0.7260&      0.7638&      -0.019\sym{***}&       -3.03&      -0.057\sym{***}&       -6.79\\
+Two         &      0.2768&      0.2525&      0.2284&       0.024\sym{***}&        4.00&       0.048\sym{***}&        5.91\\
+Three or more&      0.0160&      0.0215&      0.0079&       -0.006\sym{***}&       -2.95&       0.008\sym{***}&        3.74\\
+\emph{Other Job}&            &            &            &                     &            &                     &            \\
+No          &      0.5120&      0.4962&      0.4875&       0.016\sym{**} &        2.29&       0.024\sym{***}&        2.61\\
+Yes, with education&      0.4366&      0.4390&      0.4326&       -0.002         &       -0.35&       0.004         &        0.43\\
+Yes, outside education&      0.0514&      0.0648&      0.0798&      -0.013\sym{***}&       -4.15&      -0.028\sym{***}&       -6.45\\
+\textbf{\emph{School Features}}&            &            &            &                     &            &                     &            \\
+Library     &      0.8913&      0.7322&      0.9640&      0.159\sym{***}&       30.80&      -0.073\sym{***}&      -14.27\\
+Computer lab&      0.2262&      0.8540&      0.8894&      -0.628\sym{***}&     -124.35&      -0.663\sym{***}&      -93.85\\
+Science lab &      0.0337&      0.0024&      0.7755&      0.031\sym{***}&       18.32&      -0.742\sym{***}&     -157.07\\
+Sports court&      0.8915&      0.7658&      0.9135&      0.126\sym{***}&       25.81&      -0.022\sym{***}&       -4.05\\
+Art room    &      0.1398&      0.0455&      0.4520&      0.094\sym{***}&       25.36&      -0.312\sym{***}&      -44.25\\
+Intimidation of students&      0.2864&      0.3081&      0.1420&       -0.022\sym{***}&       -3.39&       0.144\sym{***}&       17.91\\
+Intimidation of staffs&      0.2825&      0.3374&      0.2477&       -0.055\sym{***}&       -8.50&       0.035\sym{***}&        4.14\\
+Violence against students&      0.3447&      0.3750&      0.0955&       -0.030\sym{***}&       -4.53&       0.249\sym{***}&       30.50\\
+Violence against staffs &      0.2370&      0.2693&      0.0450&       -0.032\sym{***}&       -5.34&       0.192\sym{***}&       26.63\\
+Depredation &      0.4158&      0.5218&      0.1271&       -0.106\sym{***}&      -15.35&       0.289\sym{***}&       33.55\\
+Drug use    &      0.3930&      0.5701&      0.0791&       -0.177\sym{***}&      -25.58&       0.314\sym{***}&       37.71\\
+Interference of drug cartel&      0.3648&      0.5107&      0.0753&       -0.146\sym{***}&      -21.04&       0.289\sym{***}&       35.50 \vspace{-3pt}\\ 
+\midrule
+Observations        &       18,225&     17,635       &   5,755    &            &        &            \\
+Students    &     3,686       &     3,560       &           1,165            &                     &            &                     &            \\
+Classes    &          366&    410        &           176            &                     &            &                     &            \\
+Schools     &        20    &       20     &           20            &                     &            &                     &            \\
+%Waves       &     5       &      5      &           5             &                     &            &                     &            \\ 
+\bottomrule
+\multicolumn{8}{@{}p{7in}@{}}{\footnotesize Notes: This table provides descriptive statistics for panel data structure in which each student $i$ was tracked during the five sample waves. \textit{t}-tests compare the variables across school types. \( * p<0.1, ** p<0.05, *** p<0.01 \).}\vspace{-3pt} \\
+\multicolumn{8}{@{}p{7in}@{}}{\footnotesize Source: GERES database (2005–2008); author’s own estimates.}\\
+\end{tabular}
+\end{adjustbox}
+\end{longtable}
+
+
+
+\tablename\ \addtocounter{table}{-1}
+\begin{landscape}
+% Table generated by Excel2LaTeX from sheet 'Teachers (2)'
+\begin{table}[htbp]
+  \centering
+%  \caption{Add caption}
+\addcontentsline{lot}{table}{Table \ref{table:DescStat} \hspace{0pt} Descriptive statistics of Teacher Practices} 
+\refstepcounter{table} \label{table:DependentTeacher} \centering \textbf{Table \ref{table:DependentTeacher}. Descriptive Statistics of Teacher Practices.} \\
+%\vspace{-10pt}
+  \begin{adjustbox}{width=10.5in,totalheight=6in}
+    \begin{tabular}{llcccccccccccccc}   
+    \toprule
+    \multicolumn{1}{c}{\textbf{Dependent Variable}} &       & \multicolumn{10}{c}{\textbf{State Schools}}                                   &       & \multicolumn{3}{c}{\textbf{Municipal Schools}} \\
+\cmidrule{1-1}\cmidrule{3-12}\cmidrule{14-16}    \multicolumn{1}{c}{\textbf{TEAM WORK}} &       & \multicolumn{5}{c}{\textbf{Likert Scale (in \%)}} &       &       & \multicolumn{3}{c}{\textbf{Descriptive}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    \textit{Please indicate your level of agreement with the following statements.} &       & 1     & 2     & 3     & 4     & 5     &       &       & N     & Mean  & SD    &       & N     & Mean  & SD \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    I participate in the decisions related to my work &       & 1.98  & 1.19  & 4.35  & 18.97 & 73.51 &       &       & 253   & 4,61  & 0,80  &       & 272   & 4,36  & 0,99 \\
+    I take into consideration the ideas of my work colleagues &       & 0.78  & 1.16  & 5.43  & 39.92 & 52.71 &       &       & 258   & 4,43  & 0,72  &       & 270   & 4,38  & 0,69 \\
+    The teaching in this school is very much influenced by the exchange of ideas between teachers &       & 1.16  & 3.88  & 15.50 & 34.11 & 45.35 &       &       & 258   & 4,19  & 0,91  &       & 268   & 3,86  & 1,10 \\
+    The teachers in this school endeavour to coordinate the curricular content between the different classes &       & 1.92  & 3.46  & 10.00 & 30.77 & 53.85 &       &       & 260   & 4,31  & 0,93  &       & 271   & 3,85  & 1,17 \\
+    The school staff collaborates to make this school work well &       & 3.07  & 1.15  & 10.73 & 28.35 & 56.70 &       &       & 261   & 4,34  & 0,94  &       & 271   & 4,01  & 0,99 \\
+    The principal motivates me for the work &       & 8.08  & 6.54  & 19.23 & 23.85 & 42.30 &       &       & 260   & 3,86  & 1,26  &       & 271   & 3,61  & 1,27 \\
+    The principal is able to make the teachers compromised with the school &       & 6.18  & 4.63  & 15.06 & 31.66 & 42.47 &       &       & 259   & 4,00  & 1,15  &       & 267   & 3,67  & 1,18 \\
+    The principal stimulates innovative activities &       & 7.31  & 5.38  & 11.54 & 27.69 & 48.08 &       &       & 260   & 4,04  & 1,21  &       & 268   & 3,89  & 1,21 \\
+    The principal gives special attention to aspects related to learning &       & 5.10  & 5.49  & 16.86 & 26.27 & 46.28 &       &       & 255   & 4,03  & 1,15  &       & 264   & 3,76  & 1,27 \\
+    The principal gives special attention to aspects related to existing rules &       & 1.56  & 3.89  & 9.73  & 22.57 & 62.25 &       &       & 257   & 4,40  & 0,93  &       & 263   & 4,19  & 0,95 \\
+    The principal gives special attention to aspects related to school maintenance &       & 1.98  & 3.95  & 8.70  & 21.34 & 64.03 &       &       & 253   & 4,42  & 0,95  &       & 266   & 4,16  & 1,04 \\
+          &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+    \multicolumn{1}{c}{\textbf{LEARNING PRACTICES BY PORTUGUESE}} &       & \multicolumn{6}{c}{\textbf{Frequency Scale (in \%)}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    \textit{Question: How often do you (teacher) conduct the following teaching practices in classroom?} &       & 1     & 2     & 3     & 4     & 5     &       &       & N     & Mean  & SD    &       & N     & Mean  & SD \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    Students deal with reading (aloud) of stories or texts for the class &       & 24.90 & 2.30  & 1.92  & 6.51  & 64.37 &       &       & 261   & 3,83  & 1,73  &       & 268   & 3,83  & 1,67 \\
+    Students deal with the silent reading of texts from textbook   &       & 10.89 & 13.23 & 8.95  & 26.07 & 40.86 &       &       & 257   & 3,73  & 1,39  &       & 263   & 3,73  & 1,37 \\
+    Students deal with collective reading (aloud) of stories &       & 20.16 & 8.91  & 7.75  & 22.48 & 40.70 &       &       & 258   & 3,55  & 1,57  &       & 266   & 3,39  & 1,55 \\
+    Students deal with dictation &       & 9.49  & 31.23 & 24.11 & 22.13 & 13.04 &       &       & 253   & 2,98  & 1,20  &       & 270   & 2,93  & 1,10 \\
+    Students deal with the copying of texts &       & 17.05 & 23.64 & 18.99 & 25.58 & 14.74 &       &       & 258   & 2,97  & 1,33  &       & 265   & 3,06  & 1,22 \\
+    Students deal with the writing of texts chosen by the teacher &       & 5.16  & 13.89 & 23.81 & 44.44 & 12.70 &       &       & 252   & 3,46  & 1,05  &       & 265   & 3,33  & 1,01 \\
+    Students respond in writing the questions made after the storytelling &       & 9.06  & 15.75 & 19.69 & 25.98 & 29.52 &       &       & 254   & 3,51  & 1,31  &       & 259   & 3,56  & 1,26 \\
+          &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+    \multicolumn{1}{c}{\textbf{LEARNING PRACTICES BY MATH}} &       & \multicolumn{6}{c}{\textbf{Frequency Scale (in \%)}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    \textit{Question: How often do you conduct the following teaching practices in classroom?} &       & 1     & 2     & 3     & 4     & 5     &       &       & N     & Mean  & SD    &       & N     & Mean  & SD \\
+\cmidrule{1-1}\cmidrule{3-7}\cmidrule{10-12}\cmidrule{14-16}    Students work with games and puzzles &       & 1.59  & 11.90 & 44.44 & 34.92 & 7.15  &       &       & 126   & 3,34  & 0,84  &       & 118   & 3,45  & 0,96 \\
+    Students deal with situations for memorization of concepts and rules &       & 6.61  & 13.22 & 14.05 & 23.14 & 42.98 &       &       & 121   & 3,83  & 1,30  &       & 118   & 3,97  & 1,20 \\
+    Students deal with topics related to Math found in newspapers and magazines? &       & 0.80  & 4.00  & 24.00 & 35.20 & 36.00 &       &       & 125   & 4,02  & 0,92  &       & 119   & 3,59  & 1,04 \\
+    Students deal with situations to improve the calculation speed? &       & 4.03  & 7.26  & 8.87  & 29.84 & 50.00 &       &       & 124   & 4,15  & 1,11  &       & 118   & 4     & 1,07 \\
+    Students deal with problems involving calculations and algorithms? &       & 2.42  & 4.84  & 9.68  & 26.61 & 56.45 &       &       & 124   & 4,30  & 1,00  &       & 118   & 4,21  & 0,94 \\
+    Students deal with problems involving the representation of situations in mathematical language? &       & 1.64  & 5.74  & 24.59 & 68.03 & -     &       &       & 122   & 3,59  & 0,68  &       & 118   & 3,54  & 0,66 \\
+    Students deal with situations related to the day-to-day life &       & 0.00  & 1.61  & 16.13 & 82.26 & -     &       &       & 124   & 3,81  & 0,44  &       & 121   & 3,60  & 0,68 \\
+          &       &       &       &       &       &       &       &       &       &       &       &       &       &       &  \\
+    \multicolumn{1}{c}{\textbf{USE OF SUPPORTING MATERIAL}} &       & \multicolumn{6}{c}{\textbf{Frequency Scale (in \%)}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} &       & \multicolumn{3}{c}{\textbf{Descriptive}} \\
+\cmidrule{1-1}\cmidrule{3-8}\cmidrule{10-12}\cmidrule{14-16}    Question: How often do you use the following teaching resources in classroom? &       & 1     & 2     & 3     & 4     & 5     & 6     &       & N     & Mean  & SD    &       & N     & Mean  & SD \\
+\cmidrule{1-1}\cmidrule{3-8}\cmidrule{10-12}\cmidrule{14-16}    Use of material specific for Math (Golden Beads, Tangram, etc) &       & 1.92  & 7.69  & 14.62 & 41.15 & 22.69 & 11.93 &       & 260   & 4,11  & 1,15  &       & 269   & 3,99  & 1,21 \\
+    Use of geographical maps and globes &       & 1.59  & 2.79  & 11.16 & 45.42 & 29.08 & 9.96  &       & 251   & 4,27  & 0,99  &       & 267   & 4,34  & 0,95 \\
+    Use of terrarium and aquarium &       & 52.92 & 23.33 & 5.00  & 5.83  & 5.00  & 7.92  &       & 240   & 2,10  & 1,59  &       & 257   & 2,27  & 1,60 \\
+    Use of human body diagram and anatomical models &       & 19.67 & 9.84  & 11.48 & 34.02 & 18.44 & 6.55  &       & 244   & 3,41  & 1,55  &       & 262   & 3,66  & 1,33 \\
+    Use of educational multimedia (video tapes and DVDs) &       & 7.78  & 7.00  & 16.34 & 47.86 & 19.07 & 1.95  &       & 257   & 3,69  & 1,15  &       & 273   & 4     & 0,86 \\
+    Use of television &       & 2.33  & 22.96 & 21.40 & 28.02 & 15.95 & 9.34  &       & 257   & 3,60  & 1,31  &       & 269   & 3,59  & 1,25 \\
+    Use of multimedia projector / datashow &       & 52.55 & 29.02 & 3.53  & 1.18  & 1.18  & 12.54 &       & 255   & 2,07  & 1,65  &       & 267   & 3,31  & 1,52 \\
+    Use of computer &       & 15.14 & 37.45 & 15.94 & 7.57  & 7.57  & 16.33 &       & 251   & 3,04  & 1,68  &       & 266   & 3,88  & 1,39 \\
+    How often do you give homework? &       & 12.02 & 17.05 & 7.36  & 34.50 & 29.07 & -     &       & 258   & 3,52  & 1,38  &       & 275   & 3,57  & 1,37 \\
+    In this year, how many times did you correct (outside the classroom) the texts produced by the students? &       & 4.69  & 0.39  & 2.73  & 3.52  & 5.08  & 83.59 &       & 256   & 5,55  & 1,21  &       & 269   & 5,63  & 1,09 \\
+    How often do you use the textbook for Portuguese? &       & 25.90 & 23.51 & 31.47 & 19.12 & -     & -     &       & 251   & 2,44  & 1,07  &       & 254   & 2,45  & 1,10 \\
+    How often do you use the textbook for Math? &       & 30.28 & 19.27 & 33.03 & 17.42 & -     & -     &       & 109   & 2,38  & 1,10  &       & 111   & 2,23  & 0,92 \\
+    \bottomrule 
+    \end{tabular}%
+    \end{adjustbox}
+%  \label{tab:DependentTeacher}%
+    \begin{minipage}{1.65\textheight}            \scriptsize Notes: This table provides descriptive statistics of the teachers responsible to teach the GERES students over their first four years of schooling (2005-2008). Data is strongly unbalanced: State (municipal) schools contain 231 (231) different teachers and 269 (281) observations. Likert scale ranges from strongly disagree (1) to completely agree (5). Frequency scale with four options means: never (1), seldom (2), around once per week (3) and many times per week (4). Frequency scale with five options: never (1), seldom (2), sometimes per bimester (3), around once per week (4) and many times per week (5). Frequency scale with six options: never, because the school does not have it (1), never (2), seldom (3), sometimes per bimester (4), around once per week (5) and many times per week (6). \\                     
+Source: GERES database (2005–2008); author’s own estimates.             
+\end{minipage}   
+\end{table}%
+\end{landscape}%
+\restoregeometry%
+
+
+
+
+
+
+\newpage
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=1cm}
+%\caption{Timing of data collection and bonus implementation}
+   \hspace{-10pt}   \includegraphics[scale=0.58]{Figure/Cronograma3-GERES}
+  \begin{minipage}{1\textwidth}
+  \vspace{-200pt}
+{\scriptsize 
+Notes: The academic year in Brazil aligns with the calendar year, lasting from February to November. \href{http://tiny.cc/4opsaz}{Law No. 1,017} of 15 October 2007 introduced the teacher-incentive bonus in the state of São Paulo, and \href{http://tiny.cc/ympsaz}{Decree No. 52,719} of 14 February 2008 and \href{http://tiny.cc/0wpsaz}{Law No. 1,078} of 17 December 2008 supplemented it. In April 2009, the state paid the productivity bonus for the first time, which was based on the previous year's targets. \\
+Source: Author’s own elaboration based on GERES database and data of the Official Gazette of the State of São Paulo.\par}
+\end{minipage}
+\vspace{-96pt}
+\caption{Timing of data collection and bonus implementation}
+\label{fig:Cronograma-GERES}     
+    \end{figure}
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=1.5cm}
+%\caption{GERES Test Scores, by Waves and School Type}
+      \includegraphics[width=1\textwidth]{Figure/Boxplot-MathPor}
+       \vspace{-0.5cm}
+          \begin{minipage}{1\textwidth} % choose width suitably
+{\scriptsize
+Notes: The proficiency (test scores) on GERES was estimated using the Item Response Theory. Each (of the five) GERES waves was composed of standardized tests for mathematics and Portuguese. The waves were conducted in March 2005 and November 2005, 2006, 2007 and 2008.  \\
+Source: GERES database (2005–2008); author’s own estimates.\par}
+\end{minipage}
+\vspace{10pt}
+\caption{GERES Test Scores, by Waves and School Type}
+\label{fig:Boxplot-MathPor}
+\end{figure} 
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=1.5cm}
+%\caption{Student Performance in Mathematics}
+      \includegraphics[width=0.85\textwidth]{Figure/MathScores-AllCampinas}
+       \vspace{0cm}
+          \begin{minipage}{0.86\textwidth} % choose width suitably
+{\scriptsize
+Notes: The proficiency (test scores) on GERES was estimated using the Item Response Theory. The reported values refer to the average test scores calculated by type of school. The Law No. 1,017 of 15 October 2007 introduced the teacher-incentive system to the state of São Paulo, and its first year of implementation was 2008. The academic year in Brazil aligns with the calendar year, lasting from February to November. The dashed red lines illustrate academic years.  \\
+Source: GERES database (2005–2008); author’s own estimates.\par}
+\end{minipage}
+%\vspace{2pt}
+\caption{Student Performance in Mathematics}
+\label{fig:Math-RegStud}
+\end{figure} 
+
+%Graphic restricted to Campinas sample. Only regular students.
+
+
+
+\begin{figure}[H]
+\centering
+\captionsetup{justification=centering,margin=1.5cm}
+%\caption{Student Performance in Portuguese}
+      \includegraphics[width=0.85\textwidth]{Figure/PorScores-AllCampinas}
+       \vspace{0cm}
+         \begin{minipage}{0.86\textwidth} % choose width suitably
+{\scriptsize
+Notes: The proficiency (test scores) on GERES was estimated using the Item Response Theory. The reported values refer to the average test scores calculated by type of schools. Law No. 1,017 of 15 October 2007 introduced the teacher-incentive system to the state of São Paulo, and its first year of implementation was 2008. The academic year in Brazil aligns with the calendar year, lasting from February to November. The dashed red lines illustrate the academic years.  \\
+Source: GERES database (2005–2008); author’s own estimates.\par}
+\end{minipage}
+%\vspace{2pt}
+\caption{Student Performance in Portuguese}
+\label{fig:Por-RegStud}
+\end{figure} 
+
+
+
+
+
+
+
+
+%\section{Appendix: Figures}
+
+
+
+\end{document}
